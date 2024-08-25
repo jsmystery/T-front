@@ -28,7 +28,9 @@
 .login,
 .rate,
 .count {
-	@apply text-small font-medium;
+	// @apply text-small font-medium;
+	@apply text-medium-lg font-medium;
+	font-weight: 800;
 }
 .top {
 	@apply absolute left-5 right-5 top-5 flex items-center justify-between gap-5;
@@ -132,9 +134,9 @@
 }
 
 @media (max-width: 800px) {
-	.category {
-		font-size: 9px;
-	}
+	// .category {
+	// 	font-size: 9px;
+	// }
 	.best {
 		@apply min-h-6 max-h-6 min-w-6 max-w-6;
 	}
@@ -170,14 +172,14 @@
 	.label {
 		@apply hidden;
 	}
-	.count,
 	.rate,
 	.login {
-		font-size: 9px;
+		// font-size: 9px;
+		font-size: 11px;
 	}
-	.category {
-		font-size: 8px;
-	}
+	// .category {
+	// 	font-size: 8px;
+	// }
 	.price {
 		font-size: 17px;
 
@@ -192,14 +194,14 @@
 }
 
 @media (max-width: 600px) {
-	.count,
-	.rate,
-	.login {
-		font-size: 8px;
-	}
-	.category {
-		font-size: 7px;
-	}
+	// .count,
+	// .rate,
+	// .login {
+	// 	font-size: 8px;
+	// }
+	// .category {
+	// 	font-size: 7px;
+	// }
 	.best {
 		@apply min-h-5 max-h-5 min-w-5 max-w-5;
 	}

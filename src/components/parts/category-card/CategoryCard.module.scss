@@ -86,22 +86,22 @@
 }
 
 @media (max-width: 550px) {
-	.category.circle .name,
-	.category.card .name {
-		font-size: 10px;
-	}
+	// .category.circle .name,
+	// .category.card .name {
+	// 	font-size: 10px;
+	// }
 
 	.category.card .name {
 		max-width: 115px;
 	}
 }
 
-@media (max-width: 500px) {
-	.category.circle .name,
-	.category.card .name {
-		font-size: 9px;
-	}
-}
+// @media (max-width: 500px) {
+// 	.category.circle .name,
+// 	.category.card .name {
+// 		font-size: 9px;
+// 	}
+// }
 
 @media (max-width: 420px) {
 	.category.category.card .name {
