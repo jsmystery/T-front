@@ -97,9 +97,9 @@
 	.name {
 		@apply text-medium-lg;
 	}
-	.created {
-		@apply text-small;
-	}
+	// .created {
+	// 	@apply text-small;
+	// }
 	.comment,
 	.toggle {
 		font-size: 11px;
@@ -112,7 +112,7 @@
 @media (max-width: 420px) {
 	.comment,
 	.toggle {
-		@apply text-small;
+		// @apply text-small;
 	}
 	.avatar {
 		min-width: 40px;

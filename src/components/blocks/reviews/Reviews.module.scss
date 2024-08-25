@@ -12,6 +12,7 @@
 }
 .count {
 	@apply text-lg text-gray-400;
+	font-weight: 800;
 }
 .more {
 	@apply py-3 px-14 rounded-full bg-green-base/30 text-green-base text-medium-lg font-semibold;
@@ -116,9 +117,9 @@
 			height: 20px;
 		}
 	}
-	.count {
-		@apply text-small;
-	}
+	// .count {
+	// 	@apply text-small;
+	// }
 	.heading {
 		font-size: 15px;
 	}

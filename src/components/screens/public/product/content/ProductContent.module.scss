@@ -161,7 +161,8 @@
 }
 .term {
 	@apply pl-2 relative font-medium text-gray-500 ellipse-text max-w-full;
-	font-size: 8px;
+	font-size: 11px;
+	font-weight: 800px;
 
 	&::before {
 		@apply rounded-full my-auto bg-green-base absolute left-0 top-0 bottom-0;
@@ -186,7 +187,7 @@
 }
 .rate,
 .count {
-	@apply text-small font-medium;
+	@apply font-medium;
 }
 .count {
 	@apply text-gray-400 pl-2 relative;
@@ -206,7 +207,7 @@
 }
 .label {
 	@apply bg-gray-base text-white rounded-xl py-0.5 px-3 flex items-center gap-1.5 font-medium;
-	font-size: 8px;
+	font-size: 10px;
 
 	> img {
 		@apply w-2.5 h-2.5;
@@ -226,7 +227,7 @@
 	max-height: 50px;
 }
 .average {
-	@apply flex items-center gap-1.5 font-medium text-small;
+	@apply flex items-center gap-1.5 font-medium text-medium-lg;
 
 	> svg {
 		stroke-width: 1.3px;
@@ -255,7 +256,7 @@
 }
 .complain {
 	@apply flex items-center gap-1.5 py-0.5 px-3 rounded-full bg-gray-200 font-medium;
-	font-size: 8px;
+	font-size: 10px;
 
 	> img {
 		min-width: 11px;
@@ -290,14 +291,14 @@
 	}
 }
 .quantity {
-	@apply text-small font-medium;
+	@apply text-medium-lg font-medium;
 }
 .contact {
 	@apply w-full mt-3;
 	max-width: 267px;
 }
 .phone {
-	@apply w-full order-1 text-small;
+	@apply w-full order-1 text-medium-lg;
 }
 .subscribe {
 	@apply w-full order-2;
@@ -452,7 +453,7 @@
 		max-width: 160px;
 	}
 	.link {
-		@apply text-small py-1.5 px-8;
+		@apply py-1.5 px-8;
 
 		> img {
 			@apply block;
@@ -517,7 +518,7 @@
 		@apply text-medium-lg;
 	}
 	.label {
-		font-size: 7px;
+		font-size: 9px;
 	}
 	.rating > svg {
 		min-width: 18px;
@@ -529,7 +530,7 @@
 	.count,
 	.rate,
 	.quantity {
-		font-size: 9px;
+		font-size: 10px;
 	}
 	.fillBottom {
 		@apply gap-3;
@@ -748,12 +749,12 @@
 	.text {
 		@apply pr-0 overflow-hidden;
 	}
-	.average,
-	.count,
-	.rate,
-	.quantity {
-		font-size: 8px;
-	}
+	// .average,
+	// .count,
+	// .rate,
+	// .quantity {
+	// 	font-size: 8px;
+	// }
 	.rating > svg {
 		@apply min-w-4 max-w-4 min-h-4 max-h-4;
 	}
@@ -787,7 +788,7 @@
 	}
 	.label {
 		@apply px-2 py-0.5;
-		font-size: 6px;
+		// font-size: 6px;
 
 		> img {
 			@apply hidden;
@@ -796,9 +797,9 @@
 	.fillBottom {
 		@apply flex-nowrap;
 	}
-	.providerName {
-		@apply text-small;
-	}
+	// .providerName {
+	// 	@apply text-small;
+	// }
 	.link {
 		@apply px-2;
 		max-width: 80px;

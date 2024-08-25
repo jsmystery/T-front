@@ -2,10 +2,10 @@
 	@apply flex items-center gap-10 justify-between;
 }
 .list {
-	@apply overflow-hidden flex items-center gap-2.5 text-small font-medium;
+	@apply overflow-hidden flex items-center gap-2.5 text-medium font-medium;
 }
 .catalog {
-	@apply hidden font-medium whitespace-nowrap rounded-full bg-gray-200 items-center gap-1.5 text-small px-5 py-1;
+	@apply hidden font-medium whitespace-nowrap rounded-full bg-gray-200 items-center gap-1.5 text-medium px-5 py-1;
 	color: #686868;
 
 	> svg {
@@ -56,7 +56,7 @@
 	}
 	.catalog {
 		@apply py-1 px-3;
-		font-size: 8px;
+		// font-size: 8px;
 
 		> svg {
 			@apply w-4 h-4;
@@ -76,7 +76,7 @@
 	}
 	.catalog {
 		@apply flex;
-		font-size: 8px;
+		// font-size: 8px;
 
 		> svg {
 			@apply w-3.5 h-3.5 stroke-green-base;
@@ -84,7 +84,7 @@
 		}
 	}
 	.list {
-		font-size: 8px;
+		// font-size: 8px;
 
 		img {
 			@apply max-w-4 max-h-4;
@@ -101,7 +101,7 @@
 	}
 	.item,
 	.catalog {
-		font-size: 6px;
+		// font-size: 6px;
 	}
 	.catalog > svg {
 		@apply w-2.5 h-2.5;
