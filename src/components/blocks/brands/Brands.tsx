@@ -11,7 +11,7 @@ import { PUBLIC_PAGES } from '@/constants/url.constants'
 import type { IBrands } from '@/shared/interfaces/api/brand/brand.interface'
 import cn from 'clsx'
 import Link from 'next/link'
-import { useState, type FC } from 'react'
+import { useState, useEffect, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styles from './Brands.module.scss'
 
@@ -24,7 +24,14 @@ const Brands: FC<IBrands> = ({
 	listClassName,
 	brandClassName,
 }) => {
-	const isMobile = useMediaQuery({ maxWidth: 550 })
+	const [isMobile, setIsMobile] = useState(false);
+	
+	const checkMobile = useMediaQuery({ maxWidth: 550 });
+
+	useEffect(() => {
+		setIsMobile(checkMobile);
+	 }, [checkMobile]);
+
 	const [brands, setBrands] = useState<BrandCardType[]>(queriedBrands)
 
 	return (

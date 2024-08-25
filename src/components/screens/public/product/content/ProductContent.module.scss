@@ -310,11 +310,11 @@
 	@apply max-h-full overflow-hidden flex flex-col;
 }
 
-@media (max-width: 1600px) {
-	.text {
-		font-size: 13px;
-	}
-}
+// @media (max-width: 1600px) {
+// 	.text {
+// 		font-size: 13px;
+// 	}
+// }
 
 @media (max-width: 1400px) {
 	.slider > div > div > div > div > div > div > div > button > img {
@@ -470,9 +470,9 @@
 		@apply mb-2;
 		font-size: 17px;
 	}
-	.text {
-		@apply text-medium-lg;
-	}
+	// .text {
+	// 	@apply text-medium-lg;
+	// }
 	.providerName {
 		font-size: 13px;
 	}
@@ -510,9 +510,9 @@
 		@apply mb-1.5;
 		font-size: 16px;
 	}
-	.text {
-		@apply text-medium;
-	}
+	// .text {
+	// 	@apply text-medium;
+	// }
 	.providerName {
 		@apply text-medium-lg;
 	}
@@ -746,7 +746,7 @@
 		@apply min-w-4 max-w-4 min-h-4 max-h-4;
 	}
 	.text {
-		@apply text-small pr-0 overflow-hidden;
+		@apply pr-0 overflow-hidden;
 	}
 	.average,
 	.count,
@@ -779,9 +779,9 @@
 		max-width: 115px;
 		min-width: 115px;
 	}
-	.name {
-		@apply text-2lg;
-	}
+	// .name {
+	// 	@apply text-2lg;
+	// }
 	.contact {
 		@apply mt-2.5;
 	}

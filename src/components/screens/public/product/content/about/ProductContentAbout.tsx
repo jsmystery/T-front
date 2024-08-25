@@ -13,13 +13,22 @@ import { formatNumber } from '@/utils/formats/format-number.util'
 import { Star } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import styles from '../ProductContent.module.scss'
 
 const ProductContentAbout: FC<IProduct> = ({ product }) => {
-	const isMobile = useMediaQuery({
-		maxWidth: 550,
-	})
+	const [isMobile, setIsMobile] = useState(false);
+
+	const checkMobile = useMediaQuery({ maxWidth: 550 });
+
+	useEffect(() => {
+		setIsMobile(checkMobile);
+	 }, [checkMobile]);
+
+	// const isMobile = useMediaQuery({
+	// 	maxWidth: 550,
+	// })
 
 	return (
 		<>
