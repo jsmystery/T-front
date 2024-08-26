@@ -17,8 +17,8 @@
 .fill {
 	@apply w-full items-start;
 }
-.bigAdd {
-	height: 100px;
+.sellerAdd {
+	height: 100px!important;
 }
 .smallAdd {
 	height: 135px;
@@ -205,6 +205,12 @@
 		height: 62px;
 	}
 }
+
+// @media (min-width: 550px) and (max-width: 800px) {
+// 	.sellerAdd {
+// 		min-height: 400px !important;
+// 	}
+// }
 
 @media (max-width: 650px) {
 	.bigAdd {

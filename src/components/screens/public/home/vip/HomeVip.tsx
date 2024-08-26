@@ -10,6 +10,7 @@ import {
 	HOME_SMALL_ADVERTISING_DATA,
 } from '../data/advertising.data'
 import { HOME_VIP_PRODUCTS_DATA } from '../data/products.data'
+import cn from 'clsx'
 import styles from './HomeVip.module.scss'
 
 const HomeVip: FC<IUserIsAdmin> = async ({ isAdmin }) => {
@@ -56,10 +57,10 @@ const HomeVip: FC<IUserIsAdmin> = async ({ isAdmin }) => {
 								advertising={bannerAd}
 							/>
 						)} */}
-						{/* <Advertising
-							className={styles.sellerAdd}
+						<Advertising
+							className={cn(styles.sellerAdd, styles.bigAdd)}
 							advertising={HOME_BANNER_ADVERTISING_DATA.advertising}
-						/> */}
+						/>
 						<div className={styles.box}>
 							{/* {!advertisementsError && smallAd && (
 								<Advertising
