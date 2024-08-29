@@ -13,7 +13,7 @@ export const useCatalog = ({ searchParams }: IPageSearchParam) => {
 		variables: {
 			query: {
 				page,
-				perPage: 2,
+				perPage: 3,
 				sort: Sort.Desc,
 			},
 		},

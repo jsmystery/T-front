@@ -27,6 +27,7 @@ export const PUBLIC_PAGES = {
 	CATEGORY: (slug: string) => `/catalog?category=${slug}`,
 	SEARCH: (searchTerm: string) => `/catalog?searchTerm=${searchTerm}`,
 	PROVIDER: (slug: string) => `/provider/${slug}`,
+	BRAND: (slug: string) => `/brand/${slug}`,
 }
 
 export const USER_PAGES = {

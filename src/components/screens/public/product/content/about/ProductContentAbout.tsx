@@ -47,7 +47,7 @@ const ProductContentAbout: FC<IProduct> = ({ product }) => {
 					<div className={styles.fillBottom}>
 						<Link
 							className={styles.provider}
-							href={PUBLIC_PAGES.PROVIDER(product.provider.slug)}
+							href={PUBLIC_PAGES.BRAND(product.provider.slug)}
 						>
 							<div className={styles.logo}>
 								<Picture
@@ -69,7 +69,7 @@ const ProductContentAbout: FC<IProduct> = ({ product }) => {
 						</div>
 						<Link
 							className={styles.link}
-							href={PUBLIC_PAGES.PROVIDER(product.provider.slug)}
+							href={PUBLIC_PAGES.BRAND(product.provider.slug)}
 						>
 							<Picture src={providerIcon.src} alt="Поставщик" />
 							<span>НА СТРАНИЦУ ПОСТАВЩИКА</span>
