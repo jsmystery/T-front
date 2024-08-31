@@ -11,7 +11,7 @@ import { HOME_CATEGORIES_DATA } from '../home/data/categories.data'
 import styles from './Catalog.module.scss'
 
 const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
-	const { products, count, step, page, setPage } = useCatalog({ searchParams })
+	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams })
 
 	const classNames: { [key: number]: string } = {
 		1: styles.first,
@@ -55,7 +55,7 @@ const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
 					page,
 					setPage,
 					step,
-					pagesCount: Math.ceil(count / (step * 2)),
+					pagesCount: Math.ceil(count / perPageShow),
 				}}
 			/>
 		</>
