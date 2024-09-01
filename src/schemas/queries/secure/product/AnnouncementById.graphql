@@ -1,18 +1,18 @@
-query AnnouncementById($id: Int!) {
-	announcementById(id: $id) {
-		name
-		about
-		sku
-		posterPath
-		videoPath
-		imagesPaths
-		prices {
-			price
-			minQuantity
-		}
-		category {
-			id
-			name
-		}
-	}
-}
+# query AnnouncementById($id: Int!) {
+# 	announcementById(id: $id) {
+# 		name
+# 		about
+# 		sku
+# 		posterPath
+# 		videoPath
+# 		imagesPaths
+# 		prices {
+# 			price
+# 			minQuantity
+# 		}
+# 		category {
+# 			id
+# 			name
+# 		}
+# 	}
+# }

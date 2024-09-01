@@ -12,6 +12,8 @@ import styles from './Catalog.module.scss'
 
 const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
 	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams })
+	console.log(products);
+	
 
 	const classNames: { [key: number]: string } = {
 		1: styles.first,

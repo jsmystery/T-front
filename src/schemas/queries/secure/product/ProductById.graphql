@@ -1,18 +1,18 @@
-query ProductById($id: Int!) {
-	productById(id: $id) {
-		name
-		about
-		sku
-		posterPath
-		videoPath
-		imagesPaths
-		category {
-			id
-			name
-		}
-		prices {
-			price
-			minQuantity
-		}
-	}
-}
+# query ProductById($id: Int!) {
+# 	productById(id: $id) {
+# 		name
+# 		about
+# 		sku
+# 		posterPath
+# 		videoPath
+# 		imagesPaths
+# 		category {
+# 			id
+# 			name
+# 		}
+# 		prices {
+# 			price
+# 			minQuantity
+# 		}
+# 	}
+# }
