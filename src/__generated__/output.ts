@@ -121,6 +121,7 @@ export type Brand = {
 
 export type BrandCard = {
   category: NestedCategory;
+  city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   logoPath: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -229,6 +230,7 @@ export type MutationTelegramAuthArgs = {
 };
 
 export type NestedBrand = {
+  city: Scalars['String']['output'];
   logoPath: Scalars['String']['output'];
   name: Scalars['String']['output'];
   slug: Scalars['String']['output'];
@@ -246,6 +248,7 @@ export type NestedOrder = {
 };
 
 export type NestedProductBrand = {
+  city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   isBrandOwner: Scalars['Boolean']['output'];
   isSubscribed: Scalars['Boolean']['output'];
@@ -275,6 +278,7 @@ export type Price = {
 export type Product = {
   about: Scalars['String']['output'];
   category: NestedCategory;
+  city?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   imagesPaths: Array<Scalars['String']['output']>;
@@ -292,6 +296,7 @@ export type Product = {
 
 export type ProductCard = {
   category: NestedCategory;
+  city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   maxPrice: Scalars['Int']['output'];
   minPrice: Scalars['Int']['output'];
@@ -567,14 +572,14 @@ export type CurrentProductQueryVariables = Exact<{
 }>;
 
 
-export type CurrentProductQuery = { currentProduct: { id: number, name: string, about: string, sku: string, posterPath: string, videoPath?: string | null, imagesPaths: Array<string>, rating: string, reviewsCount: number, views: number, createdAt: string, prices: Array<{ price: string, minQuantity: string }>, reviews: Array<{ id: number, authorName: string, comment: string, rating: number, createdAt: string }>, category: { name: string, slug: string }, provider: { id: number, rating: string, phone?: string | null, whatsapp?: string | null, telegram?: string | null, name: string, slug: string, logoPath: string, isSubscribed: boolean, isBrandOwner: boolean } } };
+export type CurrentProductQuery = { currentProduct: { id: number, name: string, about: string, sku: string, posterPath: string, videoPath?: string | null, imagesPaths: Array<string>, rating: string, reviewsCount: number, views: number, createdAt: string, prices: Array<{ price: string, minQuantity: string }>, reviews: Array<{ id: number, authorName: string, comment: string, rating: number, createdAt: string }>, category: { name: string, slug: string }, provider: { id: number, rating: string, phone?: string | null, whatsapp?: string | null, telegram?: string | null, name: string, slug: string, city: string, logoPath: string, isSubscribed: boolean, isBrandOwner: boolean } } };
 
 export type ProductsQueryVariables = Exact<{
   query: ProductQueryInput;
 }>;
 
 
-export type ProductsQuery = { products: { count: number, products: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: number, ratesCount: number, category: { name: string, slug: string }, provider: { name: string, slug: string, logoPath: string } }> } };
+export type ProductsQuery = { products: { count: number, products: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: number, ratesCount: number, category: { name: string, slug: string }, provider: { name: string, slug: string, logoPath: string, city: string } }> } };
 
 export type ReviewsQueryVariables = Exact<{
   query: QueryInput;
@@ -1249,6 +1254,7 @@ export const CurrentProductDocument = gql`
       telegram
       name
       slug
+      city
       logoPath
       isSubscribed
       isBrandOwner
@@ -1310,6 +1316,7 @@ export const ProductsDocument = gql`
         name
         slug
         logoPath
+        city
       }
     }
     count

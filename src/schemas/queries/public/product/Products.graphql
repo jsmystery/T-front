@@ -16,6 +16,7 @@ query Products($query: ProductQueryInput!) {
 				name
 				slug
 				logoPath
+				city
 			}
 		}
 		count
