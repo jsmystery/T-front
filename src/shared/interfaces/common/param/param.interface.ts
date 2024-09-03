@@ -14,6 +14,7 @@ export interface IPageIdParam {
 
 export interface IPageSearchParam {
 	searchParams?: TypeSearchParams
+	sortType?: String
 }
 
 export interface IPageSlug {

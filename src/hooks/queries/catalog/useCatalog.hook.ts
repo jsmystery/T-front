@@ -3,7 +3,11 @@ import type { IPageSearchParam } from '@/shared/interfaces/common/param/param.in
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
-export const useCatalog = ({ searchParams }: IPageSearchParam) => {
+export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:String) => {
+	console.log(sortType);
+
+	// let sortTypeVar = sortType
+	
 	const step = 1
 	const perPageShow = 7
 	// const step = 4
@@ -17,7 +21,8 @@ export const useCatalog = ({ searchParams }: IPageSearchParam) => {
 			query: {
 				page,
 				perPage: perPageShow,
-				sort: Sort.Desc,
+				sort: Sort[sortType as keyof typeof Sort],
+				// sort: Sort.Desc,
 			},
 		},
 	})

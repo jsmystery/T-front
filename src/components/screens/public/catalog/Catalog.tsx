@@ -11,7 +11,7 @@ import { HOME_CATEGORIES_DATA } from '../home/data/categories.data'
 import styles from './Catalog.module.scss'
 
 const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
-	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams })
+	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams }, "Desc")
 	console.log(products);
 	
 
