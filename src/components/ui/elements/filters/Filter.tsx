@@ -27,12 +27,15 @@ const Filter: FC<IFilter> = ({
 
 	const { ref } = useOutside<HTMLDivElement>(() => setIsShow(false))
 
+	const filteredSelectedOptions = selectedOptions.filter(option =>
+		options.includes(option)
+	);
 
 
 	const handleOptionSelect = (option: string) => {
 		const newSelectedOptions = selectedOptions.includes(option)
 			? selectedOptions.filter(o => o !== option)
-			: [...selectedOptions, option];
+			: isMulti ? [...selectedOptions, option]:[option];
 		setSelectedOptions(newSelectedOptions);
 
 		// Вызываем коллбек при изменении опций
@@ -50,7 +53,15 @@ const Filter: FC<IFilter> = ({
 				onClick={() => setIsShow(!isShow)}
 			>
 				<Picture src={image.src} alt={image.alt} />
-				{!isMulti && selectedOptions[0] ? selectedOptions[0] : label}
+				{/* {!isMulti && selectedOptions[0] ? selectedOptions[0] : label} */}
+
+				
+				{isMulti && filteredSelectedOptions.length > 0 
+					? filteredSelectedOptions.join(', ')  // Показываем все валидные выбранные опции
+					: filteredSelectedOptions[0] || label // Для single select показываем одну валидную опцию
+				}
+			
+
 				<ChevronDown />
 			</button>
 			<div

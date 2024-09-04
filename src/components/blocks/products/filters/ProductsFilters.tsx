@@ -74,6 +74,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Сортировка',
 								}}
 								label="По новинкам"
+								isMulti={false}
 								onFilterChange={(value: string) => handleFilterChange('sort', value)} 
 							/>
 						)}
@@ -85,6 +86,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Город',
 								}}
 								label="Город"
+								isMulti
 								onFilterChange={(value: string) => handleFilterChange('city', value)} 
 							/>
 						)}
@@ -96,6 +98,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Поставщик',
 								}}
 								label="Поставщик"
+								isMulti
 								onFilterChange={(value: string) => handleFilterChange('provider', value)} 
 							/>
 						)}
