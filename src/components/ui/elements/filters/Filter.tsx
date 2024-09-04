@@ -7,7 +7,7 @@ import { useState,  createContext, useContext, type FC } from 'react'
 import styles from './Filter.module.scss'
 
 export const SelectedOptionsContext = createContext(undefined); // Export the context
-export const useSelectedOptions = () => useContext(SelectedOptionsContext);
+const useSelectedOptions:any = () => useContext(SelectedOptionsContext);
 
 
 // const SelectedOptionsContext = createContext(['']);

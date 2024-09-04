@@ -7,10 +7,10 @@ import type { IPageSearchParam } from '@/shared/interfaces/common/param/param.in
 import { formatNumber } from '@/utils/formats/format-number.util'
 import cn from 'clsx'
 // import { useSelectedOptions } from '@/components/ui/elements/filters/Filter' 
-import { useSelectedOptions, SelectedOptionsContext } from '@/components/ui/elements/filters/Filter' 
+import { SelectedOptionsContext } from '@/components/ui/elements/filters/Filter' 
 
 import type { FC } from 'react'
-import {  createContext, useState, useContext} from 'react'
+import { useState} from 'react'
 
 import { HOME_CATEGORIES_DATA } from '../home/data/categories.data'
 import styles from './Catalog.module.scss'
