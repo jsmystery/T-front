@@ -10,9 +10,6 @@ export const SelectedOptionsContext = createContext(undefined); // Export the co
 const useSelectedOptions:any = () => useContext(SelectedOptionsContext);
 
 
-// const SelectedOptionsContext = createContext(['']);
-// export const useSelectedOptions = () => useContext(SelectedOptionsContext);
-
 
 const Filter: FC<IFilter> = ({
 	isSearchable,
@@ -21,20 +18,30 @@ const Filter: FC<IFilter> = ({
 	label,
 	options,
 	className,
+	onFilterChange
 }) => {
 
-
-	const { selectedOptions, setSelectedOptions } = useSelectedOptions(); // Use the context
+	const { selectedOptions, setSelectedOptions } = useSelectedOptions();
 
 	const [isShow, setIsShow] = useState(false)
-	// const [selectedOptions, setSelectedOptions] = useState([''])
-	
-
 
 	const { ref } = useOutside<HTMLDivElement>(() => setIsShow(false))
 
+
+
+	const handleOptionSelect = (option: string) => {
+		const newSelectedOptions = selectedOptions.includes(option)
+			? selectedOptions.filter(o => o !== option)
+			: [...selectedOptions, option];
+		setSelectedOptions(newSelectedOptions);
+
+		// Вызываем коллбек при изменении опций
+		if (onFilterChange) {
+			onFilterChange(newSelectedOptions.join(', '));
+		}
+	};
+
 	return (
-		// <SelectedOptionsContext.Provider value={{ selectedOptions }}>
 		<div className={cn(styles.filter, className && className)} ref={ref}>
 			<button
 				className={cn(styles.toggle, {
@@ -58,11 +65,13 @@ const Filter: FC<IFilter> = ({
 								className={cn(styles.button, {
 									[styles.active]: selectedOptions.includes(option),
 								})}
-								onClick={() =>
-									setSelectedOptions((prev) =>
-										isMulti ? [...prev, option] : [option]
-									)
-								}
+								// onClick={() =>
+								// 	setSelectedOptions((prev:any) =>
+								// 		isMulti ? [...prev, option] : [option]
+								// 	)
+								// }
+								onClick={() => handleOptionSelect(option)}
+
 							>
 								<div className={styles.radio}>
 									<span></span>
@@ -74,7 +83,6 @@ const Filter: FC<IFilter> = ({
 				</ul>
 			</div>
 		</div>
-		// </SelectedOptionsContext.Provider>
 	)
 }
 

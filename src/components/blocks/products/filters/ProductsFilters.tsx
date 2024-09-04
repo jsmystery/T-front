@@ -29,6 +29,24 @@ const ProductsFilters: FC<IProductsFilters> = ({
 	hasSort,
 	hasProvider,
 }) => {
+	  // Добавляем состояние для фильтров
+	  const [selectedFilters, setSelectedFilters] = useState({
+		sortClassic: '',
+		city: '',
+		provider: ''
+  });
+
+
+    // Обработка изменений в фильтрах
+    const handleFilterChange = (filterType: string, value: string) => {
+		setSelectedFilters((prevFilters) => ({
+			 ...prevFilters,
+			 [filterType]: value,
+		}));
+		console.log(`Filter changed: ${filterType} - ${value}`);
+  };
+
+
 	const [isShow, setIsShow] = useState(false)
 
 	return (
@@ -56,6 +74,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Сортировка',
 								}}
 								label="По новинкам"
+								onFilterChange={(value: string) => handleFilterChange('sort', value)} 
 							/>
 						)}
 						{hasCity && (
@@ -66,6 +85,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Город',
 								}}
 								label="Город"
+								onFilterChange={(value: string) => handleFilterChange('city', value)} 
 							/>
 						)}
 						{hasProvider && (
@@ -76,6 +96,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 									alt: 'Поставщик',
 								}}
 								label="Поставщик"
+								onFilterChange={(value: string) => handleFilterChange('provider', value)} 
 							/>
 						)}
 					</div>

@@ -6,7 +6,6 @@ import { useCatalog } from '@/hooks/queries/catalog/useCatalog.hook'
 import type { IPageSearchParam } from '@/shared/interfaces/common/param/param.interface'
 import { formatNumber } from '@/utils/formats/format-number.util'
 import cn from 'clsx'
-// import { useSelectedOptions } from '@/components/ui/elements/filters/Filter' 
 import { SelectedOptionsContext } from '@/components/ui/elements/filters/Filter' 
 
 import type { FC } from 'react'
@@ -17,12 +16,11 @@ import styles from './Catalog.module.scss'
 
 const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
 
-	const [selectedOptions, setSelectedOptions] = useState(['']) // Initialize state here
+	const [selectedOptions, setSelectedOptions] = useState([''])
 
-	// const selectedOptions = useSelectedOptions();
-	// console.log(selectedOptions + " is cntx val");
 	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams }, "Asc")
 	console.log(products);
+	console.log(selectedOptions);
 	
 
 	const classNames: { [key: number]: string } = {
@@ -40,8 +38,8 @@ const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
 				count={HOME_CATEGORIES_DATA.count}
 				variant="circle"
 			/>
-			<div><h1>{selectedOptions}</h1></div>
-			<div><h1>{selectedOptions.join(', ')}</h1></div> {/* *** Highlighted: Display selected options *** */}
+			{/* <div><h1>{selectedOptions}</h1></div> */}
+			<div><h1>{selectedOptions.join(', ')}</h1></div>
 
 			<SelectedOptionsContext.Provider value={{ selectedOptions, setSelectedOptions }}>
 			<Products

@@ -14,6 +14,7 @@ export interface IFilter extends IClassName {
 	isSearchable?: boolean
 	label?: string
 	isMulti?: boolean
+	onFilterChange?: Function
 }
 
 export interface IFilterProps extends IClassName {
