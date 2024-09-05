@@ -308,6 +308,7 @@ export type ProductCard = {
 };
 
 export type ProductQueryInput = {
+  brandCity?: InputMaybe<Scalars['String']['input']>;
   brandId?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   perPage?: InputMaybe<Scalars['Int']['input']>;
@@ -431,7 +432,10 @@ export type SessionUserResponse = {
 
 export enum Sort {
   Asc = 'ASC',
-  Desc = 'DESC'
+  Brand = 'BRAND',
+  City = 'CITY',
+  Desc = 'DESC',
+  Rate = 'RATE'
 }
 
 export type Tariff = {

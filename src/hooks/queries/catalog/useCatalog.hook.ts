@@ -2,11 +2,28 @@ import { Sort, useProductsQuery } from '@/__generated__/output'
 import type { IPageSearchParam } from '@/shared/interfaces/common/param/param.interface'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+const sortMapping:any = {
+	'По возрастанию цены': Sort.Asc,
+	'По убыванию цены': Sort.Desc,
+	'Рейтинг': Sort.Rate,
+	'Казань': Sort.City,
+	'Провайдер 1': Sort.Brand,
+	'Провайдер 4': Sort.Brand,
+};
+
+
+const determineSortType = (filterValues: string[]): Sort[] => {
+	return filterValues.map((value) => sortMapping[value]);
+};
+
+
 
 export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:String) => {
 	console.log(sortType);
 
-	// let sortTypeVar = sortType
+
+	// const sortFinalType = determineSortType(sortType);
+
 	
 	const step = 1
 	const perPageShow = 7
@@ -21,8 +38,10 @@ export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:String) 
 			query: {
 				page,
 				perPage: perPageShow,
-				sort: Sort[sortType as keyof typeof Sort],
-				// sort: Sort.Desc,
+				// sort: Sort[sortType as keyof typeof Sort],
+				sort: Sort.Desc,
+				brandId: 2,
+				brandCity: "Казань",
 			},
 		},
 	})
