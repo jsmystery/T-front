@@ -6,14 +6,6 @@ export const PRODUCTS_FILTERS_SORT_DATA: string[] = [
 ]
 
 export const PRODUCTS_FILTERS_PROVIDERS_DATA: string[] = [
-	'Провайдер 1',
-	'Провайдер 2',
-	'Провайдер 3',
-	'Провайдер 4',
-	'Провайдер 5',
-	'Провайдер 6',
-	'Провайдер 7',
-	'Провайдер 8',
-	'Провайдер 9',
-	'Провайдер 10',
+	'Lacoste Россия',
+	'Lacoste Казань'
 ]

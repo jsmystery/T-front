@@ -64,7 +64,7 @@ const ProductsFilters: FC<IProductsFilters> = ({
 						<X />
 					</button>
 					<h2 className={styles.heading}>Фильтры</h2>
-					<span className={styles.label}>сортировка1</span>
+					<span className={styles.label}>сортировка</span>
 					<div className={styles.items}>
 						{hasSort && (
 							<Filter

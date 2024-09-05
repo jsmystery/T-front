@@ -1,14 +1,14 @@
 import type { IOption } from '@/shared/interfaces/common/form/form.interface'
 
 export const COUNTRIES_DATA: string[] = [
-	'Санкт-Петербург',
-	'Новосибирск',
-	'Екатеринбург',
+	// 'Санкт-Петербург',
+	// 'Новосибирск',
+	// 'Екатеринбург',
+	'Москва',
 	'Казань',
-	'Нижний Новгород',
-	'Челябинск',
-	'Красноярск',
-	'Самара',
+	// 'Челябинск',
+	// 'Красноярск',
+	// 'Самара',
 ]
 
 export const COUNTRIES_SELECT_DATA: IOption[] = COUNTRIES_DATA.map((c) => ({
