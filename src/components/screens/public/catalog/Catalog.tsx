@@ -19,9 +19,7 @@ const Catalog: FC<IPageSearchParam> = ({ searchParams }) => {
 	const [selectedOptions, setSelectedOptions] = useState([''])
 
 	const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams }, selectedOptions)
-	// const { products, count, step, perPageShow, page, setPage } = useCatalog({ searchParams }, "Asc")
 	console.log(products);
-	console.log(selectedOptions);
 	
 
 	const classNames: { [key: number]: string } = {
