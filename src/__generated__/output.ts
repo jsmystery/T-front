@@ -432,8 +432,6 @@ export type SessionUserResponse = {
 
 export enum Sort {
   Asc = 'ASC',
-  Brand = 'BRAND',
-  City = 'CITY',
   Desc = 'DESC',
   Rate = 'RATE'
 }

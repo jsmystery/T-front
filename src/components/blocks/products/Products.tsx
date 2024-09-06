@@ -31,11 +31,21 @@ const Products: FC<IProducts> = ({
 	bigClassName,
 }) => {
 	const [isBig, setIsBig] = useState(false)
-	const [products, setProducts] = useState<ProductCardType[]>([])
+	const [products, setProducts] = useState<ProductCardType[]>(queriedProducts)
 
+	// Ensure client-side updates do not affect initial server-rendered HTML
 	useEffect(() => {
-		if (queriedProducts.length > 0) setProducts(queriedProducts)
+		// Set products only if there is a change to avoid affecting server-rendered HTML
+		if (queriedProducts.length > 0) {
+			setProducts(queriedProducts)
+		}
 	}, [queriedProducts])
+
+	// Determine class names for product display
+	const productClassName = cn(
+		styles.product,
+		isBig ? cn(styles.big, bigClassName) : cn(styles.small, smallClassName)
+	)
 
 	const productsComponent = (
 		<>
@@ -60,22 +70,15 @@ const Products: FC<IProducts> = ({
 					<Fragment key={product.id}>
 						<ProductCard
 							isAdmin={isAdmin}
-							className={cn(
-								styles.product,
-								isBig
-									? cn(styles.big, bigClassName)
-									: cn(styles.small, smallClassName)
-							)}
+							className={productClassName} // Use consistent class name
 							product={product}
 							setProducts={setProducts}
 						/>
 						{advertising && index === 9 && (
-							<>
-								<Advertising
-									className={styles.advertising}
-									advertising={advertising}
-								/>
-							</>
+							<Advertising
+								className={styles.advertising}
+								advertising={advertising}
+							/>
 						)}
 					</Fragment>
 				))}
@@ -99,7 +102,7 @@ const Products: FC<IProducts> = ({
 	)
 
 	return hasWrapper ? (
-		<Section className={wrapperClassName && wrapperClassName}>
+		<Section className={wrapperClassName}>
 			<Container>{productsComponent}</Container>
 		</Section>
 	) : (
