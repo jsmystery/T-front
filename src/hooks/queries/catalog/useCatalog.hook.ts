@@ -69,10 +69,6 @@ export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:string[]
 			query: {
 				page,
 				perPage: perPageShow,
-				// sort: Sort[sortType as keyof typeof Sort],
-				// sort: Sort.Desc,
-				// brandId: 2,
-				// brandCity: "Казань",
 				sort: sort || Sort.Desc, // Use determined sort or default to Desc
 				brandId: brandId,
 				brandCity: brandCity,
@@ -101,12 +97,12 @@ export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:string[]
 	// 	}
 	// }, [page])
 
-	const updateUrlParameters = (newPage: number) => {
-		const params = new URLSearchParams(searchParams?.toString())
-		const displayPage = Math.floor((newPage - 1) / step) + 1
-		params.set('page', String(displayPage))
-		push('?' + params.toString())
-	}
+	// const updateUrlParameters = (newPage: number) => {
+	// 	const params = new URLSearchParams(searchParams?.toString())
+	// 	const displayPage = Math.floor((newPage - 1) / step) + 1
+	// 	params.set('page', String(displayPage))
+	// 	push('?' + params.toString())
+	// }
 
 	return {
 		page,

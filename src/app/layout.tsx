@@ -17,6 +17,7 @@ const montserrat = Montserrat({
 	variable: '--font-montserrat',
 	display: 'swap',
 })
+//note montserrat.variable has ssr
 
 export const metadata: Metadata = {
 	title: {
