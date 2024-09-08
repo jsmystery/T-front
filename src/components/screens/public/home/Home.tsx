@@ -1,3 +1,5 @@
+'use client'
+
 import { UserRole } from '@/__generated__/output'
 import Advertisements from '@/components/blocks/advertisements/Advertisements'
 import Brands from '@/components/blocks/brands/Brands'
@@ -16,10 +18,24 @@ import {
 import { HOME_INFO_DATA } from './data/info.data'
 import { HOME_PRODUCTS_DATA } from './data/products.data'
 import HomeVip from './vip/HomeVip'
+import { Sort, useProductsQuery } from '@/__generated__/output'
 
-const Home: FC = async () => {
-	const user = await getUser()
+
+const Home: FC = () => {
+	const user = getUser()
 	const isAdmin = user?.role === UserRole.Admin
+
+	const homeItems = useProductsQuery({
+		variables: {
+			query: {
+				page: 1,
+				perPage: 20,
+				sort: Sort.Desc,
+			},
+		},
+	})
+	// console.log(homeItems.data?.products)
+
 
 	return (
 		<>
@@ -31,6 +47,7 @@ const Home: FC = async () => {
 				count={HOME_CATEGORIES_DATA.count}
 				variant="circle"
 			/>
+			{homeItems.data?.products && (
 			<Products
 				isAdmin={isAdmin}
 				hasMoreBtn
@@ -38,13 +55,17 @@ const Home: FC = async () => {
 					children: 'Новинки каталога',
 					variant: 'h2',
 					hasLine: true,
-					button: { label: 'Показать все', href: '' },
+					button: { label: 'Показать все', href: '/catalog' },
 				}}
 				wrapperClassName={styles.products}
 				smallClassName={styles.product}
-				products={HOME_PRODUCTS_DATA.products}
-				count={HOME_PRODUCTS_DATA.count}
+				products={homeItems.data?.products.products}
+				// products={HOME_PRODUCTS_DATA.products}
+				count={homeItems.data?.products.count}
+				// count={HOME_PRODUCTS_DATA.count}
 			/>
+			)}
+			
 			<Advertisements advertisements={HOME_CARD_ADVERTISEMENTS_DATA} />
 			<Categories
 				isAdmin={isAdmin}
