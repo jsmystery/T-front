@@ -18,6 +18,7 @@ import {
 import { HOME_INFO_DATA } from './data/info.data'
 import { HOME_PRODUCTS_DATA } from './data/products.data'
 import HomeVip from './vip/HomeVip'
+import { useAllCategories } from '@/hooks/queries/category/useAllCategories.hook'
 import { Sort, useProductsQuery } from '@/__generated__/output'
 
 
@@ -35,6 +36,9 @@ const Home: FC = () => {
 		},
 	})
 	// console.log(homeItems.data?.products)
+
+	const homeCategories = useAllCategories()
+	console.log(homeCategories)
 
 
 	return (
