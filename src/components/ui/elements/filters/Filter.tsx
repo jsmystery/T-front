@@ -7,7 +7,22 @@ import { useState,  createContext, useContext, type FC } from 'react'
 import styles from './Filter.module.scss'
 
 export const SelectedOptionsContext = createContext(undefined); // Export the context
-const useSelectedOptions:any = () => useContext(SelectedOptionsContext);
+// const useSelectedOptions:any = () => useContext(SelectedOptionsContext);
+const useSelectedOptions: any = () => {
+	const context = useContext(SelectedOptionsContext);
+	
+	// If the context is not provided, throw an error or return default values
+	if (!context) {
+	  console.error("useSelectedOptions must be used within a SelectedOptionsContext.Provider");
+	  return {
+		 selectedOptions: [],  // default empty array
+		 setSelectedOptions: () => {}  // default no-op function
+	  };
+	}
+ 
+	return context;
+ };
+ 
 
 
 
@@ -21,7 +36,9 @@ const Filter: FC<IFilter> = ({
 	onFilterChange
 }) => {
 
+	
 	const { selectedOptions, setSelectedOptions } = useSelectedOptions();
+	
 
 	const [isShow, setIsShow] = useState(false)
 

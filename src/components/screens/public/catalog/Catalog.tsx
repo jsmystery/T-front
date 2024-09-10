@@ -9,7 +9,7 @@ import cn from 'clsx'
 import { SelectedOptionsContext } from '@/components/ui/elements/filters/Filter' 
 
 import type { FC } from 'react'
-import { useState, useEffect } from 'react' // <-- useEffect added to handle client-side mounting
+import { useState, useEffect } from 'react'
 
 import { HOME_CATEGORIES_DATA } from '../home/data/categories.data'
 import styles from './Catalog.module.scss'
