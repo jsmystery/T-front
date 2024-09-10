@@ -16,10 +16,11 @@ import {
 	HOME_POPULAR_CATEGORIES_DATA,
 } from './data/categories.data'
 import { HOME_INFO_DATA } from './data/info.data'
-import { HOME_PRODUCTS_DATA } from './data/products.data'
+// import { HOME_PRODUCTS_DATA } from './data/products.data'
 import HomeVip from './vip/HomeVip'
 import { useAllCategories } from '@/hooks/queries/category/useAllCategories.hook'
-import { Sort, useProductsQuery } from '@/__generated__/output'
+import { useAllAdvertisements } from '@/hooks/queries/advertising/useAllAdvertisements.hook'
+import { Sort, useProductsQuery, AdvertisingType } from '@/__generated__/output'
 
 
 const Home: FC = () => {
@@ -35,22 +36,28 @@ const Home: FC = () => {
 			},
 		},
 	})
-	// console.log(homeItems.data?.products)
 
 	const homeCategories = useAllCategories()
-	console.log(homeCategories)
+	const homeAdvertisements = useAllAdvertisements()
+	console.log(homeAdvertisements);
+	
+	
 
 
 	return (
 		<>
 			<HomeVip isAdmin={isAdmin} />
+			{homeItems.data?.products && (
 			<Categories
 				isAdmin={isAdmin}
 				wrapperClassName={styles.categories}
 				categories={HOME_CATEGORIES_DATA.categories}
-				count={HOME_CATEGORIES_DATA.count}
+				// categories={homeCategories.categories?.categories}
+				count={homeCategories.categories?.count}
 				variant="circle"
 			/>
+			)}
+
 			{homeItems.data?.products && (
 			<Products
 				isAdmin={isAdmin}

@@ -2,7 +2,7 @@
 import Products from '@/components/blocks/products/Products'
 import Advertising from '@/components/parts/advertising/Advertising'
 import Container from '@/components/ui/common/container/Container'
-import Section from '@/components/ui/common/section/Section' // Ensure this path is correct
+import Section from '@/components/ui/common/section/Section'
 import type { IUserIsAdmin } from '@/shared/interfaces/api/user/user.interface'
 import type { FC } from 'react'
 import {
@@ -24,8 +24,6 @@ const HomeVip: FC<IUserIsAdmin> = ({ isAdmin }) => {
 			},
 		},
 	})
-
-	console.log(data?.products.products)
 	
 	return (
 		<Section className={styles.section}>
