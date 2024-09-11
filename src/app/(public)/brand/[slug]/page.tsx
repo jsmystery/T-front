@@ -1,4 +1,6 @@
-import { UserRole } from '@/__generated__/output'
+'use client'
+
+import { UserRole, useBrandQuery } from '@/__generated__/output'
 import NotFoundPage from '@/app/not-found'
 import Brand from '@/components/screens/public/brand/Brand'
 import { BRAND_DATA } from '@/components/screens/public/brand/data/brand.data'
@@ -9,21 +11,30 @@ import type {
 } from '@/shared/interfaces/common/param/param.interface'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-	title: '',
-	description: '',
-}
+// export const metadata: Metadata = {
+// 	title: '',
+// 	description: '',
+// }
 
-export default async function BrandPage({
+export default function BrandPage({
 	params,
 	searchParams,
 }: IPageSlugParam & IPageSearchParam) {
 	if (!params.slug) return <NotFoundPage />
 
-	const user = await getUser()
+	const user = getUser()
 	const isAdmin = user?.role === UserRole.Admin
 
-	return (
-		<Brand brand={BRAND_DATA} searchParams={searchParams} isAdmin={isAdmin} />
+	const brandData = useBrandQuery({
+		variables: {
+			slug: params.slug
+			// slug: 'lacoste-kazan',
+		},
+	});
+
+	console.log(brandData.data?.brand);
+
+	if (brandData.data?.brand) return (
+		<Brand brand={brandData.data?.brand} searchParams={searchParams} isAdmin={isAdmin} />
 	)
 }

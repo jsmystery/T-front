@@ -27,7 +27,7 @@ export default function ProductPage({
 
 	const productData = useCurrentProductQuery({
 		variables: {
-			id: 2,
+			id: +params.id,
 		},
 	});
 
