@@ -39,10 +39,7 @@ const Home: FC = () => {
 
 	const homeCategories = useAllCategories()
 	const homeAdvertisements = useAllAdvertisements()
-	console.log(homeAdvertisements);
-	
-	
-
+	console.log(homeAdvertisements);	
 
 	return (
 		<>
@@ -76,8 +73,11 @@ const Home: FC = () => {
 				// count={HOME_PRODUCTS_DATA.count}
 			/>
 			)}
-			
-			<Advertisements advertisements={HOME_CARD_ADVERTISEMENTS_DATA} />
+			{homeAdvertisements?.advertisements && (
+			<Advertisements advertisements={homeAdvertisements?.advertisements} />
+			)}
+
+			{/* <Advertisements advertisements={HOME_CARD_ADVERTISEMENTS_DATA} /> */}
 			<Categories
 				isAdmin={isAdmin}
 				wrapperClassName={styles.popularCategories}

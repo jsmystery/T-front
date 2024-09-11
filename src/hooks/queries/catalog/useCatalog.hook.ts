@@ -31,10 +31,10 @@ const determineSortType = (filterValues: any[]): { sort?: Sort, brandId?: number
 	// Find any numeric value for brandId
 	const brandId = filterValues.find(value => typeof value === 'number') as number;
 
-	console.log("filterValues:", filterValues);
-	console.log("sort:", sort);
-	console.log("brandCity:", brandCity);
-	console.log("brandId:", brandId);
+	// console.log("filterValues:", filterValues);
+	// console.log("sort:", sort);
+	// console.log("brandCity:", brandCity);
+	// console.log("brandId:", brandId);
 
 	return {
 		 sort: sort || undefined, // Set sort only if it's valid
@@ -45,9 +45,7 @@ const determineSortType = (filterValues: any[]): { sort?: Sort, brandId?: number
 
 
 export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:string[]) => {
-	console.log(sortType);
-
-	// const sortFinalType = determineSortType(sortType);
+	// console.log(sortType);
 	
 	let finalSortArray = mappedValues(sortType);
 	// console.log(finalSortArray);

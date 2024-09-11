@@ -13,9 +13,8 @@ export const useAllAdvertisements = () => {
 		},
 	})
 
-	console.log(data);
+	// console.log(data);
 	
-	return {
-		data
-	}
+	return data?.advertisements
+	
 }
