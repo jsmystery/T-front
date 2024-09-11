@@ -46,12 +46,10 @@ const Home: FC = () => {
 			},
 		},
 	})
-	console.log(homeBrands.data?.brands);
 	
 
 	const homeCategories = useAllCategories()
 	const homeAdvertisements = useAllAdvertisements()
-	// console.log(homeAdvertisements);	
 
 	return (
 		<>

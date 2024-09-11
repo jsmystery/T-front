@@ -1,4 +1,5 @@
-import { UserRole } from '@/__generated__/output'
+'use client'
+import { UserRole, useCurrentProductQuery } from '@/__generated__/output'
 import NotFoundPage from '@/app/not-found'
 import { PRODUCT_DATA } from '@/components/screens/public/product/data/product.data'
 import Product from '@/components/screens/public/product/Product'
@@ -9,23 +10,33 @@ import type {
 } from '@/shared/interfaces/common/param/param.interface'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-	title: '',
-	description: '',
-}
+// export const metadata: Metadata = {
+// 	title: '',
+// 	description: '',
+// }
 
-export default async function ProductPage({
+export default function ProductPage({
 	params,
 	searchParams,
 }: IPageIdParam & IPageSearchParam) {
 	if (!params.id) return <NotFoundPage />
 
-	const user = await getUser()
+	const user = getUser()
 	const isAdmin = user?.role === UserRole.Admin
+	
 
-	return (
+	const productData = useCurrentProductQuery({
+		variables: {
+			id: 2,
+		},
+	});
+
+	console.log(productData.data?.currentProduct);
+
+	if (productData.data?.currentProduct)	return (
 		<Product
-			product={PRODUCT_DATA}
+			product={productData.data?.currentProduct}
+			// product={PRODUCT_DATA}
 			searchParams={searchParams}
 			isAdmin={isAdmin}
 		/>
