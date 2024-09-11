@@ -20,7 +20,7 @@ import { HOME_INFO_DATA } from './data/info.data'
 import HomeVip from './vip/HomeVip'
 import { useAllCategories } from '@/hooks/queries/category/useAllCategories.hook'
 import { useAllAdvertisements } from '@/hooks/queries/advertising/useAllAdvertisements.hook'
-import { Sort, useProductsQuery, AdvertisingType } from '@/__generated__/output'
+import { Sort, useProductsQuery, useBrandsQuery } from '@/__generated__/output'
 
 
 const Home: FC = () => {
@@ -36,6 +36,18 @@ const Home: FC = () => {
 			},
 		},
 	})
+
+	const homeBrands = useBrandsQuery({
+		variables: {
+			query: {
+				page: 1,
+				perPage: 5,
+				sort: Sort.Desc,
+			},
+		},
+	})
+	console.log(homeBrands.data?.brands);
+	
 
 	const homeCategories = useAllCategories()
 	const homeAdvertisements = useAllAdvertisements()
@@ -89,6 +101,7 @@ const Home: FC = () => {
 				variant="card"
 			/>
 			)}
+			{homeBrands.data?.brands && (
 			<Brands
 				isAdmin={isAdmin}
 				heading={{
@@ -98,9 +111,13 @@ const Home: FC = () => {
 					button: { label: 'Показать все', href: '' },
 				}}
 				wrapperClassName={styles.brands}
-				brands={HOME_BRANDS_DATA.brands}
-				count={HOME_BRANDS_DATA.count}
+				brands={homeBrands.data?.brands.brands}
+				count={homeBrands.data?.brands.count}
+				// brands={HOME_BRANDS_DATA.brands}
+				// count={HOME_BRANDS_DATA.count}
 			/>
+			)}
+
 			<Info className={styles.info} info={HOME_INFO_DATA.info} />
 		</>
 	)
