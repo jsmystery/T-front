@@ -5,7 +5,7 @@ export const useAllCategories = () => {
 	const { data } = useCategoriesQuery({
 		variables: {
 			query: {
-				sort: Sort.Desc,
+				sort: Sort.Asc,
 			},
 		},
 	})

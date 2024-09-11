@@ -39,17 +39,17 @@ const Home: FC = () => {
 
 	const homeCategories = useAllCategories()
 	const homeAdvertisements = useAllAdvertisements()
-	console.log(homeAdvertisements);	
+	// console.log(homeAdvertisements);	
 
 	return (
 		<>
 			<HomeVip isAdmin={isAdmin} />
-			{homeItems.data?.products && (
+			{homeCategories.categories?.categories && (
 			<Categories
 				isAdmin={isAdmin}
 				wrapperClassName={styles.categories}
-				categories={HOME_CATEGORIES_DATA.categories}
-				// categories={homeCategories.categories?.categories}
+				// categories={HOME_CATEGORIES_DATA.categories}
+				categories={homeCategories.categories?.categories}
 				count={homeCategories.categories?.count}
 				variant="circle"
 			/>
@@ -78,13 +78,17 @@ const Home: FC = () => {
 			)}
 
 			{/* <Advertisements advertisements={HOME_CARD_ADVERTISEMENTS_DATA} /> */}
+			{homeCategories.categories?.categories && (
 			<Categories
 				isAdmin={isAdmin}
 				wrapperClassName={styles.popularCategories}
-				categories={HOME_POPULAR_CATEGORIES_DATA.categories}
-				count={HOME_POPULAR_CATEGORIES_DATA.count}
+				// categories={HOME_POPULAR_CATEGORIES_DATA.categories}
+				// count={HOME_POPULAR_CATEGORIES_DATA.count}
+				categories={homeCategories.categories?.categories.slice(0, 5)}
+				count={homeCategories.categories?.count}
 				variant="card"
 			/>
+			)}
 			<Brands
 				isAdmin={isAdmin}
 				heading={{
