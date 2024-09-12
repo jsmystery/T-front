@@ -31,8 +31,6 @@ export default function ProductPage({
 		},
 	});
 
-	console.log(productData.data?.currentProduct);
-
 	if (productData.data?.currentProduct)	return (
 		<Product
 			product={productData.data?.currentProduct}

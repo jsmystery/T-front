@@ -51,7 +51,7 @@ export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:string[]
 	// console.log(finalSortArray);
 	
 	const { sort, brandId, brandCity } = determineSortType(finalSortArray);
-	console.log(sort, brandId, brandCity);
+	// console.log(sort, brandId, brandCity);
 	
 
 	const step = 1

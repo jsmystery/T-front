@@ -17,15 +17,24 @@ import {
 } from './data/categories.data'
 import { HOME_INFO_DATA } from './data/info.data'
 // import { HOME_PRODUCTS_DATA } from './data/products.data'
+import { useState, useEffect } from 'react'
+
 import HomeVip from './vip/HomeVip'
 import { useAllCategories } from '@/hooks/queries/category/useAllCategories.hook'
 import { useAllAdvertisements } from '@/hooks/queries/advertising/useAllAdvertisements.hook'
 import { Sort, useProductsQuery, useBrandsQuery } from '@/__generated__/output'
 
+const Home = () => {
+	// State to manage the user and admin role
+	const [isAdmin, setIsAdmin] = useState(false)
 
-const Home: FC = () => {
-	const user = getUser()
-	const isAdmin = user?.role === UserRole.Admin
+	// Use `useEffect` to fetch user data after the component has mounted
+	useEffect(() => {
+		const user = getUser()
+		if (user?.role === UserRole.Admin) {
+			setIsAdmin(true)
+		}
+	}, []) // Empty dependency array to run this effect only once on mount
 
 	const homeItems = useProductsQuery({
 		variables: {
@@ -46,7 +55,6 @@ const Home: FC = () => {
 			},
 		},
 	})
-	
 
 	const homeCategories = useAllCategories()
 	const homeAdvertisements = useAllAdvertisements()
@@ -55,65 +63,59 @@ const Home: FC = () => {
 		<>
 			<HomeVip isAdmin={isAdmin} />
 			{homeCategories.categories?.categories && (
-			<Categories
-				isAdmin={isAdmin}
-				wrapperClassName={styles.categories}
-				// categories={HOME_CATEGORIES_DATA.categories}
-				categories={homeCategories.categories?.categories}
-				count={homeCategories.categories?.count}
-				variant="circle"
-			/>
+				<Categories
+					isAdmin={isAdmin}
+					wrapperClassName={styles.categories}
+					categories={homeCategories.categories?.categories}
+					count={homeCategories.categories?.count}
+					variant="circle"
+				/>
 			)}
 
 			{homeItems.data?.products && (
-			<Products
-				isAdmin={isAdmin}
-				hasMoreBtn
-				heading={{
-					children: 'Новинки каталога',
-					variant: 'h2',
-					hasLine: true,
-					button: { label: 'Показать все', href: '/catalog' },
-				}}
-				wrapperClassName={styles.products}
-				smallClassName={styles.product}
-				products={homeItems.data?.products.products}
-				// products={HOME_PRODUCTS_DATA.products}
-				count={homeItems.data?.products.count}
-				// count={HOME_PRODUCTS_DATA.count}
-			/>
-			)}
-			{homeAdvertisements?.advertisements && (
-			<Advertisements advertisements={homeAdvertisements?.advertisements} />
+				<Products
+					isAdmin={isAdmin}
+					hasMoreBtn
+					heading={{
+						children: 'Новинки каталога',
+						variant: 'h2',
+						hasLine: true,
+						button: { label: 'Показать все', href: '/catalog' },
+					}}
+					wrapperClassName={styles.products}
+					smallClassName={styles.product}
+					products={homeItems.data?.products.products}
+					count={homeItems.data?.products.count}
+				/>
 			)}
 
-			{/* <Advertisements advertisements={HOME_CARD_ADVERTISEMENTS_DATA} /> */}
-			{homeCategories.categories?.categories && (
-			<Categories
-				isAdmin={isAdmin}
-				wrapperClassName={styles.popularCategories}
-				// categories={HOME_POPULAR_CATEGORIES_DATA.categories}
-				// count={HOME_POPULAR_CATEGORIES_DATA.count}
-				categories={homeCategories.categories?.categories.slice(0, 5)}
-				count={homeCategories.categories?.count}
-				variant="card"
-			/>
+			{homeAdvertisements?.advertisements && (
+				<Advertisements advertisements={homeAdvertisements?.advertisements} />
 			)}
+
+			{homeCategories.categories?.categories && (
+				<Categories
+					isAdmin={isAdmin}
+					wrapperClassName={styles.popularCategories}
+					categories={homeCategories.categories?.categories.slice(0, 5)}
+					count={homeCategories.categories?.count}
+					variant="card"
+				/>
+			)}
+
 			{homeBrands.data?.brands && (
-			<Brands
-				isAdmin={isAdmin}
-				heading={{
-					children: 'Новинки каталога',
-					variant: 'h2',
-					hasLine: true,
-					button: { label: 'Показать все', href: '' },
-				}}
-				wrapperClassName={styles.brands}
-				brands={homeBrands.data?.brands.brands}
-				count={homeBrands.data?.brands.count}
-				// brands={HOME_BRANDS_DATA.brands}
-				// count={HOME_BRANDS_DATA.count}
-			/>
+				<Brands
+					isAdmin={isAdmin}
+					heading={{
+						children: 'Новинки каталога',
+						variant: 'h2',
+						hasLine: true,
+						button: { label: 'Показать все', href: '' },
+					}}
+					wrapperClassName={styles.brands}
+					brands={homeBrands.data?.brands.brands}
+					count={homeBrands.data?.brands.count}
+				/>
 			)}
 
 			<Info className={styles.info} info={HOME_INFO_DATA.info} />

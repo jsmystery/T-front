@@ -32,7 +32,6 @@ export default function BrandPage({
 		},
 	});
 
-	console.log(brandData.data?.brand);
 
 	if (brandData.data?.brand) return (
 		<Brand brand={brandData.data?.brand} searchParams={searchParams} isAdmin={isAdmin} />
