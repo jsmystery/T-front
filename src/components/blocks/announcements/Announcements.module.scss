@@ -17,11 +17,11 @@
 	@apply flex gap-4;
 
 	> div > button {
-		@apply text-small;
+		@apply text-medium-xl;
 	}
 }
 .label {
-	@apply bg-green-base rounded-full text-small font-medium capitalize text-white;
+	@apply bg-green-base rounded-full text-medium-xl font-medium capitalize text-white;
 	padding: 9px 24px;
 }
 .search {
@@ -29,10 +29,10 @@
 	padding-right: 3px;
 }
 .field {
-	@apply px-4 py-1.5 rounded-full w-full text-small;
+	@apply px-4 py-1.5 rounded-full w-full text-medium-xl;
 }
 .submit {
-	@apply min-w-fit py-0.5 btn-green rounded-full flex items-center gap-1.5 text-small font-medium;
+	@apply min-w-fit py-0.5 btn-green rounded-full flex items-center gap-1.5 text-medium-xl font-medium;
 	padding-left: 22px;
 	padding-right: 22px;
 }
@@ -82,17 +82,17 @@
 		max-height: 540px;
 	}
 	.add {
-		@apply text-small mt-6;
+		@apply text-medium-xl mt-6;
 	}
 }
 
 @media (max-width: 1200px) {
 	.filter > div > button,
 	.label {
-		font-size: 9px;
+		font-size: 13px;;
 	}
 	.select {
-		@apply text-small gap-2.5;
+		@apply text-medium-xl gap-2.5;
 	}
 	.wrapper {
 		@apply p-5;
@@ -112,7 +112,7 @@
 	}
 	.add {
 		@apply mt-5;
-		font-size: 9px;
+		font-size: 13px;;
 	}
 }
 
@@ -133,7 +133,7 @@
 	.select,
 	.field,
 	.submit {
-		font-size: 8px;
+		font-size: 12px;
 	}
 	.submit {
 		@apply px-3.5 py-1;
@@ -147,7 +147,7 @@
 	}
 	.add {
 		@apply mt-4 px-6;
-		font-size: 8px;
+		font-size: 12px;
 	}
 	.announcements {
 		max-height: 380px;

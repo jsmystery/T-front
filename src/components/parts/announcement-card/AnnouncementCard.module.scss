@@ -40,13 +40,13 @@
 	}
 }
 .name {
-	@apply text-3lg font-semibold mb-3.5 ellipse-text max-w-full;
+	@apply text-medium-xl font-semibold mb-3.5 ellipse-text max-w-full;
 }
 .price {
-	@apply font-bold text-4lg leading-none mb-3 flex items-center gap-1.5;
+	@apply font-bold text-2lg leading-none mb-3 flex items-center gap-1.5;
 }
 .city {
-	@apply flex items-center gap-1.5 text-small font-medium;
+	@apply flex items-center gap-1.5 text-medium-xl font-medium;
 }
 .actions {
 	@apply mt-6 flex gap-4;
@@ -54,7 +54,7 @@
 .action {
 	@apply w-full rounded-full text-center font-medium py-2 px-3.5 bg-gray-100;
 	min-width: 130px;
-	font-size: 8px;
+	font-size: 14px;
 }
 .actions > li:last-child .action {
 	@apply text-red-400;
@@ -67,7 +67,7 @@
 }
 .pay {
 	@apply relative w-fit flex items-center justify-center gap-1.5 font-semibold rounded-full;
-	font-size: 8px;
+	font-size: 14px;
 	height: 26px;
 	min-width: 180px;
 
@@ -108,7 +108,7 @@
 	max-width: 208px;
 }
 .description {
-	@apply w-full h-full px-3 py-2 rounded-lg bg-black text-white text-small font-medium leading-2lg scrollbar-y;
+	@apply w-full h-full px-3 py-2 rounded-lg bg-black text-white text-medium-xl font-medium leading-2lg scrollbar-y;
 	max-height: 90px;
 }
 .modalDescription {
@@ -120,14 +120,14 @@
 
 @media (max-width: 1400px) {
 	.terms {
-		@apply text-medium mb-3;
+		@apply text-medium-lg mb-3;
 	}
 	.price {
 		@apply text-3lg;
 	}
 	.name {
 		@apply mb-3;
-		font-size: 18px;
+		font-size: 14px;
 	}
 	.poster {
 		min-width: 180px;
@@ -142,10 +142,10 @@
 		max-width: 320px;
 	}
 	.terms {
-		@apply text-small mb-2.5;
+		@apply text-medium-lg mb-2.5;
 	}
 	.price {
-		font-size: 18px;
+		font-size: 16px;
 
 		> img {
 			width: 18px;
@@ -153,7 +153,7 @@
 		}
 	}
 	.name {
-		@apply text-2lg;
+		@apply text-medium-xl;
 	}
 	.actions {
 		@apply mt-4;
@@ -165,7 +165,7 @@
 		max-height: 160px;
 	}
 	.pay {
-		font-size: 7px;
+		font-size: 12px;
 		min-width: 160px;
 	}
 }
@@ -199,7 +199,7 @@
 		@apply gap-2.5;
 	}
 	.name {
-		@apply text-lg;
+		@apply text-medium-xl;
 	}
 }
 
@@ -232,7 +232,7 @@
 	}
 	.terms,
 	.city {
-		font-size: 7px;
+		font-size: 11px;
 	}
 	.price {
 		@apply text-2lg mb-2;
@@ -244,7 +244,7 @@
 		@apply w-fit px-3;
 		min-width: auto;
 		max-width: none;
-		font-size: 7px;
+		font-size: 12px;
 	}
 	.poster {
 		min-width: 120px;
@@ -288,11 +288,11 @@
 	}
 	.action {
 		padding-top: 7px;
-		font-size: 6px;
+		font-size: 9px;
 		padding-bottom: 7px;
 	}
 	.name {
-		@apply w-full text-small;
+		@apply w-full text-medium-lg;
 	}
 	.name,
 	.price {
@@ -338,7 +338,7 @@
 	}
 	.pay {
 		@apply px-2.5;
-		font-size: 6px;
+		font-size: 9px;
 		min-width: auto;
 	}
 }
@@ -349,7 +349,7 @@
 	}
 	.action,
 	.pay {
-		font-size: 7px;
+		font-size: 12px;
 	}
 	.action {
 		@apply px-2;
@@ -379,6 +379,6 @@
 	}
 	.terms,
 	.city {
-		font-size: 6px;
+		font-size: 9px;
 	}
 }
