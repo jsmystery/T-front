@@ -67,7 +67,7 @@ export const useCatalog = ({ searchParams }: IPageSearchParam, sortType:string[]
 			query: {
 				page,
 				perPage: perPageShow,
-				sort: sort || Sort.Desc, // Use determined sort or default to Desc
+				sort: sort || Sort.Desc,
 				brandId: brandId,
 				brandCity: brandCity,
 			},

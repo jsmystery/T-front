@@ -10,11 +10,15 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE,
 }
 
+
+
 export default async function MyAccountPage({
 	searchParams,
 }: IPageSearchParam) {
 	const { error, brand, tariffs, categories } = await useAccount()
-
+	
+	console.log('wowowowowo' + brand);
+	
 	if (error) {
 		return <NotFoundPage />
 	}

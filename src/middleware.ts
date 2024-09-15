@@ -4,6 +4,8 @@ import { PUBLIC_PAGES } from './constants/url.constants'
 import { getSession } from './libs/iron-session.lib'
 
 export async function middleware(request: NextRequest, response: NextResponse) {
+	console.log('check access');
+
 	const refreshToken = request.cookies.get(EnumCookies.REFRESH_TOKEN)?.value
 	const { user } = await getSession(request, response)
 
@@ -17,5 +19,6 @@ export const config = {
 }
 
 const redirectToHome = (request: NextRequest) => {
+	
 	return NextResponse.redirect(new URL(PUBLIC_PAGES.HOME, request.url))
 }
