@@ -17,7 +17,7 @@ const Account: FC<IAccount> = ({
 	const [balance, setBalance] = useState(brand?.balance || 0)
 	const isEdit = searchParams && searchParams.type === 'edit'
 
-	if (brand.id) {
+	if (!brand.id) {
 		return <Section className={styles.section}>
 			<Container>
 				<div>Бренд еще не создан</div>

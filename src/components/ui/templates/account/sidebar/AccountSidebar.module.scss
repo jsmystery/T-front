@@ -1,5 +1,5 @@
 .sidebar {
-	@apply min-w-fit flex flex-col gap-8 text-small font-medium;
+	@apply min-w-fit flex flex-col gap-8 text-medium-xl font-medium;
 }
 .infoContainer,
 .boxContainer {
@@ -25,7 +25,7 @@
 	max-width: 145px;
 
 	> img {
-		@apply image-like-bg-cover rounded-xl;
+		@apply image-like-bg-contain;
 	}
 }
 .name {
@@ -65,7 +65,7 @@
 .edit,
 .logout {
 	@apply w-full text-center p-2 rounded-full;
-	font-size: 8px;
+	font-size: 11px;
 }
 .edit {
 	@apply bg-green-base/30 text-green-base mt-1.5;
@@ -89,10 +89,10 @@
 }
 .topUp {
 	@apply flex items-center gap-1.5 font-medium py-1 px-5 bg-gray-100 rounded-full;
-	font-size: 8px;
+	font-size: 11px;
 
 	> span {
-		@apply text-small font-bold;
+		@apply text-medium-xl font-bold;
 	}
 }
 .balance {
@@ -202,7 +202,7 @@
 	.city,
 	.balance,
 	.list {
-		font-size: 8px;
+		font-size: 11px;
 	}
 	.logo {
 		min-width: 100px;
@@ -221,7 +221,7 @@
 	.logout,
 	.topUp {
 		@apply px-2.5 py-1.5;
-		font-size: 7px;
+		font-size: 12px;
 	}
 	.infoContainer {
 		@apply py-4;
@@ -250,7 +250,7 @@
 	.city,
 	.balance,
 	.list {
-		font-size: 7px;
+		font-size: 12px;
 	}
 	.about {
 		@apply gap-1.5;
@@ -305,18 +305,18 @@
 	.city,
 	.balance,
 	.list {
-		font-size: 7px;
+		font-size: 12px;
 	}
 	.edit,
 	.logout,
 	.topUp {
 		@apply px-2;
-		font-size: 7px;
+		font-size: 12px;
 		padding-top: 5px;
 		padding-bottom: 5px;
 	}
 	.topUp > span {
-		font-size: 8px;
+		font-size: 11px;
 	}
 	.logo {
 		min-width: 80px;
