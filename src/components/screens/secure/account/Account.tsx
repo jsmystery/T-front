@@ -7,6 +7,10 @@ import AccountSidebar from '@/components/ui/templates/account/sidebar/AccountSid
 import type { IAccount } from '@/shared/interfaces/api/brand/brand.interface'
 import { useState, type FC } from 'react'
 import styles from './Account.module.scss'
+import plusIcon from '@/assets/images/icons/plus.png'
+import Picture from '@/components/ui/common/picture/Picture'
+
+
 
 const Account: FC<IAccount> = ({
 	searchParams,
@@ -38,6 +42,12 @@ const Account: FC<IAccount> = ({
 							<Announcements setBalance={setBalance} tariffs={tariffs} />
 						</>
 					)}
+				</div>
+				<div className={styles.newAdWrap}>
+					<button className={styles.newad}>
+						<Picture src={plusIcon.src} alt="добавить товар" />
+						<span>Добавить объявление</span>
+					</button>
 				</div>
 			</Container>
 		</Section>

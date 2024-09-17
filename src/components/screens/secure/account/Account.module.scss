@@ -4,7 +4,7 @@
 .wrapper {
 	@apply flex items-start;
 	gap: 30px;
-	padding-bottom: 30px;
+	padding-bottom: 25px;
 }
 .fill {
 	@apply w-full;
@@ -51,6 +51,30 @@
 }
 .submit {
 	@apply mx-auto py-2.5 px-7 text-medium-lg;
+}
+
+.newad {
+	width: 234px;
+	height: 26px;
+	background: #F4F4F4;
+	border-radius: 20px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+
+	&:hover  {
+		background: #f4f4f45a;
+	}
+
+	img {
+		margin-right: 5px;
+	}
+}
+
+.newAdWrap {
+	justify-content: center;
+	display: flex;
+	align-items: center;
 }
 
 @media (max-width: 1200px) {
