@@ -255,10 +255,12 @@
 	.list {
 		flex-direction: column;
 		align-items: normal;
-		margin-bottom: 5px;
+		margin-bottom: 6px;
 	}
 	.about {
 		@apply gap-1.5;
+		flex-direction: column;
+		align-items: normal;
 	}
 	.logo {
 		min-width: 80px;

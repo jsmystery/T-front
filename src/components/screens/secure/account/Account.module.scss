@@ -90,6 +90,11 @@
 }
 
 @media (max-width: 550px) {
+
+	.newad span {
+	font-size: 12px;
+	}
+	
 	.wrapper {
 		@apply pb-5;
 	}
