@@ -90,6 +90,14 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 							<Picture src={cityIcon.src} alt="Город" />
 							{announcement.city}
 						</div>
+						<div className={styles.editWrap}>
+						<button className={styles.editBtn}>
+						Изменить
+						</button>
+						<button className={styles.delBtn}>
+						Удалить
+						</button>
+						</div>
 					</div>
 				</div>
 				<div className={styles.payments}>

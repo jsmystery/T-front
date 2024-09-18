@@ -118,6 +118,42 @@
 	@apply block w-fit mx-auto mt-4 btn-green py-2.5 px-7 font-medium rounded-full text-medium-lg;
 }
 
+.editWrap {
+	justify-content: normal;
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+
+	button {
+		width: 129px;
+		height: 26px;
+		background: #F4F4F4;
+		border-radius: 20px;
+		justify-content: center;
+		display: flex;
+		font-size: 11px;
+		align-items: center;
+		}
+
+		.editBtn {
+			color: #282828;
+			&:hover  {
+				opacity: 0.7;
+			}
+		}
+
+		.delBtn {
+			color: #F30000;
+			margin-left: 15px;
+			&:hover  {
+				opacity: 0.7;
+			}
+		}
+
+
+
+}
+
 @media (max-width: 1400px) {
 	.terms {
 		@apply text-medium-lg mb-3;
@@ -321,6 +357,22 @@
 }
 
 @media (max-width: 520px) {
+	.editWrap {
+		// flex-direction: column;
+		margin-top: 2px;
+
+		button {
+			width: 100px;
+			height: 20px;
+			font-size: 10px;
+			margin: 2px;
+		}
+
+		.delBtn {
+			margin-left: 0;
+		}
+	}
+
 	.box {
 		@apply max-w-full overflow-hidden;
 	}
@@ -342,6 +394,13 @@
 		min-width: auto;
 	}
 }
+
+
+
+@media (max-width: 450px) {
+	.editWrap {
+		flex-direction: column;	
+	}}
 
 @media (max-width: 420px) {
 	.term > img {
