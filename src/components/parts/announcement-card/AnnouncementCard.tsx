@@ -91,14 +91,28 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 							{announcement.city}
 						</div>
 						<div className={styles.editWrap}>
-						<button className={styles.editBtn}>
-						Изменить
-						</button>
-						<button className={styles.delBtn}>
-						Удалить
-						</button>
+							<button className={styles.editBtn}>
+							Изменить
+							</button>
+							<button className={styles.delBtn}>
+							Удалить
+							</button>
 						</div>
 					</div>
+					<div className={styles.serviceWrap}>
+							<button className={styles.editBtn}>
+							<Picture src={cityIcon.src} alt="Поднять" />
+							Поднять объявление
+							</button>
+							<button className={styles.delBtn}>
+							<Picture src={cityIcon.src} alt="Выделить" />
+							Выделить цветом
+							</button>
+							<button className={styles.delBtn}>
+							<Picture src={cityIcon.src} alt="Размещение" />
+							Размещение
+							</button>
+						</div>
 				</div>
 				<div className={styles.payments}>
 					{tariffs.map((tariff) => {
