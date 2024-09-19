@@ -81,13 +81,13 @@ var AnnouncementCard = function (_a) {
                         React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].delBtn }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))),
                 React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].serviceWrap },
                     React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].editBtn },
-                        React.createElement(Picture_1["default"], { src: city_png_1["default"].src, alt: "\u041F\u043E\u0434\u043D\u044F\u0442\u044C" }),
+                        React.createElement(Picture_1["default"], { src: raise_png_1["default"].src, alt: "\u041F\u043E\u0434\u043D\u044F\u0442\u044C" }),
                         "\u041F\u043E\u0434\u043D\u044F\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435"),
                     React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].delBtn },
-                        React.createElement(Picture_1["default"], { src: city_png_1["default"].src, alt: "\u0412\u044B\u0434\u0435\u043B\u0438\u0442\u044C" }),
+                        React.createElement(Picture_1["default"], { src: fill_png_1["default"].src, alt: "\u0412\u044B\u0434\u0435\u043B\u0438\u0442\u044C" }),
                         "\u0412\u044B\u0434\u0435\u043B\u0438\u0442\u044C \u0446\u0432\u0435\u0442\u043E\u043C"),
                     React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].delBtn },
-                        React.createElement(Picture_1["default"], { src: city_png_1["default"].src, alt: "\u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u0435" }),
+                        React.createElement(Picture_1["default"], { src: vip_png_1["default"].src, alt: "\u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u0435" }),
                         "\u0420\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u0435"))),
             React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].payments }, tariffs.map(function (tariff) {
                 var _a;

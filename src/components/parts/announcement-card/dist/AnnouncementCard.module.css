@@ -175,6 +175,9 @@
   align-items: center;
   margin-bottom: 15px;
 }
+.serviceWrap button img {
+  margin-right: 4px;
+}
 
 @media (max-width: 1400px) {
   .terms {

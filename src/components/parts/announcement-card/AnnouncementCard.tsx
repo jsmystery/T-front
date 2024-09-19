@@ -101,15 +101,15 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 					</div>
 					<div className={styles.serviceWrap}>
 							<button className={styles.editBtn}>
-							<Picture src={cityIcon.src} alt="Поднять" />
+							<Picture src={raiseIcon.src} alt="Поднять" />
 							Поднять объявление
 							</button>
 							<button className={styles.delBtn}>
-							<Picture src={cityIcon.src} alt="Выделить" />
+							<Picture src={fillIcon.src} alt="Выделить" />
 							Выделить цветом
 							</button>
 							<button className={styles.delBtn}>
-							<Picture src={cityIcon.src} alt="Размещение" />
+							<Picture src={vipIcon.src} alt="Размещение" />
 							Размещение
 							</button>
 						</div>
