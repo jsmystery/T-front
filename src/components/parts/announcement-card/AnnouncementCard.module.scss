@@ -169,14 +169,31 @@
 		align-items: center;
 		margin-bottom: 15px;
 
+		&:hover {
+			background: #37e371;
+		}
+
 			img {
 				margin-right: 4px;
+			}
+		}
+
+		.serviceBtnWrap {
+			display: flex;
+			align-items: baseline;
+
+			img {
+				margin-left: 5px;
 			}
 		}
 }		
 
 
 @media (max-width: 1400px) {
+	.serviceWrap {
+		margin-left: 20%;
+	}
+
 	.terms {
 		@apply text-medium-lg mb-3;
 	}
@@ -196,6 +213,10 @@
 }
 
 @media (max-width: 1300px) {
+
+	.serviceWrap {
+		margin-left: 18%;
+	}
 	.box {
 		max-width: 320px;
 	}
@@ -229,6 +250,11 @@
 }
 
 @media (max-width: 900px) {
+
+	.serviceWrap {
+		margin-left: 5%;
+	}
+
 	.info > img {
 		min-width: 17px;
 		max-width: 17px;
@@ -262,6 +288,11 @@
 }
 
 @media (max-width: 800px) {
+	
+	.serviceWrap {
+		margin-left: 3%;
+	}
+
 	.box {
 		max-width: 240px;
 	}

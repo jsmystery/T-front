@@ -106,9 +106,13 @@
 }
 
 @media (max-width: 900px) {
+
 	.announcements {
 		@apply gap-5;
 		max-height: 462px;
+		&.big {
+			@apply pr-2;
+		}
 	}
 	.add {
 		@apply mt-5;
