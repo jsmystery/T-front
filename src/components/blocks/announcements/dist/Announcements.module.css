@@ -125,7 +125,7 @@
     max-height: 462px;
   }
   .announcements.big {
-    @apply pr-2;
+    @apply pr-1;
   }
 
   .add {
