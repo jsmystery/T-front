@@ -1,0 +1,138 @@
+.section {
+  @apply py-5;
+}
+
+.wrapper {
+  @apply flex items-start;
+  gap: 30px;
+  padding-bottom: 25px;
+}
+
+.fill {
+  @apply w-full;
+}
+
+.heading {
+  @apply font-bold mb-6;
+}
+
+.form,
+.contacts {
+  @apply flex flex-wrap gap-x-10 gap-y-5;
+}
+
+.left {
+  max-width: 220px;
+  min-width: 220px;
+}
+
+.right {
+  @apply w-full flex flex-col justify-between;
+  max-width: calc(100% - 260px);
+}
+
+.contacts {
+  @apply w-full items-start;
+}
+
+.uploadBtn {
+  @apply w-full py-8 px-4;
+  height: 220px;
+}
+
+.field,
+.select {
+  @apply w-full;
+}
+
+.social {
+  max-width: calc(100% / 3 - 27px);
+}
+
+.back,
+.submit {
+  @apply w-fit btn-green rounded-full font-medium;
+}
+
+.back {
+  @apply py-2 px-8 flex items-center gap-1.5 mb-4;
+}
+.back > svg {
+  @apply w-5 h-5;
+}
+
+.submit {
+  @apply mx-auto py-2.5 px-7 text-medium-lg;
+}
+
+.newad {
+  width: 234px;
+  height: 26px;
+  background: #F4F4F4;
+  border-radius: 20px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.newad:hover {
+  background: #f4f4f45a;
+}
+.newad img {
+  margin-right: 5px;
+}
+
+.newAdWrap {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.saveEditWrap {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.editFormWrap {
+  margin: 10px;
+  padding: 5px;
+}
+
+.inputWrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+}
+
+.inputEdit {
+  margin-left: 10px;
+  @apply border border-green-base rounded-full flex items-center justify-between;
+  padding: 8px;
+  width: 200px;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    @apply gap-5 flex-col;
+  }
+}
+@media (max-width: 700px) {
+  .wrapper {
+    @apply gap-2.5;
+  }
+}
+@media (max-width: 550px) {
+  .newad span {
+    font-size: 12px;
+  }
+
+  .wrapper {
+    @apply pb-5;
+  }
+}
+@media (max-width: 400px) {
+  .wrapper {
+    @apply pb-4;
+  }
+}

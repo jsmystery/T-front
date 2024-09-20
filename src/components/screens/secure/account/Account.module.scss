@@ -77,6 +77,32 @@
 	align-items: center;
 }
 
+.saveEditWrap {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.editFormWrap {
+	margin: 10px;
+	padding: 5px;
+}
+
+.inputWrap {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 10px;
+}
+
+.inputEdit {
+	margin-left: 10px;
+	@apply border border-green-base rounded-full flex items-center justify-between;
+	padding: 8px;
+	width: 200px;
+}
+
+
 @media (max-width: 1200px) {
 	.wrapper {
 		@apply gap-5 flex-col;
@@ -94,7 +120,7 @@
 	.newad span {
 	font-size: 12px;
 	}
-	
+
 	.wrapper {
 		@apply pb-5;
 	}
