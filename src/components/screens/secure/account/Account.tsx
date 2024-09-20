@@ -7,7 +7,7 @@ import AccountSidebar from '@/components/ui/templates/account/sidebar/AccountSid
 import type { IAccount } from '@/shared/interfaces/api/brand/brand.interface';
 import { useState, type FC } from 'react';
 import styles from './Account.module.scss';
-import stylesExtra from '@/components/blocks/announcements/Announcements.module.scss'
+// import styles from '@/components/blocks/announcements/Announcements.module.scss'
 import plusIcon from '@/assets/images/icons/plus.png';
 import Picture from '@/components/ui/common/picture/Picture';
 
@@ -58,7 +58,7 @@ const Account: FC<IAccount> = ({
           {isEdit ? (
             <div className={styles.editFormWrap}>
 				 <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>Brand Name:</label>
+                <label className={styles.label}>Brand Name:</label>
                 <input 
 					 className={styles.inputEdit}
                   type="text" 
@@ -67,7 +67,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>City:</label>
+                <label className={styles.label}>City:</label>
                 <input
 					   className={styles.inputEdit}
                   type="text" 
@@ -76,7 +76,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>Phone:</label>
+                <label className={styles.label}>Phone:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="text" 
@@ -85,7 +85,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>Telegram:</label>
+                <label className={styles.label}>Telegram:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="text" 
@@ -94,7 +94,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>WhatsApp:</label>
+                <label className={styles.label}>WhatsApp:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="text" 
@@ -103,7 +103,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
               <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>Email:</label>
+                <label className={styles.label}>Email:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="email" 
@@ -112,7 +112,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
               <div className={styles.inputWrap}>
-                <label className={stylesExtra.label}>Password:</label>
+                <label className={styles.label}>Password:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="password" 
@@ -122,7 +122,9 @@ const Account: FC<IAccount> = ({
               </div>
 				  <div className={styles.saveEditWrap}>
 					<button className={styles.newad} onClick={handleSave}>
-						Save
+						<span className={styles.editSaveBtn}>
+						СОХРАНИТЬ
+						</span>
 					</button>
             	</div>
             </div>

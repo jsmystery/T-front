@@ -82,10 +82,14 @@
 	display: flex;
 	align-items: center;
 	margin-top: 10px;
+
+	.newad {
+		@apply border border-green-base rounded-full
+	}
 }
 
 .editFormWrap {
-	margin: 10px;
+	margin: 0 10px;
 	padding: 5px;
 }
 
@@ -96,14 +100,33 @@
 }
 
 .inputEdit {
-	margin-left: 10px;
+	margin-left: 15px;
 	@apply border border-green-base rounded-full flex items-center justify-between;
 	padding: 8px;
 	width: 200px;
+	text-align: center;
+}
+
+.label {
+	@apply bg-green-base rounded-full text-medium-xl font-medium capitalize text-white;
+	padding: 9px 24px;
+	justify-content: center;
+	display: flex;
+	width: 150px;
+}
+
+.editSaveBtn {
+	font-weight: 900;
 }
 
 
 @media (max-width: 1200px) {
+	.label {
+		@apply py-2;
+		font-size: 13px;
+
+	}
+
 	.wrapper {
 		@apply gap-5 flex-col;
 	}

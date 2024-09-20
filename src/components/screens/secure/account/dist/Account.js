@@ -7,7 +7,7 @@ var Section_1 = require("@/components/ui/common/section/Section");
 var AccountSidebar_1 = require("@/components/ui/templates/account/sidebar/AccountSidebar");
 var react_1 = require("react");
 var Account_module_scss_1 = require("./Account.module.scss");
-var Announcements_module_scss_1 = require("@/components/blocks/announcements/Announcements.module.scss");
+// import styles from '@/components/blocks/announcements/Announcements.module.scss'
 var plus_png_1 = require("@/assets/images/icons/plus.png");
 var Picture_1 = require("@/components/ui/common/picture/Picture");
 var Account = function (_a) {
@@ -42,28 +42,29 @@ var Account = function (_a) {
         React.createElement(Container_1["default"], null,
             React.createElement("div", { className: Account_module_scss_1["default"].wrapper }, isEdit ? (React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "Brand Name:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Brand Name:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: brandName, onChange: function (e) { return setBrandName(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "City:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "City:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: city, onChange: function (e) { return setCity(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "Phone:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Phone:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: phone, onChange: function (e) { return setPhone(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "Telegram:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Telegram:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: telegram, onChange: function (e) { return setTelegram(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "WhatsApp:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "WhatsApp:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: whatsapp, onChange: function (e) { return setWhatsapp(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "Email:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Email:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "email", value: email, onChange: function (e) { return setEmail(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Announcements_module_scss_1["default"].label }, "Password:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Password:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
-                    React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSave }, "Save")))) : (React.createElement(React.Fragment, null,
+                    React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSave },
+                        React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0425\u0420\u0410\u041D\u0418\u0422\u042C"))))) : (React.createElement(React.Fragment, null,
                 React.createElement(AccountSidebar_1["default"], { balance: balance, brand: brand }),
                 React.createElement(Announcements_1["default"], { setBalance: setBalance, tariffs: tariffs })))),
             !isEdit && (React.createElement("div", { className: Account_module_scss_1["default"].newAdWrap },
