@@ -17,6 +17,10 @@ export default async function MyAccountPage({
 }: IPageSearchParam) {
 	const { error, brand, tariffs, categories } = await useAccount()
 		
+	console.log(searchParams);
+	
+
+
 	if (error) {
 		return <NotFoundPage />
 	}

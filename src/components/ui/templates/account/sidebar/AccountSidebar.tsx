@@ -57,7 +57,7 @@ const AccountSidebar: FC<IAccountBrand> = ({ brand, balance }) => {
 		return items
 	}
 
-	return (
+	return ( 
 		<aside className={styles.sidebar}>
 			<div className={styles.infoContainer}>
 				<div className={styles.info}>
