@@ -15,10 +15,10 @@ var Account = function (_a) {
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
-    var _e = react_1.useState(''), phone = _e[0], setPhone = _e[1];
+    var _e = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.phone) || ''), phone = _e[0], setPhone = _e[1];
     var _f = react_1.useState(''), telegram = _f[0], setTelegram = _f[1];
     var _g = react_1.useState(''), whatsapp = _g[0], setWhatsapp = _g[1];
-    var _h = react_1.useState(''), email = _h[0], setEmail = _h[1];
+    var _h = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.email) || ''), email = _h[0], setEmail = _h[1];
     var _j = react_1.useState(''), password = _j[0], setPassword = _j[1];
     var isEdit = searchParams && searchParams.type === 'edit';
     if (!brand.id) {
@@ -42,13 +42,13 @@ var Account = function (_a) {
         React.createElement(Container_1["default"], null,
             React.createElement("div", { className: Account_module_scss_1["default"].wrapper }, isEdit ? (React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Brand Name:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u0431\u0440\u0435\u043D\u0434\u0430:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: brandName, onChange: function (e) { return setBrandName(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "City:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0413\u043E\u0440\u043E\u0434:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: city, onChange: function (e) { return setCity(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Phone:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: phone, onChange: function (e) { return setPhone(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                     React.createElement("label", { className: Account_module_scss_1["default"].label }, "Telegram:"),
@@ -60,7 +60,10 @@ var Account = function (_a) {
                     React.createElement("label", { className: Account_module_scss_1["default"].label }, "Email:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "email", value: email, onChange: function (e) { return setEmail(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "Password:"),
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041F\u0430\u0440\u043E\u043B\u044C:"),
+                    React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
+                React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                    React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C:"),
                     React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
                 React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
                     React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSave },

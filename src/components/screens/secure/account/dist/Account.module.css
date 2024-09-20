@@ -117,11 +117,12 @@
 }
 
 .label {
-  @apply bg-green-base rounded-full text-medium-xl font-medium capitalize text-white;
+  @apply bg-green-base rounded-full text-medium-xl font-medium text-white;
   padding: 9px 24px;
   justify-content: center;
   display: flex;
-  width: 150px;
+  width: 160px;
+  align-items: center;
 }
 
 .editSaveBtn {

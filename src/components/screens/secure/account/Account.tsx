@@ -20,10 +20,10 @@ const Account: FC<IAccount> = ({
   const [balance, setBalance] = useState(brand?.balance || 0);
   const [brandName, setBrandName] = useState(brand?.name || '');
   const [city, setCity] = useState(brand?.city || '');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(brand?.phone ||'');
   const [telegram, setTelegram] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(brand?.email ||'');
   const [password, setPassword] = useState('');
   
   const isEdit = searchParams && searchParams.type === 'edit';
@@ -58,7 +58,7 @@ const Account: FC<IAccount> = ({
           {isEdit ? (
             <div className={styles.editFormWrap}>
 				 <div className={styles.inputWrap}>
-                <label className={styles.label}>Brand Name:</label>
+                <label className={styles.label}>Имя бренда:</label>
                 <input 
 					 className={styles.inputEdit}
                   type="text" 
@@ -67,7 +67,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={styles.label}>City:</label>
+                <label className={styles.label}>Город:</label>
                 <input
 					   className={styles.inputEdit}
                   type="text" 
@@ -76,7 +76,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
-                <label className={styles.label}>Phone:</label>
+                <label className={styles.label}>Телефон:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="text" 
@@ -112,7 +112,16 @@ const Account: FC<IAccount> = ({
                 />
               </div>
               <div className={styles.inputWrap}>
-                <label className={styles.label}>Password:</label>
+                <label className={styles.label}>Пароль:</label>
+                <input 
+					   className={styles.inputEdit}
+                  type="password" 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                />
+              </div>
+              <div className={styles.inputWrap}>
+                <label className={styles.label}>Новый пароль:</label>
                 <input 
 					   className={styles.inputEdit}
                   type="password" 
