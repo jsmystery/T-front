@@ -15,11 +15,9 @@ export const metadata: Metadata = {
 export default async function MyAccountPage({
 	searchParams,
 }: IPageSearchParam) {
-	const { error, brand, tariffs, categories } = await useAccount()
-		
-	console.log(searchParams);
+	const { error, brand, tariffs, categories } = await useAccount()	
+	console.log(brand);
 	
-
 
 	if (error) {
 		return <NotFoundPage />

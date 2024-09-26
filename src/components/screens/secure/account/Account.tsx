@@ -21,8 +21,8 @@ const Account: FC<IAccount> = ({
   const [brandName, setBrandName] = useState(brand?.name || '');
   const [city, setCity] = useState(brand?.city || '');
   const [phone, setPhone] = useState(brand?.phone ||'');
-  const [telegram, setTelegram] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
+  const [telegram, setTelegram] = useState(brand?.telegram || '');
+  const [whatsapp, setWhatsapp] = useState(brand?.whatsapp || '');
   const [email, setEmail] = useState(brand?.email ||'');
   const [password, setPassword] = useState('');
   

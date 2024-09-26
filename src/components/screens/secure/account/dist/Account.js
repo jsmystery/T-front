@@ -16,8 +16,8 @@ var Account = function (_a) {
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
     var _e = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.phone) || ''), phone = _e[0], setPhone = _e[1];
-    var _f = react_1.useState(''), telegram = _f[0], setTelegram = _f[1];
-    var _g = react_1.useState(''), whatsapp = _g[0], setWhatsapp = _g[1];
+    var _f = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.telegram) || ''), telegram = _f[0], setTelegram = _f[1];
+    var _g = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.whatsapp) || ''), whatsapp = _g[0], setWhatsapp = _g[1];
     var _h = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.email) || ''), email = _h[0], setEmail = _h[1];
     var _j = react_1.useState(''), password = _j[0], setPassword = _j[1];
     var isEdit = searchParams && searchParams.type === 'edit';

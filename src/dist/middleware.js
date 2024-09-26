@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -47,28 +36,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.metadata = void 0;
-var not_found_1 = require("@/app/not-found");
-var Account_1 = require("@/components/screens/secure/account/Account");
-var seo_constants_1 = require("@/constants/seo.constants");
-var useAccount_hook_1 = require("@/hooks/queries/account/useAccount.hook");
-exports.metadata = __assign({ title: '' }, seo_constants_1.NO_INDEX_PAGE);
-function MyAccountPage(_a) {
-    var searchParams = _a.searchParams;
+exports.config = exports.middleware = void 0;
+var server_1 = require("next/server");
+var enums_constants_1 = require("./constants/enums.constants");
+var url_constants_1 = require("./constants/url.constants");
+var iron_session_lib_1 = require("./libs/iron-session.lib");
+function middleware(request, response) {
+    var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var _b, error, brand, tariffs, categories;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0: return [4 /*yield*/, useAccount_hook_1.useAccount()];
+        var refreshToken, user;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    refreshToken = (_a = request.cookies.get(enums_constants_1.EnumCookies.REFRESH_TOKEN)) === null || _a === void 0 ? void 0 : _a.value;
+                    return [4 /*yield*/, iron_session_lib_1.getSession(request, response)];
                 case 1:
-                    _b = _c.sent(), error = _b.error, brand = _b.brand, tariffs = _b.tariffs, categories = _b.categories;
-                    console.log(brand);
-                    if (error) {
-                        return [2 /*return*/, React.createElement(not_found_1["default"], null)];
+                    user = (_b.sent()).user;
+                    if (!refreshToken || !user) {
+                        return [2 /*return*/, redirectToHome(request)];
                     }
-                    return [2 /*return*/, (React.createElement(Account_1["default"], { searchParams: searchParams, brand: brand, tariffs: tariffs, categories: categories }))];
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports["default"] = MyAccountPage;
+exports.middleware = middleware;
+exports.config = {
+    matcher: ['/my-account']
+};
+var redirectToHome = function (request) {
+    return server_1.NextResponse.redirect(new URL(url_constants_1.PUBLIC_PAGES.HOME, request.url));
+};
