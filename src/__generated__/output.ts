@@ -185,6 +185,7 @@ export type JwtAuthVerificationInput = {
 
 export type Mutation = {
   balanceTopUp: YookassaPayment;
+  deleteProduct: Scalars['Boolean']['output'];
   jwtConfirmation: Scalars['Boolean']['output'];
   jwtLogin: SessionUserResponse;
   jwtReset: Scalars['Boolean']['output'];
@@ -197,6 +198,11 @@ export type Mutation = {
 
 export type MutationBalanceTopUpArgs = {
   data: YookassaInput;
+};
+
+
+export type MutationDeleteProductArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -521,6 +527,13 @@ export type PlaceOrderMutationVariables = Exact<{
 
 
 export type PlaceOrderMutation = { placeOrder: { expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } } };
+
+export type DeleteProductMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteProductMutation = { deleteProduct: boolean };
 
 export type AdvertisementsByTypesQueryVariables = Exact<{
   types: Array<AdvertisingType> | AdvertisingType;
@@ -881,6 +894,37 @@ export function usePlaceOrderMutation(baseOptions?: Apollo.MutationHookOptions<P
 export type PlaceOrderMutationHookResult = ReturnType<typeof usePlaceOrderMutation>;
 export type PlaceOrderMutationResult = Apollo.MutationResult<PlaceOrderMutation>;
 export type PlaceOrderMutationOptions = Apollo.BaseMutationOptions<PlaceOrderMutation, PlaceOrderMutationVariables>;
+export const DeleteProductDocument = gql`
+    mutation DeleteProduct($id: Int!) {
+  deleteProduct(id: $id)
+}
+    `;
+export type DeleteProductMutationFn = Apollo.MutationFunction<DeleteProductMutation, DeleteProductMutationVariables>;
+
+/**
+ * __useDeleteProductMutation__
+ *
+ * To run a mutation, you first call `useDeleteProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteProductMutation, { data, loading, error }] = useDeleteProductMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteProductMutation(baseOptions?: Apollo.MutationHookOptions<DeleteProductMutation, DeleteProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteProductMutation, DeleteProductMutationVariables>(DeleteProductDocument, options);
+      }
+export type DeleteProductMutationHookResult = ReturnType<typeof useDeleteProductMutation>;
+export type DeleteProductMutationResult = Apollo.MutationResult<DeleteProductMutation>;
+export type DeleteProductMutationOptions = Apollo.BaseMutationOptions<DeleteProductMutation, DeleteProductMutationVariables>;
 export const AdvertisementsByTypesDocument = gql`
     query AdvertisementsByTypes($types: [AdvertisingType!]!) {
   advertisementsByTypes(types: $types) {

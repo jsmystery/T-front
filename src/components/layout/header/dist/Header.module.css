@@ -1,0 +1,288 @@
+.wrapper,
+.list,
+.fill {
+  @apply flex;
+  gap: 35px;
+}
+
+.fill {
+  @apply w-full;
+}
+
+.wrapper {
+  @apply pt-10 pb-5;
+}
+
+.logo {
+  @apply w-full flex items-center;
+  max-width: 155px;
+  min-width: 155px;
+}
+
+.list {
+  @apply items-center whitespace-nowrap min-w-fit;
+}
+
+.item:first-child {
+  @apply relative;
+  transition: border-radius 200ms ease-in-out;
+}
+.item:first-child > svg {
+  @apply transition-transform;
+}
+.item:first-child:hover {
+  @apply rounded-b-none;
+}
+.item:first-child:hover .countries {
+  @apply visible opacity-100 pointer-events-auto;
+}
+.item:first-child:hover > svg:nth-child(2) {
+  @apply rotate-180;
+}
+
+.countries {
+  @apply absolute left-0 right-0 z-1 w-full top-full flex flex-col gap-1 invisible opacity-0 pointer-events-none bg-gray-200 rounded-b-md transition-opacity scrollbar-y;
+  max-height: 135px;
+}
+
+.country {
+  @apply w-full;
+}
+.country > a {
+  @apply px-4 py-2 ellipse-text max-w-full green-hover;
+}
+
+.item {
+  display: flex;
+}
+
+.item:first-child,
+.login {
+  @apply text-medium-lg font-medium flex items-center rounded-xl py-1.5 px-3 bg-gray-200 gap-1.5;
+  margin-right: 8px;
+}
+.item:first-child svg,
+.login svg {
+  stroke-width: 1.3px;
+}
+
+.item:first-child > svg:first-child {
+  @apply stroke-green-base;
+}
+.item:first-child > svg:nth-child(2) {
+  width: 22px;
+  height: 22px;
+}
+
+.login {
+  @apply green-hover;
+}
+.login > svg {
+  @apply stroke-green-base;
+}
+
+.catalog {
+  @apply btn-green flex items-center gap-2.5 text-2lg font-semibold rounded-lg;
+  padding: 0 18px;
+}
+.catalog img {
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+}
+
+.search {
+  @apply w-full;
+}
+
+@media (max-width: 1600px) {
+  .logo {
+    max-width: 140px;
+    min-width: 140px;
+  }
+
+  .catalog {
+    @apply text-lg gap-2;
+  }
+}
+@media (max-width: 1400px) {
+  .wrapper {
+    @apply pt-8;
+  }
+
+  .wrapper,
+.list,
+.fill {
+    @apply gap-7;
+  }
+
+  .catalog {
+    @apply text-medium-xl;
+  }
+}
+@media (max-width: 1200px) {
+  .wrapper {
+    @apply pt-7;
+  }
+
+  .wrapper,
+.list,
+.fill {
+    @apply gap-5;
+  }
+
+  .catalog {
+    font-size: 13px;
+  }
+}
+@media (max-width: 1000px) {
+  .wrapper {
+    @apply pt-6;
+  }
+
+  .button {
+    @apply text-medium;
+  }
+  .button > svg {
+    @apply w-5 h-5;
+  }
+
+  .button svg,
+.button > svg:last-child {
+    @apply w-5 h-5;
+  }
+}
+@media (max-width: 900px) {
+  .item {
+    @apply h-full;
+  }
+  .item > a {
+    @apply h-full;
+  }
+
+  .logo {
+    max-width: 130px;
+    min-width: 130px;
+  }
+
+  .countries {
+    @apply rounded-t-md w-auto left-auto right-auto;
+    min-width: 120px;
+  }
+
+  .wrapper {
+    @apply pt-5;
+  }
+
+  .login,
+.item {
+    @apply bg-transparent flex flex-col items-center justify-end p-0;
+  }
+
+  .item:first-child {
+    @apply bg-transparent;
+  }
+
+  .login img,
+.item:first-child > img:first-child {
+    @apply w-5 h-5;
+  }
+
+  .item:first-child > svg:nth-child(2) {
+    @apply hidden;
+  }
+
+  .item:first-child {
+    @apply p-0;
+  }
+
+  .catalog {
+    @apply bg-transparent text-gray-base flex-col gap-0.5 text-medium-lg font-medium green-hover;
+  }
+  .catalog img {
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
+  }
+  .catalog:hover {
+    @apply bg-transparent;
+  }
+}
+@media (max-width: 700px) {
+  .catalog,
+.item:first-child,
+.login {
+    @apply text-small;
+  }
+
+  .fill {
+    @apply gap-0;
+  }
+
+  .search {
+    margin-left: 30px;
+  }
+
+  .list {
+    gap: 30px;
+  }
+
+  .wrapper {
+    @apply gap-0;
+  }
+
+  .catalog {
+    order: 1;
+  }
+
+  .search {
+    @apply w-fit;
+    order: 2;
+  }
+
+  .logo {
+    @apply mx-auto;
+    order: 3;
+  }
+
+  .list {
+    order: 4;
+  }
+
+  .catalog,
+.item,
+.login {
+    @apply flex flex-col py-0 px-0 items-center justify-end;
+  }
+}
+@media (max-width: 550px) {
+  .logo {
+    @apply w-fit;
+    min-width: auto;
+    max-width: none;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .wrapper {
+    @apply py-2.5;
+  }
+}
+@media (max-width: 430px) {
+  .logo {
+    max-width: 34px;
+  }
+
+  .catalog,
+.item:first-child,
+.login {
+    font-size: 9px;
+  }
+}
+@media (max-width: 450px) {
+  .countries {
+    top: calc(100% + 10px);
+  }
+}

@@ -49,10 +49,15 @@
 		@apply px-4 py-2 ellipse-text max-w-full green-hover;
 	}
 }
+
+.item {
+	display: flex;
+}
+
 .item:first-child,
 .login {
 	@apply text-medium-lg font-medium flex items-center rounded-xl py-1.5 px-3 bg-gray-200 gap-1.5;
-
+	margin-right: 8px;
 	svg {
 		stroke-width: 1.3px;
 	}

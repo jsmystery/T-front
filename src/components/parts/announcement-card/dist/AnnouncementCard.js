@@ -30,6 +30,7 @@ var format_number_util_1 = require("@/utils/formats/format-number.util");
 var clsx_1 = require("clsx");
 var lucide_react_1 = require("lucide-react");
 var react_1 = require("react");
+var react_hot_toast_1 = require("react-hot-toast");
 var AnnouncementCard_module_scss_1 = require("./AnnouncementCard.module.scss");
 var AnnouncementCard = function (_a) {
     var _b;
@@ -41,6 +42,18 @@ var AnnouncementCard = function (_a) {
     var currentTariff = tariffs.find(function (tariff) { return tariff.type === type; });
     var isTop = type === output_1.TariffType.Top;
     var isFill = type === output_1.TariffType.Fill;
+    var deleteProductMutate = output_1.useDeleteProductMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        }
+    })[0];
+    var handleDelete = function () { return deleteProductMutate({
+        variables: {
+            id: announcement.id
+        }
+    }); };
     return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: clsx_1["default"](AnnouncementCard_module_scss_1["default"].announcement, className && className) },
             React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].fill },
@@ -78,7 +91,7 @@ var AnnouncementCard = function (_a) {
                         announcement.city),
                     React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].editWrap },
                         React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].editBtn }, "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C"),
-                        React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].delBtn }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))),
+                        React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].delBtn, onClick: handleDelete }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))),
                 React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].serviceWrap },
                     React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].serviceBtnWrap },
                         React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].editBtn },

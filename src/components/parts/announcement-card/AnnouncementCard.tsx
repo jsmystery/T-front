@@ -1,4 +1,4 @@
-import { TariffType } from '@/__generated__/output'
+import { TariffType, useDeleteProductMutation } from '@/__generated__/output'
 import cityIcon from '@/assets/images/icons/city.png'
 import eyeIcon from '@/assets/images/icons/eye.png'
 import fillGrayIcon from '@/assets/images/icons/fill-gray.png'
@@ -18,6 +18,7 @@ import { formatNumber } from '@/utils/formats/format-number.util'
 import cn from 'clsx'
 import { AlertCircle } from 'lucide-react'
 import { useState, type FC } from 'react'
+import toast from 'react-hot-toast'
 import styles from './AnnouncementCard.module.scss'
 
 const AnnouncementCard: FC<IAnnouncementCard> = ({
@@ -33,6 +34,19 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const currentTariff = tariffs.find((tariff) => tariff.type === type)
 	const isTop = type === TariffType.Top
 	const isFill = type === TariffType.Fill
+
+	const [deleteProductMutate] = useDeleteProductMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+			toast.error(message)
+		},
+	})
+
+	const handleDelete = () => deleteProductMutate({
+				variables: {
+					id: announcement.id
+				}})
+
 
 	return (
 		<>
@@ -94,7 +108,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 							<button className={styles.editBtn}>
 							Изменить
 							</button>
-							<button className={styles.delBtn}>
+							<button className={styles.delBtn} onClick={handleDelete}>
 							Удалить
 							</button>
 						</div>
