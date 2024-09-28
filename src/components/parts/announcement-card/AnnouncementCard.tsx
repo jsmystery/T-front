@@ -26,6 +26,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	tariffs,
 	announcement,
 	className,
+	onDeleteAnnouncement
 }) => {
 	const [{ isShow, type }, setModalState] = useState({
 		isShow: false,
@@ -40,6 +41,9 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 		onError: ({ message }) => {
 			toast.error(message)
 		},
+		onCompleted: () => {
+			onDeleteAnnouncement()
+		}
 	})
 
 	const handleDelete = () => deleteProductMutate({

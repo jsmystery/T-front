@@ -34,7 +34,7 @@ var react_hot_toast_1 = require("react-hot-toast");
 var AnnouncementCard_module_scss_1 = require("./AnnouncementCard.module.scss");
 var AnnouncementCard = function (_a) {
     var _b;
-    var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className;
+    var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className, onDeleteAnnouncement = _a.onDeleteAnnouncement;
     var _c = react_1.useState({
         isShow: false,
         type: output_1.TariffType.Top
@@ -47,6 +47,9 @@ var AnnouncementCard = function (_a) {
         onError: function (_a) {
             var message = _a.message;
             react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            onDeleteAnnouncement();
         }
     })[0];
     var handleDelete = function () { return deleteProductMutate({

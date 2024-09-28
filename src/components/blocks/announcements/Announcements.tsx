@@ -10,6 +10,7 @@ import { useAnnouncements } from '@/hooks/queries/product/useAnnouncements.hook'
 import type { IAnnouncements } from '@/shared/interfaces/api/product/product.interface'
 import cn from 'clsx'
 import type { FC } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Announcements.module.scss'
 import AnnouncementSearch from './search/AnnouncementSearch'
 
@@ -19,7 +20,8 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 		checked,
 		setChecked,
 		scrollRef,
-		announcements,
+		// announcements,
+		announcements: initialAnnouncements,
 		error,
 		searchTerm,
 		handleSearch,
@@ -32,6 +34,22 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 		},
 		setBalance
 	)
+
+
+
+	const [announcements, setAnnouncements] = useState(initialAnnouncements) // Highlight: UseState to manage announcements reactively
+
+	useEffect(() => {
+		setAnnouncements(initialAnnouncements)
+	}, [initialAnnouncements])
+
+
+	const onDeleteAnnouncementHandler = (id: Number) => {
+		alert(888)
+		setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id))
+	}
+
+
 
 	if (error) return null
 
@@ -92,6 +110,7 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 									placeOrder={placeOrder}
 									tariffs={tariffs}
 									announcement={announcement}
+									onDeleteAnnouncement={() => onDeleteAnnouncementHandler(announcement.id)}
 								/>
 							</div>
 						))}

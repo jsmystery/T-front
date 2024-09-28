@@ -27,6 +27,7 @@ export interface IAnnouncementCard {
 	className?: string
 	announcement: AnnouncementCard
 	tariffs: Tariff[]
+	onDeleteAnnouncement?: function		
 }
 
 export interface IProductsFiltersProps {
