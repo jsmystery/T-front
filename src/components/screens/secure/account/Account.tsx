@@ -24,6 +24,7 @@ const Account: FC<IAccount> = ({
   const [telegram, setTelegram] = useState(brand?.telegram || '');
   const [whatsapp, setWhatsapp] = useState(brand?.whatsapp || '');
   const [email, setEmail] = useState(brand?.email ||'');
+  const [about, setAbout] = useState(brand?.about ||'');
   const [password, setPassword] = useState('');
   
   const isEdit = searchParams && searchParams.type === 'edit';
@@ -57,6 +58,8 @@ const Account: FC<IAccount> = ({
         <div className={styles.wrapper}>
           {isEdit ? (
             <div className={styles.editFormWrap}>
+					<div>
+					<div className={styles.editHeader}><h2>Редактировать бренд</h2></div>
 				 <div className={styles.inputWrap}>
                 <label className={styles.label}>Имя бренда:</label>
                 <input 
@@ -76,6 +79,27 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
+                <label className={styles.label}>Описание:</label>
+                <input
+					   className={styles.inputEdit}
+                  type="textarea" 
+                  value={about} 
+                  onChange={(e) => setAbout(e.target.value)} 
+                />
+              </div>
+				 
+				  <div className={styles.saveEditWrap}>
+					<button className={styles.newad} onClick={handleSave}>
+						<span className={styles.editSaveBtn}>
+						СОХРАНИТЬ 
+						</span>
+					</button>
+            	</div>
+					</div>
+
+					<div>
+					<div className={styles.editHeader}><h2>Редактировать профиль</h2></div>
+					<div className={styles.inputWrap}>
                 <label className={styles.label}>Телефон:</label>
                 <input 
 					   className={styles.inputEdit}
@@ -132,10 +156,11 @@ const Account: FC<IAccount> = ({
 				  <div className={styles.saveEditWrap}>
 					<button className={styles.newad} onClick={handleSave}>
 						<span className={styles.editSaveBtn}>
-						СОХРАНИТЬ
+						СОХРАНИТЬ 
 						</span>
 					</button>
             	</div>
+					</div>
             </div>
           ) : (
             <>

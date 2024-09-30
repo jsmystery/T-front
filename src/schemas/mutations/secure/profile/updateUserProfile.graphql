@@ -1,0 +1,5 @@
+mutation UpdateUserProfile($input: UpdateUserInput!) {
+  updateUserProfile(input: $input)  # No subfields since it returns a Boolean!
+}
+
+

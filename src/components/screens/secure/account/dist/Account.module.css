@@ -73,6 +73,7 @@
   justify-content: center;
   display: flex;
   align-items: center;
+  margin-bottom: 18px;
 }
 .newad:hover {
   background: #f4f4f45a;
@@ -100,6 +101,10 @@
 .editFormWrap {
   margin: 0 10px;
   padding: 5px;
+  display: flex;
+  justify-content: space-around;
+  width: 65%;
+  flex-wrap: wrap;
 }
 
 .inputWrap {
@@ -127,6 +132,11 @@
 
 .editSaveBtn {
   font-weight: 900;
+}
+
+.editHeader {
+  font-weight: 900;
+  font-size: 17px;
 }
 
 @media (max-width: 1200px) {
