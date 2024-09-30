@@ -1,17 +1,35 @@
 'use client';
 "use strict";
 exports.__esModule = true;
+var output_1 = require("@/__generated__/output");
 var Announcements_1 = require("@/components/blocks/announcements/Announcements");
 var Container_1 = require("@/components/ui/common/container/Container");
 var Section_1 = require("@/components/ui/common/section/Section");
 var AccountSidebar_1 = require("@/components/ui/templates/account/sidebar/AccountSidebar");
 var react_1 = require("react");
 var Account_module_scss_1 = require("./Account.module.scss");
+var react_hot_toast_1 = require("react-hot-toast");
 // import styles from '@/components/blocks/announcements/Announcements.module.scss'
 var plus_png_1 = require("@/assets/images/icons/plus.png");
 var Picture_1 = require("@/components/ui/common/picture/Picture");
 var Account = function (_a) {
     var searchParams = _a.searchParams, brand = _a.brand, tariffs = _a.tariffs, categories = _a.categories;
+    var UpdateUserProfileMutate = output_1.useUpdateUserProfileMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            // onDeleteAnnouncement()
+            console.log('save profie');
+        }
+    })[0];
+    // const profileMutate = () => UpdateUserProfileMutate({
+    // 	variables: {
+    // 		id: announcement.id
+    // 	}}
+    // 	)
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
@@ -27,10 +45,28 @@ var Account = function (_a) {
             React.createElement(Container_1["default"], null,
                 React.createElement("div", null, "\u0411\u0440\u0435\u043D\u0434 \u0435\u0449\u0435 \u043D\u0435 \u0441\u043E\u0437\u0434\u0430\u043D"))));
     }
-    var handleSave = function () {
+    var handleSaveBrand = function () {
         // Logic to save the updated information goes here
         console.log('Saved data:', {
             brandName: brandName,
+            city: city,
+            about: about
+        });
+    };
+    var handleSaveProfile = function () {
+        UpdateUserProfileMutate({
+            variables: {
+                input: {
+                    email: email,
+                    password: password,
+                    whatsapp: whatsapp,
+                    telegram: telegram,
+                    phone: phone
+                }
+            }
+        });
+        // Logic to save the updated information goes here
+        console.log('Saved data:', {
             city: city,
             phone: phone,
             telegram: telegram,
@@ -55,7 +91,7 @@ var Account = function (_a) {
                         React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435:"),
                         React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "textarea", value: about, onChange: function (e) { return setAbout(e.target.value); } })),
                     React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
-                        React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSave },
+                        React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSaveBrand },
                             React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0425\u0420\u0410\u041D\u0418\u0422\u042C")))),
                 React.createElement("div", null,
                     React.createElement("div", { className: Account_module_scss_1["default"].editHeader },
@@ -79,7 +115,7 @@ var Account = function (_a) {
                         React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C:"),
                         React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
                     React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
-                        React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSave },
+                        React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSaveProfile },
                             React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0425\u0420\u0410\u041D\u0418\u0422\u042C")))))) : (React.createElement(React.Fragment, null,
                 React.createElement(AccountSidebar_1["default"], { balance: balance, brand: brand }),
                 React.createElement(Announcements_1["default"], { setBalance: setBalance, tariffs: tariffs })))),

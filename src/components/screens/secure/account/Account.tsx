@@ -1,5 +1,6 @@
 'use client';
 
+import { useUpdateUserProfileMutation } from '@/__generated__/output'
 import Announcements from '@/components/blocks/announcements/Announcements';
 import Container from '@/components/ui/common/container/Container';
 import Section from '@/components/ui/common/section/Section';
@@ -7,6 +8,8 @@ import AccountSidebar from '@/components/ui/templates/account/sidebar/AccountSid
 import type { IAccount } from '@/shared/interfaces/api/brand/brand.interface';
 import { useState, type FC } from 'react';
 import styles from './Account.module.scss';
+import toast from 'react-hot-toast'
+
 // import styles from '@/components/blocks/announcements/Announcements.module.scss'
 import plusIcon from '@/assets/images/icons/plus.png';
 import Picture from '@/components/ui/common/picture/Picture';
@@ -17,6 +20,28 @@ const Account: FC<IAccount> = ({
   tariffs,
   categories,
 }) => {
+
+
+	const [UpdateUserProfileMutate] = useUpdateUserProfileMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+			toast.error(message)
+		},
+		onCompleted: () => {
+			// onDeleteAnnouncement()
+			console.log('save profie');
+			
+		}
+	})
+
+
+	// const profileMutate = () => UpdateUserProfileMutate({
+	// 	variables: {
+	// 		id: announcement.id
+	// 	}}
+	// 	)
+
+
   const [balance, setBalance] = useState(brand?.balance || 0);
   const [brandName, setBrandName] = useState(brand?.name || '');
   const [city, setCity] = useState(brand?.city || '');
@@ -39,16 +64,34 @@ const Account: FC<IAccount> = ({
     );
   }
 
-  const handleSave = () => {
+  const handleSaveBrand = () => {
     // Logic to save the updated information goes here
     console.log('Saved data:', {
       brandName,
+      city,
+		about
+    });
+  };
+  const handleSaveProfile = () => {
+	UpdateUserProfileMutate({
+		variables: {
+			input: {
+				email,        
+				password,     
+				whatsapp,     
+				telegram,     
+				phone         
+			 }
+		}}
+		)
+    // Logic to save the updated information goes here
+    console.log('Saved data:', {
       city,
       phone,
       telegram,
       whatsapp,
       email,
-      password,
+      password
     });
   };
 
@@ -89,7 +132,7 @@ const Account: FC<IAccount> = ({
               </div>
 				 
 				  <div className={styles.saveEditWrap}>
-					<button className={styles.newad} onClick={handleSave}>
+					<button className={styles.newad} onClick={handleSaveBrand}>
 						<span className={styles.editSaveBtn}>
 						СОХРАНИТЬ 
 						</span>
@@ -154,7 +197,7 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.saveEditWrap}>
-					<button className={styles.newad} onClick={handleSave}>
+					<button className={styles.newad} onClick={handleSaveProfile}>
 						<span className={styles.editSaveBtn}>
 						СОХРАНИТЬ 
 						</span>
