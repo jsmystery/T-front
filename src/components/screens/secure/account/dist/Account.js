@@ -23,6 +23,7 @@ var Account = function (_a) {
         onCompleted: function () {
             // onDeleteAnnouncement()
             console.log('save profie');
+            react_hot_toast_1["default"].success("Сохранено");
         }
     })[0];
     // const profileMutate = () => UpdateUserProfileMutate({
@@ -65,9 +66,7 @@ var Account = function (_a) {
                 }
             }
         });
-        // Logic to save the updated information goes here
         console.log('Saved data:', {
-            city: city,
             phone: phone,
             telegram: telegram,
             whatsapp: whatsapp,

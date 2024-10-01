@@ -2,7 +2,7 @@
 .list,
 .fill {
 	@apply flex;
-	gap: 35px;
+	gap: 25px;
 }
 .fill {
 	@apply w-full;
@@ -57,7 +57,7 @@
 .item:first-child,
 .login {
 	@apply text-medium-lg font-medium flex items-center rounded-xl py-1.5 px-3 bg-gray-200 gap-1.5;
-	margin-right: 8px;
+	margin-right: 5px;
 	svg {
 		stroke-width: 1.3px;
 	}
@@ -111,7 +111,7 @@
 	.wrapper,
 	.list,
 	.fill {
-		@apply gap-7;
+		@apply gap-6;
 	}
 	.catalog {
 		@apply text-medium-xl;
@@ -214,7 +214,7 @@
 		margin-left: 30px;
 	}
 	.list {
-		gap: 30px;
+		gap: 25px;
 	}
 	.wrapper {
 		@apply gap-0;

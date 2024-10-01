@@ -30,6 +30,7 @@ const Account: FC<IAccount> = ({
 		onCompleted: () => {
 			// onDeleteAnnouncement()
 			console.log('save profie');
+			toast.success("Сохранено")
 			
 		}
 	})
@@ -84,9 +85,7 @@ const Account: FC<IAccount> = ({
 			 }
 		}}
 		)
-    // Logic to save the updated information goes here
     console.log('Saved data:', {
-      city,
       phone,
       telegram,
       whatsapp,
