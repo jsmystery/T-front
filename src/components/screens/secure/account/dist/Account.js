@@ -55,6 +55,22 @@ var Account = function (_a) {
         });
     };
     var handleSaveProfile = function () {
+        if (!email || email.length <= 5 || !email.includes('@')) {
+            react_hot_toast_1["default"].error("Email должен быть не пустым, содержать более 5 символов и включать символ '@'.");
+            throw new Error("Email должен быть не пустым, содержать более 5 символов и включать символ '@'.");
+        }
+        if (!phone || phone.length <= 7) {
+            react_hot_toast_1["default"].error("Телефон должен быть не пустым и содержать более 7 символов");
+            throw new Error("Телефон должен быть не пустым и содержать более 7 символов");
+        }
+        // Проверка, изменились ли phone или email по сравнению с текущими значениями в brand
+        var isPhoneChanged = phone !== brand.phone;
+        var isEmailChanged = email !== brand.email;
+        // Если phone или email изменились, проверяем, введен ли пароль
+        if ((isPhoneChanged || isEmailChanged) && !password) {
+            react_hot_toast_1["default"].error("Введите пароль для подтверждения изменений в телефоне или email.");
+            throw new Error("Введите пароль для подтверждения изменений в телефоне или email.");
+        }
         UpdateUserProfileMutate({
             variables: {
                 input: {
