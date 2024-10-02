@@ -1,0 +1,8 @@
+mutation UpdateBrand($id: Float!, $input: UpdateBrandInput!) {
+  updateBrand(id: $id, input: $input) {
+    id 
+    name
+    city
+    about
+  }
+}

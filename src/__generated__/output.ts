@@ -193,6 +193,7 @@ export type Mutation = {
   logout: Scalars['Boolean']['output'];
   placeOrder: NestedOrder;
   telegramAuth: SessionUserResponse;
+  updateBrand: Brand;
   updateUserProfile: Scalars['Boolean']['output'];
 };
 
@@ -234,6 +235,12 @@ export type MutationPlaceOrderArgs = {
 
 export type MutationTelegramAuthArgs = {
   data: TelegramAuthInput;
+};
+
+
+export type MutationUpdateBrandArgs = {
+  id: Scalars['Float']['input'];
+  input: UpdateBrandInput;
 };
 
 
@@ -466,8 +473,15 @@ export type TelegramAuthInput = {
   password: Scalars['String']['input'];
 };
 
+export type UpdateBrandInput = {
+  about: Scalars['String']['input'];
+  city: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
 export type UpdateUserInput = {
   email?: InputMaybe<Scalars['String']['input']>;
+  newPassword?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   telegram?: InputMaybe<Scalars['String']['input']>;
@@ -534,6 +548,14 @@ export type BalanceTopUpMutationVariables = Exact<{
 
 
 export type BalanceTopUpMutation = { balanceTopUp: { paymentUrl: string } };
+
+export type UpdateBrandMutationVariables = Exact<{
+  id: Scalars['Float']['input'];
+  input: UpdateBrandInput;
+}>;
+
+
+export type UpdateBrandMutation = { updateBrand: { id: number, name: string, city: string, about: string } };
 
 export type PlaceOrderMutationVariables = Exact<{
   data: OrderInput;
@@ -878,6 +900,43 @@ export function useBalanceTopUpMutation(baseOptions?: Apollo.MutationHookOptions
 export type BalanceTopUpMutationHookResult = ReturnType<typeof useBalanceTopUpMutation>;
 export type BalanceTopUpMutationResult = Apollo.MutationResult<BalanceTopUpMutation>;
 export type BalanceTopUpMutationOptions = Apollo.BaseMutationOptions<BalanceTopUpMutation, BalanceTopUpMutationVariables>;
+export const UpdateBrandDocument = gql`
+    mutation UpdateBrand($id: Float!, $input: UpdateBrandInput!) {
+  updateBrand(id: $id, input: $input) {
+    id
+    name
+    city
+    about
+  }
+}
+    `;
+export type UpdateBrandMutationFn = Apollo.MutationFunction<UpdateBrandMutation, UpdateBrandMutationVariables>;
+
+/**
+ * __useUpdateBrandMutation__
+ *
+ * To run a mutation, you first call `useUpdateBrandMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBrandMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBrandMutation, { data, loading, error }] = useUpdateBrandMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateBrandMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBrandMutation, UpdateBrandMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBrandMutation, UpdateBrandMutationVariables>(UpdateBrandDocument, options);
+      }
+export type UpdateBrandMutationHookResult = ReturnType<typeof useUpdateBrandMutation>;
+export type UpdateBrandMutationResult = Apollo.MutationResult<UpdateBrandMutation>;
+export type UpdateBrandMutationOptions = Apollo.BaseMutationOptions<UpdateBrandMutation, UpdateBrandMutationVariables>;
 export const PlaceOrderDocument = gql`
     mutation PlaceOrder($data: OrderInput!) {
   placeOrder(data: $data) {

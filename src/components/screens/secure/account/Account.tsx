@@ -1,6 +1,6 @@
 'use client';
 
-import { useUpdateUserProfileMutation } from '@/__generated__/output'
+import { useUpdateUserProfileMutation, useUpdateBrandMutation } from '@/__generated__/output'
 import Announcements from '@/components/blocks/announcements/Announcements';
 import Container from '@/components/ui/common/container/Container';
 import Section from '@/components/ui/common/section/Section';
@@ -28,19 +28,23 @@ const Account: FC<IAccount> = ({
 			toast.error(message)
 		},
 		onCompleted: () => {
-			// onDeleteAnnouncement()
 			console.log('save profie');
 			toast.success("Сохранено")
 			
 		}
 	})
 
-
-	// const profileMutate = () => UpdateUserProfileMutate({
-	// 	variables: {
-	// 		id: announcement.id
-	// 	}}
-	// 	)
+	const [UpdateBrandMutate] = useUpdateBrandMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Brand saved');
+		  toast.success("Бренд сохранен");
+		}
+	 });
+  
 
 
   const [balance, setBalance] = useState(brand?.balance || 0);
@@ -52,6 +56,7 @@ const Account: FC<IAccount> = ({
   const [email, setEmail] = useState(brand?.email ||'');
   const [about, setAbout] = useState(brand?.about ||'');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   
   const isEdit = searchParams && searchParams.type === 'edit';
 
@@ -66,13 +71,32 @@ const Account: FC<IAccount> = ({
   }
 
   const handleSaveBrand = () => {
-    // Logic to save the updated information goes here
+	if (!brandName || !city || !about) {
+      toast.error("Пожалуйста, заполните все поля для обновления бренда.");
+      return;
+    }
+
+
+	 UpdateBrandMutate({
+      variables: {
+			id: brand.id,
+        input: {
+          name: brandName,
+          city: city,
+          about: about,
+        },
+      },
+    });
+
     console.log('Saved data:', {
       brandName,
       city,
 		about
     });
   };
+
+
+
   const handleSaveProfile = () => {
 
 
@@ -95,6 +119,12 @@ const Account: FC<IAccount> = ({
 		throw new Error("Введите пароль для подтверждения изменений в телефоне или email.");
 	}
 
+	  // Если указан новый пароль, проверяем наличие текущего пароля
+	  if (newPassword && !password) {
+      toast.error('Введите текущий пароль для изменения пароля.');
+      throw new Error('Введите текущий пароль для изменения пароля.');
+    }
+
 
 	UpdateUserProfileMutate({
 		variables: {
@@ -103,7 +133,8 @@ const Account: FC<IAccount> = ({
 				password,     
 				whatsapp,     
 				telegram,     
-				phone         
+				phone,
+				newPassword      
 			 }
 		}}
 		)
@@ -213,8 +244,8 @@ const Account: FC<IAccount> = ({
                 <input 
 					   className={styles.inputEdit}
                   type="password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                  value={newPassword} 
+                  onChange={(e) => setNewPassword(e.target.value)} 
                 />
               </div>
 				  <div className={styles.saveEditWrap}>

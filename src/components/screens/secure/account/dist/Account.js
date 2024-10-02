@@ -21,16 +21,21 @@ var Account = function (_a) {
             react_hot_toast_1["default"].error(message);
         },
         onCompleted: function () {
-            // onDeleteAnnouncement()
             console.log('save profie');
             react_hot_toast_1["default"].success("Сохранено");
         }
     })[0];
-    // const profileMutate = () => UpdateUserProfileMutate({
-    // 	variables: {
-    // 		id: announcement.id
-    // 	}}
-    // 	)
+    var UpdateBrandMutate = output_1.useUpdateBrandMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            console.log('Brand saved');
+            react_hot_toast_1["default"].success("Бренд сохранен");
+        }
+    })[0];
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
@@ -40,6 +45,7 @@ var Account = function (_a) {
     var _h = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.email) || ''), email = _h[0], setEmail = _h[1];
     var _j = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.about) || ''), about = _j[0], setAbout = _j[1];
     var _k = react_1.useState(''), password = _k[0], setPassword = _k[1];
+    var _l = react_1.useState(''), newPassword = _l[0], setNewPassword = _l[1];
     var isEdit = searchParams && searchParams.type === 'edit';
     if (!brand.id) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
@@ -47,7 +53,20 @@ var Account = function (_a) {
                 React.createElement("div", null, "\u0411\u0440\u0435\u043D\u0434 \u0435\u0449\u0435 \u043D\u0435 \u0441\u043E\u0437\u0434\u0430\u043D"))));
     }
     var handleSaveBrand = function () {
-        // Logic to save the updated information goes here
+        if (!brandName || !city || !about) {
+            react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для обновления бренда.");
+            return;
+        }
+        UpdateBrandMutate({
+            variables: {
+                id: brand.id,
+                input: {
+                    name: brandName,
+                    city: city,
+                    about: about
+                }
+            }
+        });
         console.log('Saved data:', {
             brandName: brandName,
             city: city,
@@ -71,6 +90,11 @@ var Account = function (_a) {
             react_hot_toast_1["default"].error("Введите пароль для подтверждения изменений в телефоне или email.");
             throw new Error("Введите пароль для подтверждения изменений в телефоне или email.");
         }
+        // Если указан новый пароль, проверяем наличие текущего пароля
+        if (newPassword && !password) {
+            react_hot_toast_1["default"].error('Введите текущий пароль для изменения пароля.');
+            throw new Error('Введите текущий пароль для изменения пароля.');
+        }
         UpdateUserProfileMutate({
             variables: {
                 input: {
@@ -78,7 +102,8 @@ var Account = function (_a) {
                     password: password,
                     whatsapp: whatsapp,
                     telegram: telegram,
-                    phone: phone
+                    phone: phone,
+                    newPassword: newPassword
                 }
             }
         });
@@ -128,7 +153,7 @@ var Account = function (_a) {
                         React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
                     React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                         React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C:"),
-                        React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: password, onChange: function (e) { return setPassword(e.target.value); } })),
+                        React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "password", value: newPassword, onChange: function (e) { return setNewPassword(e.target.value); } })),
                     React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
                         React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSaveProfile },
                             React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0425\u0420\u0410\u041D\u0418\u0422\u042C")))))) : (React.createElement(React.Fragment, null,
