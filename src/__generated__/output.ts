@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
 };
 
 export type Account = {
@@ -120,6 +121,7 @@ export type Brand = {
 };
 
 export type BrandCard = {
+  about: Scalars['String']['output'];
   category: NestedCategory;
   city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
@@ -154,6 +156,21 @@ export type CategoryQueryInput = {
   sort: Sort;
 };
 
+export type CreateBrandInput = {
+  about: Scalars['String']['input'];
+  balance: Scalars['Int']['input'];
+  categoryId?: InputMaybe<Scalars['Int']['input']>;
+  city: Scalars['String']['input'];
+  createdAt: Scalars['DateTime']['input'];
+  id: Scalars['Int']['input'];
+  logoPath: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  rating: Scalars['Float']['input'];
+  slug: Scalars['String']['input'];
+  subscribers: Array<Scalars['String']['input']>;
+  updatedAt: Scalars['DateTime']['input'];
+};
+
 export type FullestQueryInput = {
   page?: InputMaybe<Scalars['Int']['input']>;
   perPage?: InputMaybe<Scalars['Int']['input']>;
@@ -185,6 +202,7 @@ export type JwtAuthVerificationInput = {
 
 export type Mutation = {
   balanceTopUp: YookassaPayment;
+  createBrand: BrandCard;
   deleteProduct: Scalars['Boolean']['output'];
   jwtConfirmation: Scalars['Boolean']['output'];
   jwtLogin: SessionUserResponse;
@@ -200,6 +218,11 @@ export type Mutation = {
 
 export type MutationBalanceTopUpArgs = {
   data: YookassaInput;
+};
+
+
+export type MutationCreateBrandArgs = {
+  input: CreateBrandInput;
 };
 
 
@@ -548,6 +571,13 @@ export type BalanceTopUpMutationVariables = Exact<{
 
 
 export type BalanceTopUpMutation = { balanceTopUp: { paymentUrl: string } };
+
+export type CreateBrandMutationVariables = Exact<{
+  input: CreateBrandInput;
+}>;
+
+
+export type CreateBrandMutation = { createBrand: { id: number, name: string, slug: string, city: string, logoPath: string, about: string, rating: string } };
 
 export type UpdateBrandMutationVariables = Exact<{
   id: Scalars['Float']['input'];
@@ -900,6 +930,45 @@ export function useBalanceTopUpMutation(baseOptions?: Apollo.MutationHookOptions
 export type BalanceTopUpMutationHookResult = ReturnType<typeof useBalanceTopUpMutation>;
 export type BalanceTopUpMutationResult = Apollo.MutationResult<BalanceTopUpMutation>;
 export type BalanceTopUpMutationOptions = Apollo.BaseMutationOptions<BalanceTopUpMutation, BalanceTopUpMutationVariables>;
+export const CreateBrandDocument = gql`
+    mutation CreateBrand($input: CreateBrandInput!) {
+  createBrand(input: $input) {
+    id
+    name
+    slug
+    city
+    logoPath
+    about
+    rating
+  }
+}
+    `;
+export type CreateBrandMutationFn = Apollo.MutationFunction<CreateBrandMutation, CreateBrandMutationVariables>;
+
+/**
+ * __useCreateBrandMutation__
+ *
+ * To run a mutation, you first call `useCreateBrandMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBrandMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBrandMutation, { data, loading, error }] = useCreateBrandMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateBrandMutation(baseOptions?: Apollo.MutationHookOptions<CreateBrandMutation, CreateBrandMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBrandMutation, CreateBrandMutationVariables>(CreateBrandDocument, options);
+      }
+export type CreateBrandMutationHookResult = ReturnType<typeof useCreateBrandMutation>;
+export type CreateBrandMutationResult = Apollo.MutationResult<CreateBrandMutation>;
+export type CreateBrandMutationOptions = Apollo.BaseMutationOptions<CreateBrandMutation, CreateBrandMutationVariables>;
 export const UpdateBrandDocument = gql`
     mutation UpdateBrand($id: Float!, $input: UpdateBrandInput!) {
   updateBrand(id: $id, input: $input) {

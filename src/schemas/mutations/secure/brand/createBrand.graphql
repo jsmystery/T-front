@@ -1,0 +1,15 @@
+mutation CreateBrand(
+   $input: CreateBrandInput!
+) {
+  createBrand(
+      input: $input
+  ) {
+    id
+    name
+    slug
+    city
+    logoPath
+    about
+    rating
+  }
+}

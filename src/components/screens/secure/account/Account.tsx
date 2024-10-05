@@ -60,11 +60,76 @@ const Account: FC<IAccount> = ({
   
   const isEdit = searchParams && searchParams.type === 'edit';
 
-  if (!brand.id) {
+
+  const handleCreateBrand = () => {
+	if (!brandName || !city || !about) {
+      toast.error("Пожалуйста, заполните все поля для создания бренда.");
+      return;
+    }
+
+
+	 UpdateBrandMutate({
+      variables: {
+			id: brand.id,
+        input: {
+          name: brandName,
+          city: city,
+          about: about,
+        },
+      },
+    });
+
+    console.log('Saved data:', {
+      brandName,
+      city,
+		about
+    });
+  };
+
+  if (!brand?.id) {
     return (
       <Section className={styles.section}>
         <Container>
-          <div>Бренд еще не создан</div>
+		  <div className={styles.editFormWrap}>
+					<div>
+					<div className={`${styles.editHeader} text-center`}><h2>Создать бренд</h2></div>
+				 <div className={styles.inputWrap}>
+                <label className={styles.label}>Имя бренда</label>
+                <input 
+					 className={styles.inputEdit}
+                  type="text" 
+                  // value={brandName} 
+                  onChange={(e) => setBrandName(e.target.value)} 
+                />
+              </div>
+				  <div className={styles.inputWrap}>
+                <label className={styles.label}>Город</label>
+                <input
+					   className={styles.inputEdit}
+                  type="text" 
+                  // value={city} 
+                  onChange={(e) => setCity(e.target.value)} 
+                />
+              </div>
+				  <div className={styles.inputWrap}>
+                <label className={styles.label}>Описание</label>
+                <input
+					   className={styles.inputEdit}
+                  type="textarea" 
+                  // value={about} 
+                  onChange={(e) => setAbout(e.target.value)} 
+                />
+              </div>
+				 
+				  <div className={styles.saveEditWrap}>
+					<button className={styles.newad} onClick={handleCreateBrand}>
+						<span className={styles.editSaveBtn}>
+						СОЗДАТЬ 
+						</span>
+					</button>
+            	</div>
+					</div>
+            </div>
         </Container>
       </Section>
     );
@@ -94,6 +159,8 @@ const Account: FC<IAccount> = ({
 		about
     });
   };
+
+
 
 
 

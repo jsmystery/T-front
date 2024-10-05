@@ -47,10 +47,52 @@ var Account = function (_a) {
     var _k = react_1.useState(''), password = _k[0], setPassword = _k[1];
     var _l = react_1.useState(''), newPassword = _l[0], setNewPassword = _l[1];
     var isEdit = searchParams && searchParams.type === 'edit';
-    if (!brand.id) {
+    var handleCreateBrand = function () {
+        if (!brandName || !city || !about) {
+            react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
+            return;
+        }
+        UpdateBrandMutate({
+            variables: {
+                id: brand.id,
+                input: {
+                    name: brandName,
+                    city: city,
+                    about: about
+                }
+            }
+        });
+        console.log('Saved data:', {
+            brandName: brandName,
+            city: city,
+            about: about
+        });
+    };
+    if (!(brand === null || brand === void 0 ? void 0 : brand.id)) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
             React.createElement(Container_1["default"], null,
-                React.createElement("div", null, "\u0411\u0440\u0435\u043D\u0434 \u0435\u0449\u0435 \u043D\u0435 \u0441\u043E\u0437\u0434\u0430\u043D"))));
+                React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
+                    React.createElement("div", null,
+                        React.createElement("div", { className: Account_module_scss_1["default"].editHeader + " text-center" },
+                            React.createElement("h2", null, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0431\u0440\u0435\u043D\u0434")),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u0431\u0440\u0435\u043D\u0434\u0430"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", 
+                                // value={brandName} 
+                                onChange: function (e) { return setBrandName(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0413\u043E\u0440\u043E\u0434"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", 
+                                // value={city} 
+                                onChange: function (e) { return setCity(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "textarea", 
+                                // value={about} 
+                                onChange: function (e) { return setAbout(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
+                            React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleCreateBrand },
+                                React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"))))))));
     }
     var handleSaveBrand = function () {
         if (!brandName || !city || !about) {
