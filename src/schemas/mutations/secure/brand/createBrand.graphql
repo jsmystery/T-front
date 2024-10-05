@@ -4,6 +4,7 @@ mutation CreateBrand(
   createBrand(
       input: $input
   ) {
+       # Specify the fields to return after the mutation is executed
     id
     name
     slug

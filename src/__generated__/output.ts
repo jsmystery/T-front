@@ -15,7 +15,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
 };
 
 export type Account = {
@@ -158,17 +157,10 @@ export type CategoryQueryInput = {
 
 export type CreateBrandInput = {
   about: Scalars['String']['input'];
-  balance: Scalars['Int']['input'];
-  categoryId?: InputMaybe<Scalars['Int']['input']>;
   city: Scalars['String']['input'];
-  createdAt: Scalars['DateTime']['input'];
-  id: Scalars['Int']['input'];
   logoPath: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  rating: Scalars['Float']['input'];
   slug: Scalars['String']['input'];
-  subscribers: Array<Scalars['String']['input']>;
-  updatedAt: Scalars['DateTime']['input'];
 };
 
 export type FullestQueryInput = {

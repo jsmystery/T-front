@@ -1,6 +1,6 @@
 'use client';
 
-import { useUpdateUserProfileMutation, useUpdateBrandMutation } from '@/__generated__/output'
+import { useUpdateUserProfileMutation, useUpdateBrandMutation, useCreateBrandMutation } from '@/__generated__/output'
 import Announcements from '@/components/blocks/announcements/Announcements';
 import Container from '@/components/ui/common/container/Container';
 import Section from '@/components/ui/common/section/Section';
@@ -44,6 +44,17 @@ const Account: FC<IAccount> = ({
 		  toast.success("Бренд сохранен");
 		}
 	 });
+
+	const [CreateBrandMutate] = useCreateBrandMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Brand created');
+		  toast.success("Бренд создан");
+		}
+	 });
   
 
 
@@ -56,6 +67,7 @@ const Account: FC<IAccount> = ({
   const [email, setEmail] = useState(brand?.email ||'');
   const [about, setAbout] = useState(brand?.about ||'');
   const [password, setPassword] = useState('');
+  const [slug, setSlug] = useState('');
   const [newPassword, setNewPassword] = useState('');
   
   const isEdit = searchParams && searchParams.type === 'edit';
@@ -68,22 +80,24 @@ const Account: FC<IAccount> = ({
     }
 
 
-	 UpdateBrandMutate({
+	 CreateBrandMutate({
       variables: {
-			id: brand.id,
+			// id: brand.id,
         input: {
           name: brandName,
           city: city,
           about: about,
+			 slug: slug,
+			 logoPath: ''
         },
       },
     });
 
-    console.log('Saved data:', {
-      brandName,
-      city,
-		about
-    });
+   //  console.log('Saved data:', {
+   //    brandName,
+   //    city,
+	// 	about
+   //  });
   };
 
   if (!brand?.id) {
@@ -112,11 +126,20 @@ const Account: FC<IAccount> = ({
                 />
               </div>
 				  <div className={styles.inputWrap}>
+                <label className={styles.label}>URL</label>
+                <input
+					   className={styles.inputEdit}
+                  type="text" 
+                  value={slug} 
+                  onChange={(e) => setSlug(e.target.value)} 
+                />
+              </div>
+				  <div className={styles.inputWrap}>
                 <label className={styles.label}>Описание</label>
                 <input
 					   className={styles.inputEdit}
                   type="textarea" 
-                  // value={about} 
+                  value={about} 
                   onChange={(e) => setAbout(e.target.value)} 
                 />
               </div>

@@ -36,6 +36,17 @@ var Account = function (_a) {
             react_hot_toast_1["default"].success("Бренд сохранен");
         }
     })[0];
+    var CreateBrandMutate = output_1.useCreateBrandMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            console.log('Brand created');
+            react_hot_toast_1["default"].success("Бренд создан");
+        }
+    })[0];
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
@@ -45,28 +56,31 @@ var Account = function (_a) {
     var _h = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.email) || ''), email = _h[0], setEmail = _h[1];
     var _j = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.about) || ''), about = _j[0], setAbout = _j[1];
     var _k = react_1.useState(''), password = _k[0], setPassword = _k[1];
-    var _l = react_1.useState(''), newPassword = _l[0], setNewPassword = _l[1];
+    var _l = react_1.useState(''), slug = _l[0], setSlug = _l[1];
+    var _m = react_1.useState(''), newPassword = _m[0], setNewPassword = _m[1];
     var isEdit = searchParams && searchParams.type === 'edit';
     var handleCreateBrand = function () {
         if (!brandName || !city || !about) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
             return;
         }
-        UpdateBrandMutate({
+        CreateBrandMutate({
             variables: {
-                id: brand.id,
+                // id: brand.id,
                 input: {
                     name: brandName,
                     city: city,
-                    about: about
+                    about: about,
+                    slug: slug,
+                    logoPath: ''
                 }
             }
         });
-        console.log('Saved data:', {
-            brandName: brandName,
-            city: city,
-            about: about
-        });
+        //  console.log('Saved data:', {
+        //    brandName,
+        //    city,
+        // 	about
+        //  });
     };
     if (!(brand === null || brand === void 0 ? void 0 : brand.id)) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
@@ -86,10 +100,11 @@ var Account = function (_a) {
                                 // value={city} 
                                 onChange: function (e) { return setCity(e.target.value); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "URL"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: slug, onChange: function (e) { return setSlug(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "textarea", 
-                                // value={about} 
-                                onChange: function (e) { return setAbout(e.target.value); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "textarea", value: about, onChange: function (e) { return setAbout(e.target.value); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
                             React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleCreateBrand },
                                 React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"))))))));
