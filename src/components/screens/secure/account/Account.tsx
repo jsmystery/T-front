@@ -9,6 +9,7 @@ import type { IAccount } from '@/shared/interfaces/api/brand/brand.interface';
 import { useState, type FC } from 'react';
 import styles from './Account.module.scss';
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 // import styles from '@/components/blocks/announcements/Announcements.module.scss'
 import plusIcon from '@/assets/images/icons/plus.png';
@@ -21,6 +22,7 @@ const Account: FC<IAccount> = ({
   categories,
 }) => {
 
+	const router = useRouter();
 
 	const [UpdateUserProfileMutate] = useUpdateUserProfileMutation({
 		fetchPolicy: 'no-cache',
@@ -53,6 +55,7 @@ const Account: FC<IAccount> = ({
 		onCompleted: () => {
 		  console.log('Brand created');
 		  toast.success("Бренд создан");
+			router.push('/');
 		}
 	 });
   
@@ -86,9 +89,9 @@ const Account: FC<IAccount> = ({
         input: {
           name: brandName,
           city: city,
-          about: about,
+          about: about,	
 			 slug: slug,
-			 logoPath: ''
+			 logoPath: '/uploads/brands/brand-1.png'
         },
       },
     });
@@ -112,7 +115,7 @@ const Account: FC<IAccount> = ({
                 <input 
 					 className={styles.inputEdit}
                   type="text" 
-                  // value={brandName} 
+                  value={brandName} 
                   onChange={(e) => setBrandName(e.target.value)} 
                 />
               </div>
@@ -121,7 +124,7 @@ const Account: FC<IAccount> = ({
                 <input
 					   className={styles.inputEdit}
                   type="text" 
-                  // value={city} 
+                  value={city} 
                   onChange={(e) => setCity(e.target.value)} 
                 />
               </div>

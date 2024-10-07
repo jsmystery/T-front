@@ -9,11 +9,13 @@ var AccountSidebar_1 = require("@/components/ui/templates/account/sidebar/Accoun
 var react_1 = require("react");
 var Account_module_scss_1 = require("./Account.module.scss");
 var react_hot_toast_1 = require("react-hot-toast");
+var navigation_1 = require("next/navigation");
 // import styles from '@/components/blocks/announcements/Announcements.module.scss'
 var plus_png_1 = require("@/assets/images/icons/plus.png");
 var Picture_1 = require("@/components/ui/common/picture/Picture");
 var Account = function (_a) {
     var searchParams = _a.searchParams, brand = _a.brand, tariffs = _a.tariffs, categories = _a.categories;
+    var router = navigation_1.useRouter();
     var UpdateUserProfileMutate = output_1.useUpdateUserProfileMutation({
         fetchPolicy: 'no-cache',
         onError: function (_a) {
@@ -45,6 +47,7 @@ var Account = function (_a) {
         onCompleted: function () {
             console.log('Brand created');
             react_hot_toast_1["default"].success("Бренд создан");
+            router.push('/');
         }
     })[0];
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
@@ -72,7 +75,7 @@ var Account = function (_a) {
                     city: city,
                     about: about,
                     slug: slug,
-                    logoPath: ''
+                    logoPath: '/uploads/brands/brand-1.png'
                 }
             }
         });
@@ -91,14 +94,10 @@ var Account = function (_a) {
                             React.createElement("h2", null, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0431\u0440\u0435\u043D\u0434")),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u0431\u0440\u0435\u043D\u0434\u0430"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", 
-                                // value={brandName} 
-                                onChange: function (e) { return setBrandName(e.target.value); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: brandName, onChange: function (e) { return setBrandName(e.target.value); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0413\u043E\u0440\u043E\u0434"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", 
-                                // value={city} 
-                                onChange: function (e) { return setCity(e.target.value); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: city, onChange: function (e) { return setCity(e.target.value); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "URL"),
                             React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: slug, onChange: function (e) { return setSlug(e.target.value); } })),
