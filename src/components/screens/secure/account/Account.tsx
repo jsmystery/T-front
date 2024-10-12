@@ -74,6 +74,7 @@ const Account: FC<IAccount> = ({
   const [newPassword, setNewPassword] = useState('');
   
   const isEdit = searchParams && searchParams.type === 'edit';
+//   const isEditItem = searchParams && searchParams.type === 'edit-item';
 
 
   const handleCreateBrand = () => {
@@ -96,11 +97,6 @@ const Account: FC<IAccount> = ({
       },
     });
 
-   //  console.log('Saved data:', {
-   //    brandName,
-   //    city,
-	// 	about
-   //  });
   };
 
   if (!brand?.id) {
@@ -160,6 +156,64 @@ const Account: FC<IAccount> = ({
       </Section>
     );
   }
+
+//   if (isEditItem) {
+//     return (
+//       <Section className={styles.section}>
+//         <Container>
+// 		  <div className={styles.editFormWrap}>
+// 					<div>
+// 					<div className={`${styles.editHeader} text-center`}><h2>Редактировать обьявления</h2></div>
+// 				 <div className={styles.inputWrap}>
+//                 <label className={styles.label}>Имя бренда</label>
+//                 <input 
+// 					 className={styles.inputEdit}
+//                   type="text" 
+//                   value={brandName} 
+//                   onChange={(e) => setBrandName(e.target.value)} 
+//                 />
+//               </div>
+// 				  <div className={styles.inputWrap}>
+//                 <label className={styles.label}>Город</label>
+//                 <input
+// 					   className={styles.inputEdit}
+//                   type="text" 
+//                   value={city} 
+//                   onChange={(e) => setCity(e.target.value)} 
+//                 />
+//               </div>
+// 				  <div className={styles.inputWrap}>
+//                 <label className={styles.label}>URL</label>
+//                 <input
+// 					   className={styles.inputEdit}
+//                   type="text" 
+//                   value={slug} 
+//                   onChange={(e) => setSlug(e.target.value)} 
+//                 />
+//               </div>
+// 				  <div className={styles.inputWrap}>
+//                 <label className={styles.label}>Описание</label>
+//                 <input
+// 					   className={styles.inputEdit}
+//                   type="textarea" 
+//                   value={about} 
+//                   onChange={(e) => setAbout(e.target.value)} 
+//                 />
+//               </div>
+				 
+// 				  <div className={styles.saveEditWrap}>
+// 					<button className={styles.newad} onClick={handleCreateBrand}>
+// 						<span className={styles.editSaveBtn}>
+// 						ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
+// 						</span>
+// 					</button>
+//             	</div>
+// 					</div>
+//             </div>
+//         </Container>
+//       </Section>
+//     );
+//   }
 
   const handleSaveBrand = () => {
 	if (!brandName || !city || !about) {

@@ -62,6 +62,7 @@ var Account = function (_a) {
     var _l = react_1.useState(''), slug = _l[0], setSlug = _l[1];
     var _m = react_1.useState(''), newPassword = _m[0], setNewPassword = _m[1];
     var isEdit = searchParams && searchParams.type === 'edit';
+    //   const isEditItem = searchParams && searchParams.type === 'edit-item';
     var handleCreateBrand = function () {
         if (!brandName || !city || !about) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
@@ -79,11 +80,6 @@ var Account = function (_a) {
                 }
             }
         });
-        //  console.log('Saved data:', {
-        //    brandName,
-        //    city,
-        // 	about
-        //  });
     };
     if (!(brand === null || brand === void 0 ? void 0 : brand.id)) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
@@ -108,6 +104,62 @@ var Account = function (_a) {
                             React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleCreateBrand },
                                 React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"))))))));
     }
+    //   if (isEditItem) {
+    //     return (
+    //       <Section className={styles.section}>
+    //         <Container>
+    // 		  <div className={styles.editFormWrap}>
+    // 					<div>
+    // 					<div className={`${styles.editHeader} text-center`}><h2>Редактировать обьявления</h2></div>
+    // 				 <div className={styles.inputWrap}>
+    //                 <label className={styles.label}>Имя бренда</label>
+    //                 <input 
+    // 					 className={styles.inputEdit}
+    //                   type="text" 
+    //                   value={brandName} 
+    //                   onChange={(e) => setBrandName(e.target.value)} 
+    //                 />
+    //               </div>
+    // 				  <div className={styles.inputWrap}>
+    //                 <label className={styles.label}>Город</label>
+    //                 <input
+    // 					   className={styles.inputEdit}
+    //                   type="text" 
+    //                   value={city} 
+    //                   onChange={(e) => setCity(e.target.value)} 
+    //                 />
+    //               </div>
+    // 				  <div className={styles.inputWrap}>
+    //                 <label className={styles.label}>URL</label>
+    //                 <input
+    // 					   className={styles.inputEdit}
+    //                   type="text" 
+    //                   value={slug} 
+    //                   onChange={(e) => setSlug(e.target.value)} 
+    //                 />
+    //               </div>
+    // 				  <div className={styles.inputWrap}>
+    //                 <label className={styles.label}>Описание</label>
+    //                 <input
+    // 					   className={styles.inputEdit}
+    //                   type="textarea" 
+    //                   value={about} 
+    //                   onChange={(e) => setAbout(e.target.value)} 
+    //                 />
+    //               </div>
+    // 				  <div className={styles.saveEditWrap}>
+    // 					<button className={styles.newad} onClick={handleCreateBrand}>
+    // 						<span className={styles.editSaveBtn}>
+    // 						ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
+    // 						</span>
+    // 					</button>
+    //             	</div>
+    // 					</div>
+    //             </div>
+    //         </Container>
+    //       </Section>
+    //     );
+    //   }
     var handleSaveBrand = function () {
         if (!brandName || !city || !about) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для обновления бренда.");

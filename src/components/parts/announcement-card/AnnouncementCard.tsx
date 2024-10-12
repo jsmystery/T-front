@@ -1,5 +1,7 @@
 import { TariffType, useDeleteProductMutation } from '@/__generated__/output'
 import cityIcon from '@/assets/images/icons/city.png'
+import Container from '@/components/ui/common/container/Container';
+import Section from '@/components/ui/common/section/Section';
 import eyeIcon from '@/assets/images/icons/eye.png'
 import fillGrayIcon from '@/assets/images/icons/fill-gray.png'
 import fillIcon from '@/assets/images/icons/fill.png'
@@ -32,6 +34,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 		isShow: false,
 		type: TariffType.Top,
 	})
+	const [editItem, setEditItem] = useState(false) // Added state for editItem
 	const currentTariff = tariffs.find((tariff) => tariff.type === type)
 	const isTop = type === TariffType.Top
 	const isFill = type === TariffType.Fill
@@ -47,10 +50,12 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	})
 
 	const handleDelete = () => deleteProductMutate({
-				variables: {
-					id: announcement.id
-				}})
+		variables: {
+			id: announcement.id
+		}})
 
+	// Ensure correct handling for setEditItem(true)
+	const handleEdit = () => setEditItem(true) // Edited to wrap setEditItem in a function
 
 	return (
 		<>
@@ -109,37 +114,37 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 							{announcement.city}
 						</div>
 						<div className={styles.editWrap}>
-							<button className={styles.editBtn}>
-							Изменить
+							<button className={styles.editBtn} onClick={handleEdit}> {/* Edited to use handleEdit */}
+								Изменить
 							</button>
 							<button className={styles.delBtn} onClick={handleDelete}>
-							Удалить
+								Удалить
 							</button>
 						</div>
 					</div>
 					<div className={styles.serviceWrap}>
-					<div className={styles.serviceBtnWrap}>
+						<div className={styles.serviceBtnWrap}>
 							<button className={styles.editBtn}>
-							<Picture src={raiseIcon.src} alt="Поднять" />
-							Поднять объявление
+								<Picture src={raiseIcon.src} alt="Поднять" />
+								Поднять объявление
 							</button>
 							<Picture className={styles.hint} src={questionIcon.src} alt="Подсказка" />
-					</div>
-					<div className={styles.serviceBtnWrap}>
+						</div>
+						<div className={styles.serviceBtnWrap}>
 							<button className={styles.delBtn}>
-							<Picture src={fillIcon.src} alt="Выделить" />
-							Выделить цветом
+								<Picture src={fillIcon.src} alt="Выделить" />
+								Выделить цветом
 							</button>
 							<Picture className={styles.hint} src={questionIcon.src} alt="Подсказка" />
-					</div>
+						</div>
 
-					<div className={styles.serviceBtnWrap}>
+						<div className={styles.serviceBtnWrap}>
 							<button className={styles.delBtn}>
-							<Picture src={vipIcon.src} alt="Размещение" />
-							Размещение
+								<Picture src={vipIcon.src} alt="Размещение" />
+								Размещение
 							</button>
 							<Picture className={styles.hint} src={questionIcon.src} alt="Подсказка" />
-						</div>	
+						</div>
 					</div>
 				</div>
 				<div className={styles.payments}>
@@ -212,6 +217,48 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 					})}
 				</div>
 			</div>
+
+			{/* If editItem is true, display the edit form */}
+			{editItem && ( /* Added condition to check if editItem is true */
+				<Section className={styles.section}>
+					<Container>
+						<div className={styles.editFormWrap}>
+							<div>
+								<div className={`${styles.editHeader} text-center`}>
+									<h2>Редактировать объявление</h2>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Имя бренда</label>
+									<input
+										className={styles.inputEdit}
+										type="text"
+										// value={brandName}
+										// onChange={(e) => setBrandName(e.target.value)}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Город</label>
+									<input
+										className={styles.inputEdit}
+										type="text"
+										// value={city}
+										// onChange={(e) => setCity(e.target.value)}
+									/>
+								</div>
+
+								<div className={styles.saveEditWrap}>
+									<button className={styles.newad}>
+										<span className={styles.editSaveBtn}>
+											ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
+										</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</Container>
+				</Section>
+			)}
+
 			{isShow && currentTariff && (
 				<Modal
 					heading={
