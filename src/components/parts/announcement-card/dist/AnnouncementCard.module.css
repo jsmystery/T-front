@@ -249,6 +249,24 @@
   text-align: center;
 }
 
+.label {
+  @apply bg-green-base rounded-full text-medium-xl font-medium text-white;
+  padding: 9px 24px;
+  justify-content: center;
+  display: flex;
+  width: 160px;
+  align-items: center;
+}
+
+.editSaveBtn {
+  font-weight: 900;
+}
+
+.editHeader {
+  font-weight: 900;
+  font-size: 17px;
+}
+
 @media (max-width: 1400px) {
   .serviceWrap {
     margin-left: 20%;
@@ -316,6 +334,11 @@
   }
 }
 @media (max-width: 900px) {
+  .label {
+    @apply py-2;
+    font-size: 13px;
+  }
+
   .serviceWrap {
     margin-left: 5%;
   }

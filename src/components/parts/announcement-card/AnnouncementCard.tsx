@@ -40,6 +40,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const currentTariff = tariffs.find((tariff) => tariff.type === type)
 	const isTop = type === TariffType.Top
 	const isFill = type === TariffType.Fill
+	const [name, setName] = useState(announcement.name) // Name state
+	const [about, setAbout] = useState('') // About state
 
 	const [deleteProductMutate] = useDeleteProductMutation({
 		fetchPolicy: 'no-cache',
@@ -230,22 +232,22 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 									<h2>Редактировать объявление</h2>
 								</div>
 								<div className={styles.inputWrap}>
-									<label className={styles.label}>Имя бренда</label>
+									<label className={styles.label}>Имя продукта</label>
 									<input
 										className={styles.inputEdit}
 										type="text"
-										// value={brandName}
+										value={name}
 										// onChange={(e) => setBrandName(e.target.value)}
+										onChange={(e) => setName(e.target.value)}
 									/>
 								</div>
 								<div className={styles.inputWrap}>
-									<label className={styles.label}>Город</label>
-									<input
-										className={styles.inputEdit}
-										type="text"
-										// value={city}
-										// onChange={(e) => setCity(e.target.value)}
-									/>
+								<label className={styles.label}>Описания</label>
+								<textarea
+									className={styles.inputEdit}
+									value={about}
+									onChange={(e) => setAbout(e.target.value)} // Update about state
+								/>
 								</div>
 
 								<div className={styles.saveEditWrap}>

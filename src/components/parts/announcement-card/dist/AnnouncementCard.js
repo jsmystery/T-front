@@ -46,6 +46,8 @@ var AnnouncementCard = function (_a) {
     var currentTariff = tariffs.find(function (tariff) { return tariff.type === type; });
     var isTop = type === output_1.TariffType.Top;
     var isFill = type === output_1.TariffType.Fill;
+    var _f = react_1.useState(announcement.name), name = _f[0], setName = _f[1]; // Name state
+    var _g = react_1.useState(''), about = _g[0], setAbout = _g[1]; // About state
     var deleteProductMutate = output_1.useDeleteProductMutation({
         fetchPolicy: 'no-cache',
         onError: function (_a) {
@@ -168,11 +170,13 @@ var AnnouncementCard = function (_a) {
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].editHeader + " text-center" },
                             React.createElement("h2", null, "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")),
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].inputWrap },
-                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u0418\u043C\u044F \u0431\u0440\u0435\u043D\u0434\u0430"),
-                            React.createElement("input", { className: AnnouncementCard_module_scss_1["default"].inputEdit, type: "text" })),
+                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u0418\u043C\u044F \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
+                            React.createElement("input", { className: AnnouncementCard_module_scss_1["default"].inputEdit, type: "text", value: name, 
+                                // onChange={(e) => setBrandName(e.target.value)}
+                                onChange: function (e) { return setName(e.target.value); } })),
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].inputWrap },
-                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u0413\u043E\u0440\u043E\u0434"),
-                            React.createElement("input", { className: AnnouncementCard_module_scss_1["default"].inputEdit, type: "text" })),
+                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
+                            React.createElement("textarea", { className: AnnouncementCard_module_scss_1["default"].inputEdit, value: about, onChange: function (e) { return setAbout(e.target.value); } })),
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].saveEditWrap },
                             React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].newad },
                                 React.createElement("span", { className: AnnouncementCard_module_scss_1["default"].editSaveBtn }, "\u0418\u0417\u041C\u0415\u041D\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415")))))))),
