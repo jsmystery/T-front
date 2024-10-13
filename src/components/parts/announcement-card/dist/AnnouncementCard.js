@@ -59,7 +59,7 @@ var AnnouncementCard = function (_a) {
             console.log('Product saved');
             react_hot_toast_1["default"].success("Изменения сохранены");
             //   setEditItem(false)
-            router.push('/my-account?type=edited');
+            router.push('/');
         }
     })[0];
     var handleEditItem = function () {

@@ -70,10 +70,15 @@ const Account: FC<IAccount> = ({
   const [password, setPassword] = useState('');
   const [slug, setSlug] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [productName, setProductName] = useState('')
+	const [productAbout, setProductAbout] = useState('') // About state
+  const [addItem, setAddItem] = useState(false) // Added state for editItem
+
   
   const isEdit = searchParams && searchParams.type === 'edit';
-//   const isEditItem = searchParams && searchParams.type === 'edit-item';
 
+// const showAddProduct = () => setAddItem(true) 
+const showAddProduct = () => setAddItem(!addItem) 
 
   const handleCreateBrand = () => {
 	if (!brandName || !city || !about) {
@@ -94,6 +99,28 @@ const Account: FC<IAccount> = ({
         },
       },
     });
+
+  };
+
+  const handleAddProduct = () => {
+	// if (!brandName || !city || !about) {
+   //    toast.error("Пожалуйста, заполните все поля для создания бренда.");
+   //    return;
+   //  }
+
+
+	//  CreateBrandMutate({
+   //    variables: {
+	// 		// id: brand.id,
+   //      input: {
+   //        name: brandName,
+   //        city: city,
+   //        about: about,	
+	// 		 slug: slug,
+	// 		 logoPath: '/uploads/brands/brand-1.png'
+   //      },
+   //    },
+   //  });
 
   };
 
@@ -155,63 +182,6 @@ const Account: FC<IAccount> = ({
     );
   }
 
-//   if (isEditItem) {
-//     return (
-//       <Section className={styles.section}>
-//         <Container>
-// 		  <div className={styles.editFormWrap}>
-// 					<div>
-// 					<div className={`${styles.editHeader} text-center`}><h2>Редактировать обьявления</h2></div>
-// 				 <div className={styles.inputWrap}>
-//                 <label className={styles.label}>Имя бренда</label>
-//                 <input 
-// 					 className={styles.inputEdit}
-//                   type="text" 
-//                   value={brandName} 
-//                   onChange={(e) => setBrandName(e.target.value)} 
-//                 />
-//               </div>
-// 				  <div className={styles.inputWrap}>
-//                 <label className={styles.label}>Город</label>
-//                 <input
-// 					   className={styles.inputEdit}
-//                   type="text" 
-//                   value={city} 
-//                   onChange={(e) => setCity(e.target.value)} 
-//                 />
-//               </div>
-// 				  <div className={styles.inputWrap}>
-//                 <label className={styles.label}>URL</label>
-//                 <input
-// 					   className={styles.inputEdit}
-//                   type="text" 
-//                   value={slug} 
-//                   onChange={(e) => setSlug(e.target.value)} 
-//                 />
-//               </div>
-// 				  <div className={styles.inputWrap}>
-//                 <label className={styles.label}>Описание</label>
-//                 <input
-// 					   className={styles.inputEdit}
-//                   type="textarea" 
-//                   value={about} 
-//                   onChange={(e) => setAbout(e.target.value)} 
-//                 />
-//               </div>
-				 
-// 				  <div className={styles.saveEditWrap}>
-// 					<button className={styles.newad} onClick={handleCreateBrand}>
-// 						<span className={styles.editSaveBtn}>
-// 						ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
-// 						</span>
-// 					</button>
-//             	</div>
-// 					</div>
-//             </div>
-//         </Container>
-//       </Section>
-//     );
-//   }
 
   const handleSaveBrand = () => {
 	if (!brandName || !city || !about) {
@@ -412,16 +382,54 @@ const Account: FC<IAccount> = ({
 
         {!isEdit && ( 
           <div className={styles.newAdWrap}>
-            <button className={styles.newad}>
+            <button className={styles.newad} onClick={showAddProduct}>
               <Picture src={plusIcon.src} alt="добавить товар" />
               <span>Добавить объявление</span>
             </button>
           </div>
         )}
+		  			{addItem && (
+			<div className={styles.newProductWrap}>
+						<div className={styles.editFormWrap}>
+							<div>
+								<div className={`${styles.editHeader} text-center`}>
+									<h2>Добавить объявление</h2>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Имя продукта</label>
+									<input
+										className={styles.inputEdit}
+										type="text"
+										value={productName}
+										onChange={(e) => setProductName(e.target.value)}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+								<label className={styles.label}>Описания</label>
+								<textarea
+									className={styles.inputEdit}
+									value={productAbout}
+									onChange={(e) => setProductAbout(e.target.value)}
+								/>
+								</div>
+
+								<div className={styles.saveEditWrap}>
+									<button className={styles.newad} onClick={handleAddProduct}>
+										<span className={styles.editSaveBtn}>
+											ДОБАВИТЬ ОБЬЯВЛЕНИЕ
+										</span>
+									</button>
+								</div>
+							</div>
+						</div>
+			 </div>
+
+			)}
 
       </Container>
     </Section>
-  );
+	 );
 };
+
 
 export default Account;

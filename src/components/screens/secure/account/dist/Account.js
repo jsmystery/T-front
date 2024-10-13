@@ -60,8 +60,12 @@ var Account = function (_a) {
     var _k = react_1.useState(''), password = _k[0], setPassword = _k[1];
     var _l = react_1.useState(''), slug = _l[0], setSlug = _l[1];
     var _m = react_1.useState(''), newPassword = _m[0], setNewPassword = _m[1];
+    var _o = react_1.useState(''), productName = _o[0], setProductName = _o[1];
+    var _p = react_1.useState(''), productAbout = _p[0], setProductAbout = _p[1]; // About state
+    var _q = react_1.useState(false), addItem = _q[0], setAddItem = _q[1]; // Added state for editItem
     var isEdit = searchParams && searchParams.type === 'edit';
-    //   const isEditItem = searchParams && searchParams.type === 'edit-item';
+    // const showAddProduct = () => setAddItem(true) 
+    var showAddProduct = function () { return setAddItem(!addItem); };
     var handleCreateBrand = function () {
         if (!brandName || !city || !about) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
@@ -79,6 +83,24 @@ var Account = function (_a) {
                 }
             }
         });
+    };
+    var handleAddProduct = function () {
+        // if (!brandName || !city || !about) {
+        //    toast.error("Пожалуйста, заполните все поля для создания бренда.");
+        //    return;
+        //  }
+        //  CreateBrandMutate({
+        //    variables: {
+        // 		// id: brand.id,
+        //      input: {
+        //        name: brandName,
+        //        city: city,
+        //        about: about,	
+        // 		 slug: slug,
+        // 		 logoPath: '/uploads/brands/brand-1.png'
+        //      },
+        //    },
+        //  });
     };
     if (!(brand === null || brand === void 0 ? void 0 : brand.id)) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
@@ -103,62 +125,6 @@ var Account = function (_a) {
                             React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleCreateBrand },
                                 React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"))))))));
     }
-    //   if (isEditItem) {
-    //     return (
-    //       <Section className={styles.section}>
-    //         <Container>
-    // 		  <div className={styles.editFormWrap}>
-    // 					<div>
-    // 					<div className={`${styles.editHeader} text-center`}><h2>Редактировать обьявления</h2></div>
-    // 				 <div className={styles.inputWrap}>
-    //                 <label className={styles.label}>Имя бренда</label>
-    //                 <input 
-    // 					 className={styles.inputEdit}
-    //                   type="text" 
-    //                   value={brandName} 
-    //                   onChange={(e) => setBrandName(e.target.value)} 
-    //                 />
-    //               </div>
-    // 				  <div className={styles.inputWrap}>
-    //                 <label className={styles.label}>Город</label>
-    //                 <input
-    // 					   className={styles.inputEdit}
-    //                   type="text" 
-    //                   value={city} 
-    //                   onChange={(e) => setCity(e.target.value)} 
-    //                 />
-    //               </div>
-    // 				  <div className={styles.inputWrap}>
-    //                 <label className={styles.label}>URL</label>
-    //                 <input
-    // 					   className={styles.inputEdit}
-    //                   type="text" 
-    //                   value={slug} 
-    //                   onChange={(e) => setSlug(e.target.value)} 
-    //                 />
-    //               </div>
-    // 				  <div className={styles.inputWrap}>
-    //                 <label className={styles.label}>Описание</label>
-    //                 <input
-    // 					   className={styles.inputEdit}
-    //                   type="textarea" 
-    //                   value={about} 
-    //                   onChange={(e) => setAbout(e.target.value)} 
-    //                 />
-    //               </div>
-    // 				  <div className={styles.saveEditWrap}>
-    // 					<button className={styles.newad} onClick={handleCreateBrand}>
-    // 						<span className={styles.editSaveBtn}>
-    // 						ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
-    // 						</span>
-    // 					</button>
-    //             	</div>
-    // 					</div>
-    //             </div>
-    //         </Container>
-    //       </Section>
-    //     );
-    //   }
     var handleSaveBrand = function () {
         if (!brandName || !city || !about) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для обновления бренда.");
@@ -267,8 +233,23 @@ var Account = function (_a) {
                 React.createElement(AccountSidebar_1["default"], { balance: balance, brand: brand }),
                 React.createElement(Announcements_1["default"], { setBalance: setBalance, tariffs: tariffs })))),
             !isEdit && (React.createElement("div", { className: Account_module_scss_1["default"].newAdWrap },
-                React.createElement("button", { className: Account_module_scss_1["default"].newad },
+                React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: showAddProduct },
                     React.createElement(Picture_1["default"], { src: plus_png_1["default"].src, alt: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440" }),
-                    React.createElement("span", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")))))));
+                    React.createElement("span", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")))),
+            addItem && (React.createElement("div", { className: Account_module_scss_1["default"].newProductWrap },
+                React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
+                    React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
+                        React.createElement("div", null,
+                            React.createElement("div", { className: Account_module_scss_1["default"].editHeader + " text-center" },
+                                React.createElement("h2", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")),
+                            React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                                React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
+                                React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: productName, onChange: function (e) { return setProductName(e.target.value); } })),
+                            React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                                React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
+                                React.createElement("textarea", { className: Account_module_scss_1["default"].inputEdit, value: productAbout, onChange: function (e) { return setProductAbout(e.target.value); } })),
+                            React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
+                                React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleAddProduct },
+                                    React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0414\u041E\u0411\u0410\u0412\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415")))))))))));
 };
 exports["default"] = Account;
