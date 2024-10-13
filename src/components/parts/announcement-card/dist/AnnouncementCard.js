@@ -34,6 +34,7 @@ var lucide_react_1 = require("lucide-react");
 var react_1 = require("react");
 var react_hot_toast_1 = require("react-hot-toast");
 var AnnouncementCard_module_scss_1 = require("./AnnouncementCard.module.scss");
+// import stylesAccount from '@/components/screens/secure/account/Account'
 var AnnouncementCard = function (_a) {
     var _b;
     var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className, onDeleteAnnouncement = _a.onDeleteAnnouncement;
@@ -63,7 +64,7 @@ var AnnouncementCard = function (_a) {
     // Ensure correct handling for setEditItem(true)
     var handleEdit = function () { return setEditItem(true); }; // Edited to wrap setEditItem in a function
     return (React.createElement(React.Fragment, null,
-        React.createElement("div", { className: clsx_1["default"](AnnouncementCard_module_scss_1["default"].announcement, className && className) },
+        !editItem && (React.createElement("div", { className: clsx_1["default"](AnnouncementCard_module_scss_1["default"].announcement, className && className) },
             React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].fill },
                 React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].poster },
                     React.createElement(Picture_1["default"], { src: announcement.posterPath, alt: announcement.name })),
@@ -159,7 +160,7 @@ var AnnouncementCard = function (_a) {
                         React.createElement(Picture_1["default"], { src: question_png_1["default"].src, alt: "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E" }),
                         tariff.description && (React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].about },
                             React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].description, dangerouslySetInnerHTML: { __html: tariff.description } }))))));
-            }))),
+            })))),
         editItem && ( /* Added condition to check if editItem is true */React.createElement(Section_1["default"], { className: AnnouncementCard_module_scss_1["default"].section },
             React.createElement(Container_1["default"], null,
                 React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].editFormWrap },

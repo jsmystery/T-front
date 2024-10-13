@@ -22,6 +22,8 @@ import { AlertCircle } from 'lucide-react'
 import { useState, type FC } from 'react'
 import toast from 'react-hot-toast'
 import styles from './AnnouncementCard.module.scss'
+// import stylesAccount from '@/components/screens/secure/account/Account'
+
 
 const AnnouncementCard: FC<IAnnouncementCard> = ({
 	placeOrder,
@@ -59,6 +61,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 
 	return (
 		<>
+		{!editItem && (
 			<div className={cn(styles.announcement, className && className)}>
 				<div className={styles.fill}>
 					<div className={styles.poster}>
@@ -217,8 +220,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 					})}
 				</div>
 			</div>
-
-			{/* If editItem is true, display the edit form */}
+			 )} 
 			{editItem && ( /* Added condition to check if editItem is true */
 				<Section className={styles.section}>
 					<Container>

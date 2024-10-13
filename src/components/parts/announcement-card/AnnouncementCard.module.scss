@@ -187,6 +187,69 @@
 			}
 		}
 }		
+.section {
+	@apply py-5;
+}
+
+.newad {
+	width: 234px;
+	height: 26px;
+	background: #F4F4F4;
+	border-radius: 20px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	margin-bottom: 18px;
+
+	&:hover  {
+		background: #f4f4f45a;
+	}
+
+	img {
+		margin-right: 5px;
+	}
+}
+
+.newAdWrap {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+
+.saveEditWrap {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+
+	.newad {
+		@apply border border-green-base rounded-full
+	}
+}
+
+
+.editFormWrap {
+	margin: 0 10px;
+	padding: 5px;
+	display: flex;
+	justify-content: space-around;
+	width: 65%;
+	flex-wrap: wrap;
+}
+
+.inputWrap {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 10px;
+}
+
+.inputEdit {
+	margin-left: 15px;
+	@apply border border-green-base rounded-full flex items-center justify-between;
+	padding: 8px;
+	width: 200px;
+	text-align: center;
+}
 
 
 @media (max-width: 1400px) {
@@ -423,6 +486,16 @@
 }
 
 @media (max-width: 520px) {
+
+	
+	.inputEdit {
+		width: 170px;
+	}
+
+	.newad span {
+	font-size: 12px;
+	}
+	
 	.editWrap {
 		// flex-direction: column;
 		margin-top: 2px;
