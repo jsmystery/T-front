@@ -45,7 +45,6 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 
 
 	const onDeleteAnnouncementHandler = (id: Number) => {
-		alert(888)
 		setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id))
 	}
 

@@ -10,7 +10,6 @@ var react_1 = require("react");
 var Account_module_scss_1 = require("./Account.module.scss");
 var react_hot_toast_1 = require("react-hot-toast");
 var navigation_1 = require("next/navigation");
-// import styles from '@/components/blocks/announcements/Announcements.module.scss'
 var plus_png_1 = require("@/assets/images/icons/plus.png");
 var Picture_1 = require("@/components/ui/common/picture/Picture");
 var Account = function (_a) {

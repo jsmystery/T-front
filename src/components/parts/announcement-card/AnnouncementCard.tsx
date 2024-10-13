@@ -22,7 +22,7 @@ import { AlertCircle } from 'lucide-react'
 import { useState, type FC } from 'react'
 import toast from 'react-hot-toast'
 import styles from './AnnouncementCard.module.scss'
-// import stylesAccount from '@/components/screens/secure/account/Account'
+import { useRouter } from 'next/navigation'
 
 
 const AnnouncementCard: FC<IAnnouncementCard> = ({
@@ -32,6 +32,9 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	className,
 	onDeleteAnnouncement
 }) => {
+
+	const router = useRouter();
+
 	const [{ isShow, type }, setModalState] = useState({
 		isShow: false,
 		type: TariffType.Top,
@@ -52,6 +55,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 		onCompleted: () => {
 		  console.log('Product saved');
 		  toast.success("Изменения сохранены");
+		//   setEditItem(false)
+			router.push('/');
 		}
 	 });
 
@@ -63,16 +68,15 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 		 }
 	
 	
-		//  UpdateProductMutate({
-		// 	variables: {
-		// 		id: brand.id,
-		// 	  input: {
-		// 		 name: brandName,
-		// 		 city: city,
-		// 		 about: about,
-		// 	  },
-		// 	},
-		//  });;
+		 UpdateProductMutate({
+			variables: {
+				id: announcement.id,
+			  data: {
+				 name: name,
+				 about: about,
+			  },
+			},
+		 });;
 	  };
 
 	const [deleteProductMutate] = useDeleteProductMutation({
@@ -90,8 +94,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 			id: announcement.id
 		}})
 
-	// Ensure correct handling for setEditItem(true)
-	const handleEdit = () => setEditItem(true) // Edited to wrap setEditItem in a function
+	const handleEdit = () => setEditItem(true) 
 
 	return (
 		<>

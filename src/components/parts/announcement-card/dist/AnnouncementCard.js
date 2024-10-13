@@ -34,10 +34,11 @@ var lucide_react_1 = require("lucide-react");
 var react_1 = require("react");
 var react_hot_toast_1 = require("react-hot-toast");
 var AnnouncementCard_module_scss_1 = require("./AnnouncementCard.module.scss");
-// import stylesAccount from '@/components/screens/secure/account/Account'
+var navigation_1 = require("next/navigation");
 var AnnouncementCard = function (_a) {
     var _b;
     var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className, onDeleteAnnouncement = _a.onDeleteAnnouncement;
+    var router = navigation_1.useRouter();
     var _c = react_1.useState({
         isShow: false,
         type: output_1.TariffType.Top
@@ -57,6 +58,8 @@ var AnnouncementCard = function (_a) {
         onCompleted: function () {
             console.log('Product saved');
             react_hot_toast_1["default"].success("Изменения сохранены");
+            //   setEditItem(false)
+            router.push('/my-account?type=edited');
         }
     })[0];
     var handleEditItem = function () {
@@ -64,16 +67,16 @@ var AnnouncementCard = function (_a) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля.");
             return;
         }
-        //  UpdateProductMutate({
-        // 	variables: {
-        // 		id: brand.id,
-        // 	  input: {
-        // 		 name: brandName,
-        // 		 city: city,
-        // 		 about: about,
-        // 	  },
-        // 	},
-        //  });;
+        UpdateProductMutate({
+            variables: {
+                id: announcement.id,
+                data: {
+                    name: name,
+                    about: about
+                }
+            }
+        });
+        ;
     };
     var deleteProductMutate = output_1.useDeleteProductMutation({
         fetchPolicy: 'no-cache',
@@ -90,8 +93,7 @@ var AnnouncementCard = function (_a) {
             id: announcement.id
         }
     }); };
-    // Ensure correct handling for setEditItem(true)
-    var handleEdit = function () { return setEditItem(true); }; // Edited to wrap setEditItem in a function
+    var handleEdit = function () { return setEditItem(true); };
     return (React.createElement(React.Fragment, null,
         !editItem && (React.createElement("div", { className: clsx_1["default"](AnnouncementCard_module_scss_1["default"].announcement, className && className) },
             React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].fill },

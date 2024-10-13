@@ -10,8 +10,6 @@ import { useState, type FC } from 'react';
 import styles from './Account.module.scss';
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-
-// import styles from '@/components/blocks/announcements/Announcements.module.scss'
 import plusIcon from '@/assets/images/icons/plus.png';
 import Picture from '@/components/ui/common/picture/Picture';
 

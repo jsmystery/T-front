@@ -34,7 +34,6 @@ var Announcements = function (_a) {
         setAnnouncements(initialAnnouncements);
     }, [initialAnnouncements]);
     var onDeleteAnnouncementHandler = function (id) {
-        alert(888);
         setAnnouncements(function (prev) { return prev.filter(function (announcement) { return announcement.id !== id; }); });
     };
     if (error)
