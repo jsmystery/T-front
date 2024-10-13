@@ -1,4 +1,4 @@
-import { TariffType, useDeleteProductMutation } from '@/__generated__/output'
+import { TariffType, useDeleteProductMutation, useUpdateProductMutation } from '@/__generated__/output'
 import cityIcon from '@/assets/images/icons/city.png'
 import Container from '@/components/ui/common/container/Container';
 import Section from '@/components/ui/common/section/Section';
@@ -42,6 +42,38 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const isFill = type === TariffType.Fill
 	const [name, setName] = useState(announcement.name) // Name state
 	const [about, setAbout] = useState('') // About state
+
+
+	const [UpdateProductMutate] = useUpdateProductMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Product saved');
+		  toast.success("Изменения сохранены");
+		}
+	 });
+
+
+	const handleEditItem = () => {
+		if (!name || !about) {
+			toast.error("Пожалуйста, заполните все поля.");
+			return;
+		 }
+	
+	
+		//  UpdateProductMutate({
+		// 	variables: {
+		// 		id: brand.id,
+		// 	  input: {
+		// 		 name: brandName,
+		// 		 city: city,
+		// 		 about: about,
+		// 	  },
+		// 	},
+		//  });;
+	  };
 
 	const [deleteProductMutate] = useDeleteProductMutation({
 		fetchPolicy: 'no-cache',
@@ -251,7 +283,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 								</div>
 
 								<div className={styles.saveEditWrap}>
-									<button className={styles.newad}>
+									<button className={styles.newad} onClick={handleEditItem}>
 										<span className={styles.editSaveBtn}>
 											ИЗМЕНИТЬ ОБЬЯВЛЕНИЕ
 										</span>

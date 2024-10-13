@@ -48,6 +48,33 @@ var AnnouncementCard = function (_a) {
     var isFill = type === output_1.TariffType.Fill;
     var _f = react_1.useState(announcement.name), name = _f[0], setName = _f[1]; // Name state
     var _g = react_1.useState(''), about = _g[0], setAbout = _g[1]; // About state
+    var UpdateProductMutate = output_1.useUpdateProductMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            console.log('Product saved');
+            react_hot_toast_1["default"].success("Изменения сохранены");
+        }
+    })[0];
+    var handleEditItem = function () {
+        if (!name || !about) {
+            react_hot_toast_1["default"].error("Пожалуйста, заполните все поля.");
+            return;
+        }
+        //  UpdateProductMutate({
+        // 	variables: {
+        // 		id: brand.id,
+        // 	  input: {
+        // 		 name: brandName,
+        // 		 city: city,
+        // 		 about: about,
+        // 	  },
+        // 	},
+        //  });;
+    };
     var deleteProductMutate = output_1.useDeleteProductMutation({
         fetchPolicy: 'no-cache',
         onError: function (_a) {
@@ -178,7 +205,7 @@ var AnnouncementCard = function (_a) {
                             React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
                             React.createElement("textarea", { className: AnnouncementCard_module_scss_1["default"].inputEdit, value: about, onChange: function (e) { return setAbout(e.target.value); } })),
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].saveEditWrap },
-                            React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].newad },
+                            React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].newad, onClick: handleEditItem },
                                 React.createElement("span", { className: AnnouncementCard_module_scss_1["default"].editSaveBtn }, "\u0418\u0417\u041C\u0415\u041D\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415")))))))),
         isShow && currentTariff && (React.createElement(Modal_1["default"], { heading: isTop ? 'Поднять объявление' : isFill ? 'Выделить цветом' : 'VIP', closeModal: function () {
                 return setModalState(function (prev) { return (__assign(__assign({}, prev), { isShow: false })); });
