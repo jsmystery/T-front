@@ -49,6 +49,18 @@ var Account = function (_a) {
             router.push('/');
         }
     })[0];
+    var CreateProductMutate = output_1.useCreateProductMutation({
+        fetchPolicy: 'no-cache',
+        onError: function (_a) {
+            var message = _a.message;
+            react_hot_toast_1["default"].error(message);
+        },
+        onCompleted: function () {
+            console.log('Product created');
+            react_hot_toast_1["default"].success("Продукт создан");
+            router.push('/');
+        }
+    })[0];
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
     var _c = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.name) || ''), brandName = _c[0], setBrandName = _c[1];
     var _d = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.city) || ''), city = _d[0], setCity = _d[1];
@@ -85,22 +97,22 @@ var Account = function (_a) {
         });
     };
     var handleAddProduct = function () {
-        // if (!brandName || !city || !about) {
-        //    toast.error("Пожалуйста, заполните все поля для создания бренда.");
-        //    return;
-        //  }
-        //  CreateBrandMutate({
-        //    variables: {
-        // 		// id: brand.id,
-        //      input: {
-        //        name: brandName,
-        //        city: city,
-        //        about: about,	
-        // 		 slug: slug,
-        // 		 logoPath: '/uploads/brands/brand-1.png'
-        //      },
-        //    },
-        //  });
+        if (!productName || !productAbout) {
+            react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
+            return;
+        }
+        CreateProductMutate({
+            variables: {
+                // id: brand.id,
+                input: {
+                    name: brandName,
+                    city: city,
+                    about: about,
+                    slug: slug,
+                    logoPath: '/uploads/brands/brand-1.png'
+                }
+            }
+        });
     };
     if (!(brand === null || brand === void 0 ? void 0 : brand.id)) {
         return (React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
@@ -237,19 +249,18 @@ var Account = function (_a) {
                     React.createElement(Picture_1["default"], { src: plus_png_1["default"].src, alt: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440" }),
                     React.createElement("span", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")))),
             addItem && (React.createElement("div", { className: Account_module_scss_1["default"].newProductWrap },
-                React.createElement(Section_1["default"], { className: Account_module_scss_1["default"].section },
-                    React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
-                        React.createElement("div", null,
-                            React.createElement("div", { className: Account_module_scss_1["default"].editHeader + " text-center" },
-                                React.createElement("h2", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")),
-                            React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                                React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
-                                React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: productName, onChange: function (e) { return setProductName(e.target.value); } })),
-                            React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
-                                React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
-                                React.createElement("textarea", { className: Account_module_scss_1["default"].inputEdit, value: productAbout, onChange: function (e) { return setProductAbout(e.target.value); } })),
-                            React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
-                                React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleAddProduct },
-                                    React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0414\u041E\u0411\u0410\u0412\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415")))))))))));
+                React.createElement("div", { className: Account_module_scss_1["default"].editFormWrap },
+                    React.createElement("div", null,
+                        React.createElement("div", { className: Account_module_scss_1["default"].editHeader + " text-center" },
+                            React.createElement("h2", null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435")),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: productName, onChange: function (e) { return setProductName(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
+                            React.createElement("textarea", { className: Account_module_scss_1["default"].inputEdit, value: productAbout, onChange: function (e) { return setProductAbout(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
+                            React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleAddProduct },
+                                React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0414\u041E\u0411\u0410\u0412\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415"))))))))));
 };
 exports["default"] = Account;

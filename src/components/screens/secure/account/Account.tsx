@@ -1,6 +1,6 @@
 'use client';
 
-import { useUpdateUserProfileMutation, useUpdateBrandMutation, useCreateBrandMutation } from '@/__generated__/output'
+import { useUpdateUserProfileMutation, useUpdateBrandMutation, useCreateBrandMutation, useCreateProductMutation } from '@/__generated__/output'
 import Announcements from '@/components/blocks/announcements/Announcements';
 import Container from '@/components/ui/common/container/Container';
 import Section from '@/components/ui/common/section/Section';
@@ -56,6 +56,18 @@ const Account: FC<IAccount> = ({
 			router.push('/');
 		}
 	 });
+
+	const [CreateProductMutate] = useCreateProductMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Product created');
+		  toast.success("Продукт создан");
+			router.push('/');
+		}
+	 });
   
 
 
@@ -103,24 +115,24 @@ const showAddProduct = () => setAddItem(!addItem)
   };
 
   const handleAddProduct = () => {
-	// if (!brandName || !city || !about) {
-   //    toast.error("Пожалуйста, заполните все поля для создания бренда.");
-   //    return;
-   //  }
+	if (!productName || !productAbout) {
+      toast.error("Пожалуйста, заполните все поля для создания бренда.");
+      return;
+    }
 
 
-	//  CreateBrandMutate({
-   //    variables: {
-	// 		// id: brand.id,
-   //      input: {
-   //        name: brandName,
-   //        city: city,
-   //        about: about,	
-	// 		 slug: slug,
-	// 		 logoPath: '/uploads/brands/brand-1.png'
-   //      },
-   //    },
-   //  });
+	 CreateProductMutate({
+      variables: {
+			// id: brand.id,
+        input: {
+          name: brandName,
+          city: city,
+          about: about,	
+			 slug: slug,
+			 logoPath: '/uploads/brands/brand-1.png'
+        },
+      },
+    });
 
   };
 

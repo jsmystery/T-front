@@ -139,6 +139,11 @@
   font-size: 17px;
 }
 
+.newProductWrap {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 1200px) {
   .label {
     @apply py-2;
