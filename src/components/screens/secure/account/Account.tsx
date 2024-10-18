@@ -125,11 +125,9 @@ const showAddProduct = () => setAddItem(!addItem)
       variables: {
 			// id: brand.id,
         input: {
-          name: brandName,
-          city: city,
-          about: about,	
-			 slug: slug,
-			 logoPath: '/uploads/brands/brand-1.png'
+          name: productName,
+          about: productAbout,	
+			//  logoPath: '/uploads/brands/brand-1.png'
         },
       },
     });

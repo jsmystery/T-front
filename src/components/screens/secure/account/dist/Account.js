@@ -105,11 +105,8 @@ var Account = function (_a) {
             variables: {
                 // id: brand.id,
                 input: {
-                    name: brandName,
-                    city: city,
-                    about: about,
-                    slug: slug,
-                    logoPath: '/uploads/brands/brand-1.png'
+                    name: productName,
+                    about: productAbout
                 }
             }
         });
