@@ -73,8 +73,10 @@ var Account = function (_a) {
     var _l = react_1.useState(''), slug = _l[0], setSlug = _l[1];
     var _m = react_1.useState(''), newPassword = _m[0], setNewPassword = _m[1];
     var _o = react_1.useState(''), productName = _o[0], setProductName = _o[1];
-    var _p = react_1.useState(''), productAbout = _p[0], setProductAbout = _p[1]; // About state
-    var _q = react_1.useState(false), addItem = _q[0], setAddItem = _q[1]; // Added state for editItem
+    var _p = react_1.useState(0), productPrice = _p[0], setProductPrice = _p[1];
+    var _q = react_1.useState(1), productMinQuantity = _q[0], setProductMinQuantity = _q[1];
+    var _r = react_1.useState(''), productAbout = _r[0], setProductAbout = _r[1]; // About state
+    var _s = react_1.useState(false), addItem = _s[0], setAddItem = _s[1]; // Added state for editItem
     var isEdit = searchParams && searchParams.type === 'edit';
     // const showAddProduct = () => setAddItem(true) 
     var showAddProduct = function () { return setAddItem(!addItem); };
@@ -97,7 +99,7 @@ var Account = function (_a) {
         });
     };
     var handleAddProduct = function () {
-        if (!productName || !productAbout) {
+        if (!productName || !productAbout || !productPrice || !productMinQuantity) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля для создания бренда.");
             return;
         }
@@ -106,7 +108,9 @@ var Account = function (_a) {
                 // id: brand.id,
                 input: {
                     name: productName,
-                    about: productAbout
+                    about: productAbout,
+                    price: productPrice,
+                    minQuantity: productMinQuantity
                 }
             }
         });
@@ -253,6 +257,12 @@ var Account = function (_a) {
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0418\u043C\u044F \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0430"),
                             React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "text", value: productName, onChange: function (e) { return setProductName(e.target.value); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0426\u0435\u043D\u0430"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productPrice, onChange: function (e) { return setProductPrice(Number(e.target.value)); } })),
+                        React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041C\u0438\u043D\u0438\u043C\u0443\u043C \u0434\u043B\u044F \u043F\u043E\u043A\u0443\u043F\u043A\u0438"),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity, onChange: function (e) { return setProductMinQuantity(Number(e.target.value)); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
                             React.createElement("textarea", { className: Account_module_scss_1["default"].inputEdit, value: productAbout, onChange: function (e) { return setProductAbout(e.target.value); } })),

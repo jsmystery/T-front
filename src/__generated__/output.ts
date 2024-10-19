@@ -165,7 +165,9 @@ export type CreateBrandInput = {
 
 export type CreateProductInput = {
   about: Scalars['String']['input'];
+  minQuantity: Scalars['Float']['input'];
   name: Scalars['String']['input'];
+  price: Scalars['Float']['input'];
 };
 
 export type FullestQueryInput = {

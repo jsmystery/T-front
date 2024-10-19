@@ -83,6 +83,8 @@ const Account: FC<IAccount> = ({
   const [slug, setSlug] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [productName, setProductName] = useState('')
+  const [productPrice, setProductPrice] = useState(0)
+  const [productMinQuantity, setProductMinQuantity] = useState(1)
 	const [productAbout, setProductAbout] = useState('') // About state
   const [addItem, setAddItem] = useState(false) // Added state for editItem
 
@@ -115,7 +117,7 @@ const showAddProduct = () => setAddItem(!addItem)
   };
 
   const handleAddProduct = () => {
-	if (!productName || !productAbout) {
+	if (!productName || !productAbout || !productPrice || !productMinQuantity) {
       toast.error("Пожалуйста, заполните все поля для создания бренда.");
       return;
     }
@@ -127,6 +129,8 @@ const showAddProduct = () => setAddItem(!addItem)
         input: {
           name: productName,
           about: productAbout,	
+          price: productPrice,	
+          minQuantity: productMinQuantity,	
 			//  logoPath: '/uploads/brands/brand-1.png'
         },
       },
@@ -412,6 +416,24 @@ const showAddProduct = () => setAddItem(!addItem)
 										type="text"
 										value={productName}
 										onChange={(e) => setProductName(e.target.value)}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice}
+										onChange={(e) => setProductPrice(Number(e.target.value))}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум для покупки</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity}
+										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
 									/>
 								</div>
 								<div className={styles.inputWrap}>
