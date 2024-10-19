@@ -10,6 +10,7 @@ query Announcements($query: ProductQueryInput!) {
 			sku
 			views
 			createdAt
+			about
 			orders {
 				expirationDate
 				isLittleLeft

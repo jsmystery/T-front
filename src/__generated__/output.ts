@@ -89,6 +89,7 @@ export type AllReviews = {
 };
 
 export type AnnouncementCard = {
+  about: Scalars['String']['output'];
   city: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
   id: Scalars['Int']['output'];
@@ -720,7 +721,7 @@ export type AnnouncementsQueryVariables = Exact<{
 }>;
 
 
-export type AnnouncementsQuery = { announcements: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, city: string, sku: string, views: number, createdAt: string, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
+export type AnnouncementsQuery = { announcements: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, city: string, sku: string, views: number, createdAt: string, about: string, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1806,6 +1807,7 @@ export const AnnouncementsDocument = gql`
       sku
       views
       createdAt
+      about
       orders {
         expirationDate
         isLittleLeft

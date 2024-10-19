@@ -48,8 +48,8 @@ var AnnouncementCard = function (_a) {
     var isTop = type === output_1.TariffType.Top;
     var isFill = type === output_1.TariffType.Fill;
     var _f = react_1.useState(announcement.name), name = _f[0], setName = _f[1]; // Name state
-    var _g = react_1.useState(''), about = _g[0], setAbout = _g[1]; // About state
-    var _h = react_1.useState(0), productPrice = _h[0], setProductPrice = _h[1];
+    var _g = react_1.useState(announcement.about), about = _g[0], setAbout = _g[1]; // About state
+    var _h = react_1.useState(announcement.maxPrice), productPrice = _h[0], setProductPrice = _h[1];
     var _j = react_1.useState(1), productMinQuantity = _j[0], setProductMinQuantity = _j[1];
     var UpdateProductMutate = output_1.useUpdateProductMutation({
         fetchPolicy: 'no-cache',

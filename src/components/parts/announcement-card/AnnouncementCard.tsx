@@ -44,8 +44,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const isTop = type === TariffType.Top
 	const isFill = type === TariffType.Fill
 	const [name, setName] = useState(announcement.name) // Name state
-	const [about, setAbout] = useState('') // About state
-	const [productPrice, setProductPrice] = useState(0)
+	const [about, setAbout] = useState(announcement.about) // About state
+	const [productPrice, setProductPrice] = useState(announcement.maxPrice)
 	const [productMinQuantity, setProductMinQuantity] = useState(1)
 
 
