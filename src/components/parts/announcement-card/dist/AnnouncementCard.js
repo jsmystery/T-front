@@ -49,6 +49,8 @@ var AnnouncementCard = function (_a) {
     var isFill = type === output_1.TariffType.Fill;
     var _f = react_1.useState(announcement.name), name = _f[0], setName = _f[1]; // Name state
     var _g = react_1.useState(''), about = _g[0], setAbout = _g[1]; // About state
+    var _h = react_1.useState(0), productPrice = _h[0], setProductPrice = _h[1];
+    var _j = react_1.useState(1), productMinQuantity = _j[0], setProductMinQuantity = _j[1];
     var UpdateProductMutate = output_1.useUpdateProductMutation({
         fetchPolicy: 'no-cache',
         onError: function (_a) {
@@ -63,7 +65,7 @@ var AnnouncementCard = function (_a) {
         }
     })[0];
     var handleEditItem = function () {
-        if (!name || !about) {
+        if (!name || !about || !productPrice || !productMinQuantity) {
             react_hot_toast_1["default"].error("Пожалуйста, заполните все поля.");
             return;
         }
@@ -72,7 +74,9 @@ var AnnouncementCard = function (_a) {
                 id: announcement.id,
                 data: {
                     name: name,
-                    about: about
+                    about: about,
+                    price: productPrice,
+                    minQuantity: productMinQuantity
                 }
             }
         });
@@ -206,6 +210,12 @@ var AnnouncementCard = function (_a) {
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"),
                             React.createElement("textarea", { className: AnnouncementCard_module_scss_1["default"].inputEdit, value: about, onChange: function (e) { return setAbout(e.target.value); } })),
+                        React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u0426\u0435\u043D\u0430"),
+                            React.createElement("input", { className: AnnouncementCard_module_scss_1["default"].inputEdit, type: "number", value: productPrice, onChange: function (e) { return setProductPrice(Number(e.target.value)); } })),
+                        React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].inputWrap },
+                            React.createElement("label", { className: AnnouncementCard_module_scss_1["default"].label }, "\u041C\u0438\u043D\u0438\u043C\u0443\u043C \u043D\u0430 \u0437\u0430\u043A\u0430\u0437"),
+                            React.createElement("input", { className: AnnouncementCard_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity, onChange: function (e) { return setProductMinQuantity(Number(e.target.value)); } })),
                         React.createElement("div", { className: AnnouncementCard_module_scss_1["default"].saveEditWrap },
                             React.createElement("button", { className: AnnouncementCard_module_scss_1["default"].newad, onClick: handleEditItem },
                                 React.createElement("span", { className: AnnouncementCard_module_scss_1["default"].editSaveBtn }, "\u0418\u0417\u041C\u0415\u041D\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415")))))))),

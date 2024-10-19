@@ -45,6 +45,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const isFill = type === TariffType.Fill
 	const [name, setName] = useState(announcement.name) // Name state
 	const [about, setAbout] = useState('') // About state
+	const [productPrice, setProductPrice] = useState(0)
+	const [productMinQuantity, setProductMinQuantity] = useState(1)
 
 
 	const [UpdateProductMutate] = useUpdateProductMutation({
@@ -62,7 +64,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 
 
 	const handleEditItem = () => {
-		if (!name || !about) {
+		if (!name || !about  || !productPrice || !productMinQuantity) {
 			toast.error("Пожалуйста, заполните все поля.");
 			return;
 		 }
@@ -74,6 +76,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 			  data: {
 				 name: name,
 				 about: about,
+				 price: productPrice,	
+				 minQuantity: productMinQuantity,	
 			  },
 			},
 		 });;
@@ -283,6 +287,24 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 									value={about}
 									onChange={(e) => setAbout(e.target.value)} // Update about state
 								/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice}
+										onChange={(e) => setProductPrice(Number(e.target.value))}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум на заказ</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity}
+										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
+									/>
 								</div>
 
 								<div className={styles.saveEditWrap}>

@@ -516,7 +516,9 @@ export type UpdateBrandInput = {
 
 export type UpdateProductInput = {
   about?: InputMaybe<Scalars['String']['input']>;
+  minQuantity: Scalars['Float']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
 };
 
 export type UpdateUserInput = {

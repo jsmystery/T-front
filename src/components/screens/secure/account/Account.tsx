@@ -85,8 +85,8 @@ const Account: FC<IAccount> = ({
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState(0)
   const [productMinQuantity, setProductMinQuantity] = useState(1)
-	const [productAbout, setProductAbout] = useState('') // About state
-  const [addItem, setAddItem] = useState(false) // Added state for editItem
+	const [productAbout, setProductAbout] = useState('')
+  const [addItem, setAddItem] = useState(false) 
 
   
   const isEdit = searchParams && searchParams.type === 'edit';
@@ -428,7 +428,7 @@ const showAddProduct = () => setAddItem(!addItem)
 									/>
 								</div>
 								<div className={styles.inputWrap}>
-									<label className={styles.label}>Минимум для покупки</label>
+									<label className={styles.label}>Минимум на заказ</label>
 									<input
 										className={styles.inputEdit}
 										type="number"
