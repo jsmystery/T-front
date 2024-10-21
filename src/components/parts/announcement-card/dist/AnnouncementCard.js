@@ -37,7 +37,7 @@ var AnnouncementCard_module_scss_1 = require("./AnnouncementCard.module.scss");
 var navigation_1 = require("next/navigation");
 var AnnouncementCard = function (_a) {
     var _b;
-    var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className, onDeleteAnnouncement = _a.onDeleteAnnouncement;
+    var placeOrder = _a.placeOrder, tariffs = _a.tariffs, announcement = _a.announcement, className = _a.className, onDeleteAnnouncement = _a.onDeleteAnnouncement, onEditAnnouncement = _a.onEditAnnouncement;
     var router = navigation_1.useRouter();
     var _c = react_1.useState({
         isShow: false,
@@ -60,8 +60,8 @@ var AnnouncementCard = function (_a) {
         onCompleted: function () {
             console.log('Product saved');
             react_hot_toast_1["default"].success("Изменения сохранены");
-            //   setEditItem(false)
-            router.push('/');
+            onEditAnnouncement();
+            setEditItem(false);
         }
     })[0];
     var handleEditItem = function () {

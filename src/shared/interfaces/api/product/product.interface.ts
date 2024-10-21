@@ -20,6 +20,7 @@ export interface IProduct extends IPageSearchParam {
 export interface IAnnouncements {
 	setBalance: Dispatch<SetStateAction<number>>
 	tariffs: Tariff[]
+	onCreateProductCompleteValue?: boolean 
 }
 
 export interface IAnnouncementCard {
@@ -28,6 +29,7 @@ export interface IAnnouncementCard {
 	announcement: AnnouncementCard
 	tariffs: Tariff[]
 	onDeleteAnnouncement?: function		
+	onEditAnnouncement?: function		
 }
 
 export interface IProductsFiltersProps {

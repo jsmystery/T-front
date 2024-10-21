@@ -13,8 +13,10 @@ import type { FC } from 'react'
 import { useState, useEffect } from 'react'
 import styles from './Announcements.module.scss'
 import AnnouncementSearch from './search/AnnouncementSearch'
+import { SelectedOptionsContext } from '@/components/ui/elements/filters/Filter'
 
-const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
+
+const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance, onCreateProductCompleteValue }) => {
 	const {
 		toggle,
 		checked,
@@ -26,6 +28,7 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 		searchTerm,
 		handleSearch,
 		placeOrder,
+		refetch
 	} = useAnnouncements(
 		{
 			perPage: 15,
@@ -39,6 +42,15 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 
 	const [announcements, setAnnouncements] = useState(initialAnnouncements) // Highlight: UseState to manage announcements reactively
 
+
+	const [selectedOptions, setSelectedOptions] = useState<string[]>([]) // Create state for selected options
+
+	useEffect(() => {
+		if (onCreateProductCompleteValue) {
+		  onEditAnnouncementHandler()
+		}
+	 }, [onCreateProductCompleteValue]);
+
 	useEffect(() => {
 		setAnnouncements(initialAnnouncements)
 	}, [initialAnnouncements])
@@ -48,11 +60,17 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 		setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id))
 	}
 
+	const onEditAnnouncementHandler = async () => {
+		
+		await refetch()
+	}
+
 
 
 	if (error) return null
 
 	return (
+		<SelectedOptionsContext.Provider value={{ selectedOptions, setSelectedOptions }}>
 		<div className={styles.wrapper}>
 			<div className={styles.top}>
 				<div className={styles.select}>
@@ -110,6 +128,7 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 									tariffs={tariffs}
 									announcement={announcement}
 									onDeleteAnnouncement={() => onDeleteAnnouncementHandler(announcement.id)}
+									onEditAnnouncement={() => onEditAnnouncementHandler()}
 								/>
 							</div>
 						))}
@@ -117,6 +136,7 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance }) => {
 				)}
 			</div>
 		</div>
+		 </SelectedOptionsContext.Provider>
 	)
 }
 

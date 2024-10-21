@@ -1,38 +1,38 @@
 import {
-	type AnnouncementCard,
-	type OrderInput,
-	type ProductQueryInput,
+	AnnouncementCard,
+	OrderInput,
+	ProductQueryInput,
 	useAnnouncementsQuery,
 	usePlaceOrderMutation,
-} from '@/__generated__/output'
-import { useSearchFilter } from '@/hooks/helpers/filters/useSearchFilter'
+} from '@/__generated__/output';
+import { useSearchFilter } from '@/hooks/helpers/filters/useSearchFilter';
 import {
-	type Dispatch,
-	type SetStateAction,
+	Dispatch,
+	SetStateAction,
 	useEffect,
 	useRef,
 	useState,
-} from 'react'
-import toast from 'react-hot-toast'
+} from 'react';
+import toast from 'react-hot-toast';
 
 export const useAnnouncements = (
 	query: ProductQueryInput,
 	setBalance: Dispatch<SetStateAction<number>>
 ) => {
-	const { searchTerm, debounceSearch, handleSearch } = useSearchFilter()
+	const { searchTerm, debounceSearch, handleSearch } = useSearchFilter();
 
-	const [checked, setChecked] = useState<number[]>([])
-	const [announcements, setAnnouncements] = useState<AnnouncementCard[]>([])
-	const [page, setPage] = useState(1)
+	const [checked, setChecked] = useState<number[]>([]);
+	const [announcements, setAnnouncements] = useState<AnnouncementCard[]>([]);
+	const [page, setPage] = useState(1);
 
-	const scrollRef = useRef<HTMLDivElement>(null)
+	const scrollRef = useRef<HTMLDivElement>(null);
 
 	const [placeOrderMutate] = usePlaceOrderMutation({
 		fetchPolicy: 'no-cache',
 		onError: ({ message }) => {
-			toast.error(message)
+			toast.error(message);
 		},
-	})
+	});
 
 	const placeOrder = (
 		data: OrderInput,
@@ -47,21 +47,21 @@ export const useAnnouncements = (
 				setAnnouncements((prev) => {
 					return prev.map((item) => {
 						if (item.id !== data.productId) {
-							return item
+							return item;
 						}
 
 						return {
 							...item,
 							orders: [...item.orders, placeOrder],
-						}
-					})
-				})
-				setBalance((prev) => prev && (prev - price < 0 ? prev : prev - price))
-				closeModal()
+						};
+					});
+				});
+				setBalance((prev) => prev && (prev - price < 0 ? prev : prev - price));
+				closeModal();
 			},
-		})
+		});
 
-	const { data, error } = useAnnouncementsQuery({
+	const { data, error, refetch } = useAnnouncementsQuery({
 		fetchPolicy: 'no-cache',
 		variables: {
 			query: {
@@ -69,45 +69,46 @@ export const useAnnouncements = (
 				searchTerm: debounceSearch,
 			},
 		},
-	})
+	});
 
 	useEffect(() => {
-		const count = data?.announcements.count || 0
-		const pagesCount = Math.ceil(count / (query.perPage || 15))
-		const scrollArea = scrollRef.current
+		const count = data?.announcements.count || 0;
+		const pagesCount = Math.ceil(count / (query.perPage || 15));
+		const scrollArea = scrollRef.current;
 
-		if (!scrollArea || pagesCount <= 1 || page >= pagesCount) return
+		if (!scrollArea || pagesCount <= 1 || page >= pagesCount) return;
 
 		const handleScroll = () => {
-			const { scrollTop, clientHeight, scrollHeight } = scrollArea
+			const { scrollTop, clientHeight, scrollHeight } = scrollArea;
 			if (scrollTop + clientHeight >= scrollHeight * 0.9) {
-				setPage((prev) => prev + 1)
+				setPage((prev) => prev + 1);
 			}
-		}
+		};
 
-		window.addEventListener('scroll', handleScroll)
+		window.addEventListener('scroll', handleScroll);
 
 		return () => {
-			window.removeEventListener('scroll', handleScroll)
-		}
-	}, [page])
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, [page]);
 
 	useEffect(() => {
-		const announcements = data?.announcements.announcements
+		const announcements = data?.announcements.announcements;
 
 		if (announcements) {
-			setAnnouncements(announcements)
+			setAnnouncements(announcements);
 		}
-	}, [data])
+	}, [data]);
 
 	const toggle = (announcementId: number) => {
 		setChecked((prev) =>
 			prev.includes(announcementId)
 				? prev.filter((id) => id !== announcementId)
 				: [...prev, announcementId]
-		)
-	}
+		);
+	};
 
+	// Return `refetch` along with other data
 	return {
 		toggle,
 		checked,
@@ -118,5 +119,6 @@ export const useAnnouncements = (
 		searchTerm,
 		handleSearch,
 		placeOrder,
-	}
-}
+		refetch,
+	};
+};

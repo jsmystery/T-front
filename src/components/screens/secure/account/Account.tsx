@@ -57,6 +57,12 @@ const Account: FC<IAccount> = ({
 		}
 	 });
 
+
+	 const handleCreateProductComplete = () => {
+		console.log('Product creating OOO');
+		setCreateProductCompleteValue(true)
+	 };
+
 	const [CreateProductMutate] = useCreateProductMutation({
 		fetchPolicy: 'no-cache',
 		onError: ({ message }) => {
@@ -65,7 +71,8 @@ const Account: FC<IAccount> = ({
 		onCompleted: () => {
 		  console.log('Product created');
 		  toast.success("Продукт создан");
-			router.push('/');
+			// router.push('/');
+			handleCreateProductComplete()
 		}
 	 });
   
@@ -82,6 +89,7 @@ const Account: FC<IAccount> = ({
   const [password, setPassword] = useState('');
   const [slug, setSlug] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [handleCreateProductCompleteValue, setCreateProductCompleteValue] = useState(false);
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState(0)
   const [productMinQuantity, setProductMinQuantity] = useState(1)
@@ -389,7 +397,7 @@ const showAddProduct = () => setAddItem(!addItem)
           ) : (
             <>
               <AccountSidebar balance={balance} brand={brand} />
-              <Announcements setBalance={setBalance} tariffs={tariffs} />
+              <Announcements setBalance={setBalance} tariffs={tariffs} onCreateProductCompleteValue={handleCreateProductCompleteValue}  />
             </>
           )}
         </div>

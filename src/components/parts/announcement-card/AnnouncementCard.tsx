@@ -30,7 +30,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	tariffs,
 	announcement,
 	className,
-	onDeleteAnnouncement
+	onDeleteAnnouncement,
+	onEditAnnouncement
 }) => {
 
 	const router = useRouter();
@@ -57,8 +58,8 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 		onCompleted: () => {
 		  console.log('Product saved');
 		  toast.success("Изменения сохранены");
-		//   setEditItem(false)
-			router.push('/');
+		  onEditAnnouncement()
+		  setEditItem(false)
 		}
 	 });
 

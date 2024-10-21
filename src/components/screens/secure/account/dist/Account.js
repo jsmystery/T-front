@@ -49,6 +49,10 @@ var Account = function (_a) {
             router.push('/');
         }
     })[0];
+    var handleCreateProductComplete = function () {
+        console.log('Product creating OOO');
+        setCreateProductCompleteValue(true);
+    };
     var CreateProductMutate = output_1.useCreateProductMutation({
         fetchPolicy: 'no-cache',
         onError: function (_a) {
@@ -58,7 +62,8 @@ var Account = function (_a) {
         onCompleted: function () {
             console.log('Product created');
             react_hot_toast_1["default"].success("Продукт создан");
-            router.push('/');
+            // router.push('/');
+            handleCreateProductComplete();
         }
     })[0];
     var _b = react_1.useState((brand === null || brand === void 0 ? void 0 : brand.balance) || 0), balance = _b[0], setBalance = _b[1];
@@ -72,11 +77,12 @@ var Account = function (_a) {
     var _k = react_1.useState(''), password = _k[0], setPassword = _k[1];
     var _l = react_1.useState(''), slug = _l[0], setSlug = _l[1];
     var _m = react_1.useState(''), newPassword = _m[0], setNewPassword = _m[1];
-    var _o = react_1.useState(''), productName = _o[0], setProductName = _o[1];
-    var _p = react_1.useState(0), productPrice = _p[0], setProductPrice = _p[1];
-    var _q = react_1.useState(1), productMinQuantity = _q[0], setProductMinQuantity = _q[1];
-    var _r = react_1.useState(''), productAbout = _r[0], setProductAbout = _r[1];
-    var _s = react_1.useState(false), addItem = _s[0], setAddItem = _s[1];
+    var _o = react_1.useState(false), handleCreateProductCompleteValue = _o[0], setCreateProductCompleteValue = _o[1];
+    var _p = react_1.useState(''), productName = _p[0], setProductName = _p[1];
+    var _q = react_1.useState(0), productPrice = _q[0], setProductPrice = _q[1];
+    var _r = react_1.useState(1), productMinQuantity = _r[0], setProductMinQuantity = _r[1];
+    var _s = react_1.useState(''), productAbout = _s[0], setProductAbout = _s[1];
+    var _t = react_1.useState(false), addItem = _t[0], setAddItem = _t[1];
     var isEdit = searchParams && searchParams.type === 'edit';
     // const showAddProduct = () => setAddItem(true) 
     var showAddProduct = function () { return setAddItem(!addItem); };
@@ -244,7 +250,7 @@ var Account = function (_a) {
                         React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleSaveProfile },
                             React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0421\u041E\u0425\u0420\u0410\u041D\u0418\u0422\u042C")))))) : (React.createElement(React.Fragment, null,
                 React.createElement(AccountSidebar_1["default"], { balance: balance, brand: brand }),
-                React.createElement(Announcements_1["default"], { setBalance: setBalance, tariffs: tariffs })))),
+                React.createElement(Announcements_1["default"], { setBalance: setBalance, tariffs: tariffs, onCreateProductCompleteValue: handleCreateProductCompleteValue })))),
             !isEdit && (React.createElement("div", { className: Account_module_scss_1["default"].newAdWrap },
                 React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: showAddProduct },
                     React.createElement(Picture_1["default"], { src: plus_png_1["default"].src, alt: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440" }),
