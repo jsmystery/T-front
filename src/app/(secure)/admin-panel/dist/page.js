@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,35 +47,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.config = exports.middleware = void 0;
-var server_1 = require("next/server");
-var enums_constants_1 = require("./constants/enums.constants");
-var url_constants_1 = require("./constants/url.constants");
-var iron_session_lib_1 = require("./libs/iron-session.lib");
-function middleware(request, response) {
-    var _a;
+exports.metadata = void 0;
+// import NotFoundPage from '@/app/not-found'
+var Sidebar_1 = require("@/components/screens/secure/admin/Sidebar");
+// import Users from '@/components/screens/secure/admin/Users' // Import Users component
+var seo_constants_1 = require("@/constants/seo.constants");
+exports.metadata = __assign({ title: 'Panel' }, seo_constants_1.NO_INDEX_PAGE);
+function AdminPanelPage(_a) {
+    var searchParams = _a.searchParams;
     return __awaiter(this, void 0, void 0, function () {
-        var refreshToken, user;
         return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    console.log('check access');
-                    refreshToken = (_a = request.cookies.get(enums_constants_1.EnumCookies.REFRESH_TOKEN)) === null || _a === void 0 ? void 0 : _a.value;
-                    return [4 /*yield*/, iron_session_lib_1.getSession(request, response)];
-                case 1:
-                    user = (_b.sent()).user;
-                    if (!refreshToken || !user) {
-                        return [2 /*return*/, redirectToHome(request)];
-                    }
-                    return [2 /*return*/];
-            }
+            // const isUsersPage = searchParams.page === 'users';
+            // const { error, brand, tariffs, categories } = await useAccount()	
+            return [2 /*return*/, (React.createElement("div", { className: "flex" },
+                    React.createElement(Sidebar_1["default"], null),
+                    React.createElement("div", null, "(\u0442\u0443\u0442 \u043C\u043E\u0436\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0432\u044B\u0432\u043E\u0434 \u043E\u0431\u0449\u0435\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438-\u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0438)")))];
         });
     });
 }
-exports.middleware = middleware;
-exports.config = {
-    matcher: ['/my-account', '/admin-panel']
-};
-var redirectToHome = function (request) {
-    return server_1.NextResponse.redirect(new URL(url_constants_1.PUBLIC_PAGES.HOME, request.url));
-};
+exports["default"] = AdminPanelPage;
