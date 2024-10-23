@@ -426,6 +426,22 @@ const showAddProduct = () => setAddItem(!addItem)
 										onChange={(e) => setProductName(e.target.value)}
 									/>
 								</div>
+	
+								<div className={styles.inputWrap}>
+								<label className={styles.label}>Описания</label>
+								<textarea
+									className={styles.inputEdit}
+									value={productAbout}
+									onChange={(e) => setProductAbout(e.target.value)}
+								/>
+								</div>
+
+								<h4 className="text-center font-bold">Цена за количество товаров в заказе</h4>
+								<h6>(есть 3 варианта - первый обязательный для заполнения)</h6>
+								<h6>можно поставить разную стоимость за разное количество в заказе</h6>
+
+								<div className={styles.inputWrap}>Вариант 1 (базовый - обязательный для заполнения)</div>
+
 								<div className={styles.inputWrap}>
 									<label className={styles.label}>Цена</label>
 									<input
@@ -444,13 +460,48 @@ const showAddProduct = () => setAddItem(!addItem)
 										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
 									/>
 								</div>
+
+
+									<div className={styles.inputWrap}>Вариант 2</div>
+
 								<div className={styles.inputWrap}>
-								<label className={styles.label}>Описания</label>
-								<textarea
-									className={styles.inputEdit}
-									value={productAbout}
-									onChange={(e) => setProductAbout(e.target.value)}
-								/>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice}
+										onChange={(e) => setProductPrice(Number(e.target.value))}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум на заказ</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity}
+										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
+									/>
+								</div>
+
+									<div className={styles.inputWrap}>Вариант 3</div>
+
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice}
+										onChange={(e) => setProductPrice(Number(e.target.value))}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум на заказ</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity}
+										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
+									/>
 								</div>
 
 								<div className={styles.saveEditWrap}>
