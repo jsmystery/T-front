@@ -80,9 +80,13 @@ var Account = function (_a) {
     var _o = react_1.useState(false), handleCreateProductCompleteValue = _o[0], setCreateProductCompleteValue = _o[1];
     var _p = react_1.useState(''), productName = _p[0], setProductName = _p[1];
     var _q = react_1.useState(0), productPrice = _q[0], setProductPrice = _q[1];
-    var _r = react_1.useState(1), productMinQuantity = _r[0], setProductMinQuantity = _r[1];
-    var _s = react_1.useState(''), productAbout = _s[0], setProductAbout = _s[1];
-    var _t = react_1.useState(false), addItem = _t[0], setAddItem = _t[1];
+    var _r = react_1.useState(null), productPrice2 = _r[0], setProductPrice2 = _r[1];
+    var _s = react_1.useState(null), productPrice3 = _s[0], setProductPrice3 = _s[1];
+    var _t = react_1.useState(1), productMinQuantity = _t[0], setProductMinQuantity = _t[1];
+    var _u = react_1.useState(null), productMinQuantity2 = _u[0], setProductMinQuantity2 = _u[1];
+    var _v = react_1.useState(null), productMinQuantity3 = _v[0], setProductMinQuantity3 = _v[1];
+    var _w = react_1.useState(''), productAbout = _w[0], setProductAbout = _w[1];
+    var _x = react_1.useState(false), addItem = _x[0], setAddItem = _x[1];
     var isEdit = searchParams && searchParams.type === 'edit';
     // const showAddProduct = () => setAddItem(true) 
     var showAddProduct = function () { return setAddItem(!addItem); };
@@ -279,17 +283,17 @@ var Account = function (_a) {
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap }, "\u0412\u0430\u0440\u0438\u0430\u043D\u0442 2"),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0426\u0435\u043D\u0430"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productPrice, onChange: function (e) { return setProductPrice(Number(e.target.value)); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productPrice2, onChange: function (e) { return setProductPrice2(Number(e.target.value)); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041C\u0438\u043D\u0438\u043C\u0443\u043C \u043D\u0430 \u0437\u0430\u043A\u0430\u0437"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity, onChange: function (e) { return setProductMinQuantity(Number(e.target.value)); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity2, onChange: function (e) { return setProductMinQuantity2(Number(e.target.value)); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap }, "\u0412\u0430\u0440\u0438\u0430\u043D\u0442 3"),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u0426\u0435\u043D\u0430"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productPrice, onChange: function (e) { return setProductPrice(Number(e.target.value)); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productPrice3, onChange: function (e) { return setProductPrice3(Number(e.target.value)); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].inputWrap },
                             React.createElement("label", { className: Account_module_scss_1["default"].label }, "\u041C\u0438\u043D\u0438\u043C\u0443\u043C \u043D\u0430 \u0437\u0430\u043A\u0430\u0437"),
-                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity, onChange: function (e) { return setProductMinQuantity(Number(e.target.value)); } })),
+                            React.createElement("input", { className: Account_module_scss_1["default"].inputEdit, type: "number", value: productMinQuantity3, onChange: function (e) { return setProductMinQuantity3(Number(e.target.value)); } })),
                         React.createElement("div", { className: Account_module_scss_1["default"].saveEditWrap },
                             React.createElement("button", { className: Account_module_scss_1["default"].newad, onClick: handleAddProduct },
                                 React.createElement("span", { className: Account_module_scss_1["default"].editSaveBtn }, "\u0414\u041E\u0411\u0410\u0412\u0418\u0422\u042C \u041E\u0411\u042C\u042F\u0412\u041B\u0415\u041D\u0418\u0415"))))))))));

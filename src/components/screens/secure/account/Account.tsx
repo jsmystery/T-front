@@ -92,7 +92,11 @@ const Account: FC<IAccount> = ({
   const [handleCreateProductCompleteValue, setCreateProductCompleteValue] = useState(false);
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState(0)
+  const [productPrice2, setProductPrice2] = useState(null)
+  const [productPrice3, setProductPrice3] = useState(null)
   const [productMinQuantity, setProductMinQuantity] = useState(1)
+  const [productMinQuantity2, setProductMinQuantity2] = useState(null)
+  const [productMinQuantity3, setProductMinQuantity3] = useState(null)
 	const [productAbout, setProductAbout] = useState('')
   const [addItem, setAddItem] = useState(false) 
 
@@ -469,8 +473,8 @@ const showAddProduct = () => setAddItem(!addItem)
 									<input
 										className={styles.inputEdit}
 										type="number"
-										value={productPrice}
-										onChange={(e) => setProductPrice(Number(e.target.value))}
+										value={productPrice2}
+										onChange={(e) => setProductPrice2(Number(e.target.value))}
 									/>
 								</div>
 								<div className={styles.inputWrap}>
@@ -478,8 +482,8 @@ const showAddProduct = () => setAddItem(!addItem)
 									<input
 										className={styles.inputEdit}
 										type="number"
-										value={productMinQuantity}
-										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
+										value={productMinQuantity2}
+										onChange={(e) => setProductMinQuantity2(Number(e.target.value))}
 									/>
 								</div>
 
@@ -490,8 +494,8 @@ const showAddProduct = () => setAddItem(!addItem)
 									<input
 										className={styles.inputEdit}
 										type="number"
-										value={productPrice}
-										onChange={(e) => setProductPrice(Number(e.target.value))}
+										value={productPrice3}
+										onChange={(e) => setProductPrice3(Number(e.target.value))}
 									/>
 								</div>
 								<div className={styles.inputWrap}>
@@ -499,8 +503,8 @@ const showAddProduct = () => setAddItem(!addItem)
 									<input
 										className={styles.inputEdit}
 										type="number"
-										value={productMinQuantity}
-										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
+										value={productMinQuantity3}
+										onChange={(e) => setProductMinQuantity3(Number(e.target.value))}
 									/>
 								</div>
 
