@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { EnumCookies } from './constants/enums.constants'
 import { PUBLIC_PAGES } from './constants/url.constants'
 import { getSession } from './libs/iron-session.lib'
+import { getUser } from '@/server/auth/get-server-session'
+
 
 export async function middleware(request: NextRequest, response: NextResponse) {
 	console.log('check access');
@@ -11,6 +13,13 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
 	if (!refreshToken || !user) {
 		return redirectToHome(request)
+	}
+
+	const currentUser = await getUser()
+	console.log(currentUser.role);
+	
+	if (request.nextUrl.pathname === '/admin-panel' && currentUser?.role !== 'ADMIN') {
+		 return redirectToHome(request)
 	}
 }
 
