@@ -44,12 +44,12 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const currentTariff = tariffs.find((tariff) => tariff.type === type)
 	const isTop = type === TariffType.Top
 	const isFill = type === TariffType.Fill
-	const [name, setName] = useState(announcement.name) // Name state
-	const [about, setAbout] = useState(announcement.about) // About state
-	const [productPrice, setProductPrice] = useState(announcement.maxPrice)
+	const [name, setName] = useState(announcement.name)
+	const [about, setAbout] = useState(announcement.about)
+	const [productPrice, setProductPrice] = useState(Number(announcement.pricesFull[0].price))
 	const [productPrice2, setProductPrice2] = useState()
 	const [productPrice3, setProductPrice3] = useState()
-	const [productMinQuantity, setProductMinQuantity] = useState(1)
+	const [productMinQuantity, setProductMinQuantity] = useState(Number(announcement.pricesFull[0].minQuantity))
 	const [productMinQuantity2, setProductMinQuantity2] = useState()
 	const [productMinQuantity3, setProductMinQuantity3] = useState()
 
@@ -69,7 +69,7 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 
 
 	const handleEditItem = () => {
-		if (!name || !about  || !productPrice || !productMinQuantity) {
+		if (!name || !about  || !productPrice || !productMinQuantity || productPrice < 1) {
 			toast.error("Пожалуйста, заполните все поля.");
 			return;
 		 }
@@ -83,6 +83,10 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 				 about: about,
 				 price: productPrice,	
 				 minQuantity: productMinQuantity,	
+				 price2: productPrice2,
+				 minQuantity2: productMinQuantity2,	
+				 price3: productPrice3,	
+				 minQuantity3: productMinQuantity3,	
 			  },
 			},
 		 });;
@@ -290,9 +294,14 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 								<textarea
 									className={styles.inputEdit}
 									value={about}
-									onChange={(e) => setAbout(e.target.value)} // Update about state
+									onChange={(e) => setAbout(e.target.value)}
 								/>
 								</div>
+								<h4 className="text-center font-bold">Цена за количество товаров в заказе</h4>
+								<h6>(есть 3 варианта - первый обязательный для заполнения)</h6>
+								<h6>можно поставить разную стоимость за разное количество в заказе</h6>
+								<div className={styles.inputWrap}>Вариант 1 (базовый - обязательный для заполнения)</div>
+
 								<div className={styles.inputWrap}>
 									<label className={styles.label}>Цена</label>
 									<input
@@ -311,6 +320,53 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 										onChange={(e) => setProductMinQuantity(Number(e.target.value))}
 									/>
 								</div>
+
+								
+									<div className={styles.inputWrap}>Вариант 2</div>
+
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice2}
+										onChange={(e) => setProductPrice2(Number(e.target.value))}
+									/> 
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум на заказ</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity2}
+										onChange={(e) => setProductMinQuantity2(Number(e.target.value))}
+									/>
+								</div>
+
+									<div className={styles.inputWrap}>Вариант 3</div>
+
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Цена</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productPrice3}
+										onChange={(e) => setProductPrice3(Number(e.target.value))}
+									/>
+								</div>
+								<div className={styles.inputWrap}>
+									<label className={styles.label}>Минимум на заказ</label>
+									<input
+										className={styles.inputEdit}
+										type="number"
+										value={productMinQuantity3}
+										onChange={(e) => setProductMinQuantity3(Number(e.target.value))}
+									/>
+								</div>
+								
+
+
+
 
 								<div className={styles.saveEditWrap}>
 									<button className={styles.newad} onClick={handleEditItem}>
