@@ -98,6 +98,7 @@ export type AnnouncementCard = {
   name: Scalars['String']['output'];
   orders: Array<NestedOrder>;
   posterPath: Scalars['String']['output'];
+  price: Scalars['Int']['output'];
   sku: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -167,8 +168,12 @@ export type CreateBrandInput = {
 export type CreateProductInput = {
   about: Scalars['String']['input'];
   minQuantity: Scalars['Float']['input'];
+  minQuantity2?: InputMaybe<Scalars['Float']['input']>;
+  minQuantity3?: InputMaybe<Scalars['Float']['input']>;
   name: Scalars['String']['input'];
   price: Scalars['Float']['input'];
+  price2?: InputMaybe<Scalars['Float']['input']>;
+  price3?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type FullestQueryInput = {

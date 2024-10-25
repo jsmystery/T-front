@@ -108,7 +108,6 @@ export const useAnnouncements = (
 		);
 	};
 
-	// Return `refetch` along with other data
 	return {
 		toggle,
 		checked,

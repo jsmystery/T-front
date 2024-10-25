@@ -73,6 +73,7 @@ const Account: FC<IAccount> = ({
 		  toast.success("Продукт создан");
 			// router.push('/');
 			handleCreateProductComplete()
+			showAddProduct()
 		}
 	 });
   
@@ -91,12 +92,12 @@ const Account: FC<IAccount> = ({
   const [newPassword, setNewPassword] = useState('');
   const [handleCreateProductCompleteValue, setCreateProductCompleteValue] = useState(false);
   const [productName, setProductName] = useState('')
-  const [productPrice, setProductPrice] = useState(0)
-  const [productPrice2, setProductPrice2] = useState(null)
-  const [productPrice3, setProductPrice3] = useState(null)
+  const [productPrice, setProductPrice] = useState(1)
+  const [productPrice2, setProductPrice2] = useState()
+  const [productPrice3, setProductPrice3] = useState()
   const [productMinQuantity, setProductMinQuantity] = useState(1)
-  const [productMinQuantity2, setProductMinQuantity2] = useState(null)
-  const [productMinQuantity3, setProductMinQuantity3] = useState(null)
+  const [productMinQuantity2, setProductMinQuantity2] = useState()
+  const [productMinQuantity3, setProductMinQuantity3] = useState()
 	const [productAbout, setProductAbout] = useState('')
   const [addItem, setAddItem] = useState(false) 
 
@@ -129,7 +130,7 @@ const showAddProduct = () => setAddItem(!addItem)
   };
 
   const handleAddProduct = () => {
-	if (!productName || !productAbout || !productPrice || !productMinQuantity) {
+	if (!productName || !productAbout || !productPrice || productPrice < 1 || !productMinQuantity) {
       toast.error("Пожалуйста, заполните все поля для создания бренда.");
       return;
     }
@@ -137,12 +138,15 @@ const showAddProduct = () => setAddItem(!addItem)
 
 	 CreateProductMutate({
       variables: {
-			// id: brand.id,
         input: {
           name: productName,
           about: productAbout,	
           price: productPrice,	
           minQuantity: productMinQuantity,	
+          price2: productPrice2,
+          minQuantity2: productMinQuantity2,	
+          price3: productPrice3,	
+          minQuantity3: productMinQuantity3,	
 			//  logoPath: '/uploads/brands/brand-1.png'
         },
       },
@@ -475,7 +479,7 @@ const showAddProduct = () => setAddItem(!addItem)
 										type="number"
 										value={productPrice2}
 										onChange={(e) => setProductPrice2(Number(e.target.value))}
-									/>
+									/> 
 								</div>
 								<div className={styles.inputWrap}>
 									<label className={styles.label}>Минимум на заказ</label>

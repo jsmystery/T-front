@@ -80,11 +80,11 @@ var Account = function (_a) {
     var _o = react_1.useState(false), handleCreateProductCompleteValue = _o[0], setCreateProductCompleteValue = _o[1];
     var _p = react_1.useState(''), productName = _p[0], setProductName = _p[1];
     var _q = react_1.useState(0), productPrice = _q[0], setProductPrice = _q[1];
-    var _r = react_1.useState(null), productPrice2 = _r[0], setProductPrice2 = _r[1];
-    var _s = react_1.useState(null), productPrice3 = _s[0], setProductPrice3 = _s[1];
+    var _r = react_1.useState(), productPrice2 = _r[0], setProductPrice2 = _r[1];
+    var _s = react_1.useState(), productPrice3 = _s[0], setProductPrice3 = _s[1];
     var _t = react_1.useState(1), productMinQuantity = _t[0], setProductMinQuantity = _t[1];
-    var _u = react_1.useState(null), productMinQuantity2 = _u[0], setProductMinQuantity2 = _u[1];
-    var _v = react_1.useState(null), productMinQuantity3 = _v[0], setProductMinQuantity3 = _v[1];
+    var _u = react_1.useState(), productMinQuantity2 = _u[0], setProductMinQuantity2 = _u[1];
+    var _v = react_1.useState(), productMinQuantity3 = _v[0], setProductMinQuantity3 = _v[1];
     var _w = react_1.useState(''), productAbout = _w[0], setProductAbout = _w[1];
     var _x = react_1.useState(false), addItem = _x[0], setAddItem = _x[1];
     var isEdit = searchParams && searchParams.type === 'edit';
@@ -120,7 +120,11 @@ var Account = function (_a) {
                     name: productName,
                     about: productAbout,
                     price: productPrice,
-                    minQuantity: productMinQuantity
+                    minQuantity: productMinQuantity,
+                    price2: productPrice2,
+                    minQuantity2: productMinQuantity2,
+                    price3: productPrice3,
+                    minQuantity3: productMinQuantity3
                 }
             }
         });

@@ -61,6 +61,7 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance, onCreateProduc
 	}
 
 	const onEditAnnouncementHandler = async () => {
+		console.log('refetch ads');
 		
 		await refetch()
 	}
