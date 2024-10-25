@@ -6,6 +6,10 @@ query Announcements($query: ProductQueryInput!) {
 			posterPath
 			minPrice
 			maxPrice
+			pricesFull {
+				price
+				minQuantity
+				}
 			city
 			sku
 			views

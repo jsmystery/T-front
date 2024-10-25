@@ -47,7 +47,11 @@ const AnnouncementCard: FC<IAnnouncementCard> = ({
 	const [name, setName] = useState(announcement.name) // Name state
 	const [about, setAbout] = useState(announcement.about) // About state
 	const [productPrice, setProductPrice] = useState(announcement.maxPrice)
+	const [productPrice2, setProductPrice2] = useState()
+	const [productPrice3, setProductPrice3] = useState()
 	const [productMinQuantity, setProductMinQuantity] = useState(1)
+	const [productMinQuantity2, setProductMinQuantity2] = useState()
+	const [productMinQuantity3, setProductMinQuantity3] = useState()
 
 
 	const [UpdateProductMutate] = useUpdateProductMutation({
