@@ -11,7 +11,7 @@ const Users = () => {
 
   useEffect(() => {
     setUsers([
-      { id: 1, login: 'User1', email: 'user1@example.com', whatsapp: '+123456789', telegram: '@user1', phone: '123-456-7890', role: 'USER', registrationDate: '2023-01-15' },
+      { id: 1, login: 'User1', email: 'user1@example.com', whatsapp: '+123456789', telegram: '@user1', phone: '123-456-7890', role: 'PROVIDER', registrationDate: '2023-01-15' },
       { id: 2, login: 'User2', email: 'user2@example.com', whatsapp: '+987654321', telegram: '@user2', phone: '098-765-4321', role: 'ADMIN', registrationDate: '2023-05-20' },
     ]);
   }, []);
@@ -31,9 +31,20 @@ const Users = () => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {  // Check if the Esc key is pressed
+      setIsEditing(false);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown); // Add keydown listener
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown); // Cleanup listener
+    };
   }, []);
 
   return (
@@ -47,10 +58,10 @@ const Users = () => {
             <th className={styles.tableHeader}>Email</th>
             <th className={styles.tableHeader}>WhatsApp</th>
             <th className={styles.tableHeader}>Telegram</th>
-            <th className={styles.tableHeader}>Phone</th>
-            <th className={styles.tableHeader}>Role</th>
-            <th className={styles.tableHeader}>Registration Date</th>
-            <th className={styles.tableHeader}>Actions</th>
+            <th className={styles.tableHeader}>Номер</th>
+            <th className={styles.tableHeader}>Роль</th>
+            <th className={styles.tableHeader}>Регистрация</th>
+            <th className={styles.tableHeader}>Управление</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +76,8 @@ const Users = () => {
               <td className={styles.tableCell}>{user.role}</td>
               <td className={styles.tableCell}>{user.registrationDate}</td>
               <td className={styles.tableCell}>
-                <button className={styles.editButton} onClick={() => handleEditClick(user)}>Edit</button>
+                <button className={styles.editButton} onClick={() => handleEditClick(user)}>Изменить</button>
+                <button className={styles.editButton} onClick={() => handleEditClick(user)}>Удалить</button>
               </td>
             </tr>
           ))}
@@ -98,16 +110,16 @@ const Users = () => {
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Phone</label>
+              <label className={styles.popupLabel}>Номер</label>
               <input className={styles.userInput} type="text" value={selectedUser.phone} onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Role</label>
+              <label className={styles.popupLabel}>Роль</label>
               <input className={styles.userInput}  type="text" value={selectedUser.role} onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })} />
             </div>
 
-            <button className={styles.saveButton} onClick={handleSave}>Save</button>
+            <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
           </div>
         </div>
       )}
