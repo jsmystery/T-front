@@ -7,6 +7,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false); // State for confirmation popup
   const popupRef = useRef(null);
 
   useEffect(() => {
@@ -21,19 +22,36 @@ const Users = () => {
     setIsEditing(true);
   };
 
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);
+    setIsConfirmingDelete(true); // Show confirmation popup
+  };
+
   const handleSave = () => {
     setIsEditing(false);
+  };
+
+  const handleConfirmDelete = () => {
+    // Implement delete logic here, e.g., remove user from state
+    setUsers(users.filter(user => user.id !== selectedUser.id));
+    setIsConfirmingDelete(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsConfirmingDelete(false);
   };
 
   const handleClickOutside = (e) => {
     if (popupRef.current && !popupRef.current.contains(e.target)) {
       setIsEditing(false);
+      setIsConfirmingDelete(false); // Close confirmation popup
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {  // Check if the Esc key is pressed
+    if (e.key === 'Escape') { 
       setIsEditing(false);
+      setIsConfirmingDelete(false); // Close confirmation popup
     }
   };
 
@@ -49,7 +67,7 @@ const Users = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Users List</h1>
+      <h1 className={styles.title}>Пользователи</h1>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -77,7 +95,7 @@ const Users = () => {
               <td className={styles.tableCell}>{user.registrationDate}</td>
               <td className={styles.tableCell}>
                 <button className={styles.editButton} onClick={() => handleEditClick(user)}>Изменить</button>
-                <button className={styles.editButton} onClick={() => handleEditClick(user)}>Удалить</button>
+                <button className={styles.editButton} onClick={() => handleDeleteClick(user)}>Удалить</button>
               </td>
             </tr>
           ))}
@@ -120,6 +138,18 @@ const Users = () => {
             </div>
 
             <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Popup */}
+      {isConfirmingDelete && selectedUser && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent} ref={popupRef}>
+            <h2>Подтвердите удаление</h2>
+            <p>Вы уверены, что хотите удалить пользователя {selectedUser.login}?</p>
+            <button className={styles.saveButton} onClick={handleConfirmDelete}>Да</button>
+            <button className={styles.saveButton} onClick={handleCancelDelete}>Нет</button>
           </div>
         </div>
       )}
