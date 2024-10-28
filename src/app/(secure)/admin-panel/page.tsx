@@ -25,7 +25,7 @@ export default async function AdminPanelPage({
 	return (
 		<div className="flex">
       <Sidebar />     
-		<div>(тут можно сделать вывод общей информации-статистики)</div>
+		<div className='p-4 text-center'>(тут можно сделать вывод общей информации-статистики)</div>
       </div>
 
 	)

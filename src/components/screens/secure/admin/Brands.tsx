@@ -3,28 +3,28 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Users.module.scss';
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+const Brands = () => {
+  const [brands, setBrands] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false); // State for confirmation popup
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
 
   useEffect(() => {
-    setUsers([
-      { id: 1, login: 'User1', email: 'user1@example.com', whatsapp: '+123456789', telegram: '@user1', phone: '123-456-7890', role: 'PROVIDER', registrationDate: '2023-01-15' },
-      { id: 2, login: 'User2', email: 'user2@example.com', whatsapp: '+987654321', telegram: '@user2', phone: '098-765-4321', role: 'ADMIN', registrationDate: '2023-05-20' },
+    setBrands([
+      { id: 1, userId: 101, created: '2023-01-15', name: 'Brand1', slug: 'brand1', city: 'City1', logoUrl: '/uploads/brands/brand-1-logo.png', balance: 500, rating: 4.5 },
+      { id: 2, userId: 102, created: '2023-05-20', name: 'Brand2', slug: 'brand2', city: 'City2', logoUrl: '/uploads/brands/brand-1-logo.png', balance: 800, rating: 4.8 },
     ]);
   }, []);
 
-  const handleEditClick = (user) => {
-    setSelectedUser(user);
+  const handleEditClick = (brand) => {
+    setSelectedBrand(brand);
     setIsEditing(true);
   };
 
-  const handleDeleteClick = (user) => {
-    setSelectedUser(user);
-    setIsConfirmingDelete(true); // Show confirmation popup
+  const handleDeleteClick = (brand) => {
+    setSelectedBrand(brand);
+    setIsConfirmingDelete(true);
   };
 
   const handleSave = () => {
@@ -32,8 +32,7 @@ const Users = () => {
   };
 
   const handleConfirmDelete = () => {
-    // Implement delete logic here, e.g., remove user from state
-    setUsers(users.filter(user => user.id !== selectedUser.id));
+    setBrands(brands.filter(brand => brand.id !== selectedBrand.id));
     setIsConfirmingDelete(false);
   };
 
@@ -44,97 +43,87 @@ const Users = () => {
   const handleClickOutside = (e) => {
     if (popupRef.current && !popupRef.current.contains(e.target)) {
       setIsEditing(false);
-      setIsConfirmingDelete(false); // Close confirmation popup
+      setIsConfirmingDelete(false);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') { 
+    if (e.key === 'Escape') {
       setIsEditing(false);
-      setIsConfirmingDelete(false); // Close confirmation popup
+      setIsConfirmingDelete(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown); // Add keydown listener
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown); // Cleanup listener
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Пользователи</h1>
+      <h1 className={styles.title}>Бренды</h1>
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.tableHeader}>ID</th>
-            <th className={styles.tableHeader}>Login</th>
-            <th className={styles.tableHeader}>Email</th>
-            <th className={styles.tableHeader}>WhatsApp</th>
-            <th className={styles.tableHeader}>Telegram</th>
-            <th className={styles.tableHeader}>Номер</th>
-            <th className={styles.tableHeader}>Роль</th>
-            <th className={styles.tableHeader}>Регистрация</th>
+            <th className={styles.tableHeader}>ID Бренда</th>
+            <th className={styles.tableHeader}>ID Пользователя</th>
+            <th className={styles.tableHeader}>Создан</th>
+            <th className={styles.tableHeader}>Название</th>
+            <th className={styles.tableHeader}>Слаг</th>
+            <th className={styles.tableHeader}>Город</th>
+            <th className={styles.tableHeader}>Логотип</th>
+            <th className={styles.tableHeader}>Баланс</th>
+            <th className={styles.tableHeader}>Рейтинг</th>
             <th className={styles.tableHeader}>Управление</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
-            <tr key={user.id} className={styles.tableRow}>
-              <td className={styles.tableCell}>{user.id}</td>
-              <td className={styles.tableCell}>{user.login}</td>
-              <td className={styles.tableCell}>{user.email}</td>
-              <td className={styles.tableCell}>{user.whatsapp}</td>
-              <td className={styles.tableCell}>{user.telegram}</td>
-              <td className={styles.tableCell}>{user.phone}</td>
-              <td className={styles.tableCell}>{user.role}</td>
-              <td className={styles.tableCell}>{user.registrationDate}</td>
+          {brands.map(brand => (
+            <tr key={brand.id} className={styles.tableRow}>
+              <td className={styles.tableCell}>{brand.id}</td>
+              <td className={styles.tableCell}>{brand.userId}</td>
+              <td className={styles.tableCell}>{brand.created}</td>
+              <td className={styles.tableCell}>{brand.name}</td>
+              <td className={styles.tableCell}>{brand.slug}</td>
+              <td className={styles.tableCell}>{brand.city}</td>
               <td className={styles.tableCell}>
-                <button className={styles.editButton} onClick={() => handleEditClick(user)}>Изменить</button>
-                <button className={styles.editButton} onClick={() => handleDeleteClick(user)}>Удалить</button>
+                <img src={brand.logoUrl} alt={brand.name} className={styles.logoImage} />
+              </td>
+              <td className={styles.tableCell}>{brand.balance}</td>
+              <td className={styles.tableCell}>{brand.rating}</td>
+              <td className={styles.tableCell}>
+                <button className={styles.editButton} onClick={() => handleEditClick(brand)}>Изменить</button>
+                <button className={styles.editButton} onClick={() => handleDeleteClick(brand)}>Удалить</button>
+                <button className={styles.editButton}>Товары</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {/* Edit User Popup */}
-      {isEditing && selectedUser && (
+      {/* Edit Brand Popup */}
+      {isEditing && selectedBrand && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
             <h2 className={styles.popupHeader}>Редактировать</h2>
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Login</label>
-              <input className={styles.userInput}  type="text" value={selectedUser.login} onChange={(e) => setSelectedUser({ ...selectedUser, login: e.target.value })} />
-            </div>
-            
-            <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Email</label>
-              <input className={styles.userInput}  type="email" value={selectedUser.email} onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })} />
+              <label className={styles.popupLabel}>Название</label>
+              <input className={styles.userInput} type="text" value={selectedBrand.name} onChange={(e) => setSelectedBrand({ ...selectedBrand, name: e.target.value })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>WhatsApp</label>
-              <input className={styles.userInput} type="text" value={selectedUser.whatsapp} onChange={(e) => setSelectedUser({ ...selectedUser, whatsapp: e.target.value })} />
+              <label className={styles.popupLabel}>Город</label>
+              <input className={styles.userInput} type="text" value={selectedBrand.city} onChange={(e) => setSelectedBrand({ ...selectedBrand, city: e.target.value })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Telegram</label>
-              <input className={styles.userInput}  type="text" value={selectedUser.telegram} onChange={(e) => setSelectedUser({ ...selectedUser, telegram: e.target.value })} />
-            </div>
-
-            <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Номер</label>
-              <input className={styles.userInput} type="text" value={selectedUser.phone} onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })} />
-            </div>
-
-            <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Роль</label>
-              <input className={styles.userInput}  type="text" value={selectedUser.role} onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })} />
+              <label className={styles.popupLabel}>Баланс</label>
+              <input className={styles.userInput} type="number" value={selectedBrand.balance} onChange={(e) => setSelectedBrand({ ...selectedBrand, balance: parseFloat(e.target.value) })} />
             </div>
 
             <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
@@ -143,14 +132,14 @@ const Users = () => {
       )}
 
       {/* Delete Confirmation Popup */}
-      {isConfirmingDelete && selectedUser && (
+      {isConfirmingDelete && selectedBrand && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
             <h2 className={styles.popupHeader}>Подтвердите удаление</h2>
-            <p>Вы уверены, что хотите удалить пользователя {selectedUser.login}?</p>
-            <div className='flex justify-center'>
-            <button className={styles.saveButton} onClick={handleConfirmDelete}>Да</button>
-            <button className={styles.saveButton} onClick={handleCancelDelete}>Нет</button>
+            <p>Вы уверены, что хотите удалить бренд {selectedBrand.name}?</p>
+            <div className="flex justify-center">
+              <button className={styles.saveButton} onClick={handleConfirmDelete}>Да</button>
+              <button className={styles.saveButton} onClick={handleCancelDelete}>Нет</button>
             </div>
           </div>
         </div>
@@ -159,4 +148,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Brands;
