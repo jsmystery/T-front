@@ -359,6 +359,7 @@ const config: Config = {
 						alignItems: 'center',
 						justifyContent: 'space-between',
 					},
+					
 
 					'.image-like-bg-contain': {
 						objectPosition: 'center',

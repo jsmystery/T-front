@@ -106,7 +106,7 @@ const Users = () => {
       {isEditing && selectedUser && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
-            <h2>Edit User</h2>
+            <h2 className={styles.popupHeader}>Редактировать</h2>
             <div className={styles.popupField}>
               <label className={styles.popupLabel}>Login</label>
               <input className={styles.userInput}  type="text" value={selectedUser.login} onChange={(e) => setSelectedUser({ ...selectedUser, login: e.target.value })} />
@@ -146,10 +146,12 @@ const Users = () => {
       {isConfirmingDelete && selectedUser && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
-            <h2>Подтвердите удаление</h2>
+            <h2 className={styles.popupHeader}>Подтвердите удаление</h2>
             <p>Вы уверены, что хотите удалить пользователя {selectedUser.login}?</p>
+            <div className='flex justify-center'>
             <button className={styles.saveButton} onClick={handleConfirmDelete}>Да</button>
             <button className={styles.saveButton} onClick={handleCancelDelete}>Нет</button>
+            </div>
           </div>
         </div>
       )}

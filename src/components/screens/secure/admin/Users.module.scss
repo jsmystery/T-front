@@ -71,7 +71,7 @@
  }
  
  .saveButton {
-	margin-top: 16px;
+	margin-top: 10px;
 	margin-right: 2px;
 	background-color: #1e3a8a;
 	color: #ffffff;
@@ -113,3 +113,8 @@
 	border-color: #1e3a8a; /* Dark blue for focus */
  }
  
+ .popupHeader {
+	font-weight: 900;
+	text-align: center;
+	margin-bottom: 8px;
+ }
