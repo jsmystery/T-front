@@ -12,8 +12,8 @@ const Products = () => {
 
   useEffect(() => {
     setProducts([
-      { brandId: 1, productId: 101, created: '2023-01-15', name: 'Product1', sku: 'SKU001', posterUrl: '/images/product1.jpg', imagesUrls: ['/images/product1-1.jpg', '/images/product1-2.jpg'], rating: 4.5 },
-      { brandId: 2, productId: 102, created: '2023-05-20', name: 'Product2', sku: 'SKU002', posterUrl: '/images/product2.jpg', imagesUrls: ['/images/product2-1.jpg', '/images/product2-2.jpg'], rating: 4.7 },
+      { brandId: 1, productId: 101, created: '2023-01-15', name: 'Product1', sku: 'SKU001', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product1-1.jpg', '/images/product1-2.jpg'], rating: 4.5 },
+      { brandId: 2, productId: 102, created: '2023-05-20', name: 'Product2', sku: 'SKU002', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product2-1.jpg', '/images/product2-2.jpg'], rating: 4.7 },
     ]);
   }, []);
 
@@ -70,15 +70,15 @@ const Products = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.tableHeader}>Brand ID</th>
-            <th className={styles.tableHeader}>Product ID</th>
-            <th className={styles.tableHeader}>Created</th>
-            <th className={styles.tableHeader}>Name</th>
-            <th className={styles.tableHeader}>SKU</th>
-            <th className={styles.tableHeader}>Poster URL</th>
-            <th className={styles.tableHeader}>Images URLs</th>
-            <th className={styles.tableHeader}>Rating</th>
-            <th className={styles.tableHeader}>Actions</th>
+            <th className={styles.tableHeader}>ID Бренда</th>
+            <th className={styles.tableHeader}>ID Продукта</th>
+            <th className={styles.tableHeader}>Создан</th>
+            <th className={styles.tableHeader}>Название</th>
+            <th className={styles.tableHeader}>Артикул (SKU)</th>
+            <th className={styles.tableHeader}>Постер</th>
+            <th className={styles.tableHeader}>Изображения</th>
+            <th className={styles.tableHeader}>Рейтинг</th>
+            <th className={styles.tableHeader}>Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -89,7 +89,9 @@ const Products = () => {
               <td className={styles.tableCell}>{product.created}</td>
               <td className={styles.tableCell}>{product.name}</td>
               <td className={styles.tableCell}>{product.sku}</td>
-              <td className={styles.tableCell}>{product.posterUrl}</td>
+              <td className={styles.tableCell}>
+                <img src={product.posterUrl} alt="poster" className={styles.posterImage} />
+              </td>
               <td className={styles.tableCell}>{product.imagesUrls.join(', ')}</td>
               <td className={styles.tableCell}>{product.rating}</td>
               <td className={styles.tableCell}>
@@ -107,27 +109,27 @@ const Products = () => {
           <div className={styles.popupContent} ref={popupRef}>
             <h2 className={styles.popupHeader}>Редактировать</h2>
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Name</label>
+              <label className={styles.popupLabel}>Название</label>
               <input className={styles.userInput} type="text" value={selectedProduct.name} onChange={(e) => setSelectedProduct({ ...selectedProduct, name: e.target.value })} />
             </div>
             
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>SKU</label>
+              <label className={styles.popupLabel}>Артикул (SKU)</label>
               <input className={styles.userInput} type="text" value={selectedProduct.sku} onChange={(e) => setSelectedProduct({ ...selectedProduct, sku: e.target.value })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Poster URL</label>
+              <label className={styles.popupLabel}>Постер</label>
               <input className={styles.userInput} type="text" value={selectedProduct.posterUrl} onChange={(e) => setSelectedProduct({ ...selectedProduct, posterUrl: e.target.value })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Images URLs</label>
+              <label className={styles.popupLabel}>Изображения</label>
               <input className={styles.userInput} type="text" value={selectedProduct.imagesUrls.join(', ')} onChange={(e) => setSelectedProduct({ ...selectedProduct, imagesUrls: e.target.value.split(', ') })} />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Rating</label>
+              <label className={styles.popupLabel}>Рейтинг</label>
               <input className={styles.userInput} type="number" value={selectedProduct.rating} onChange={(e) => setSelectedProduct({ ...selectedProduct, rating: e.target.value })} />
             </div>
 
