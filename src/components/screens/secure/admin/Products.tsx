@@ -1,14 +1,22 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter
 import styles from './Users.module.scss';
 
 const Products = () => {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false); // State for confirmation popup
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
+
+  // Log the brand query parameter on component mount
+  useEffect(() => {
+    const brandId = new URLSearchParams(window.location.search).get("brand"); // Get brand ID from query
+    console.log("Brand ID:", brandId); // Log brand ID
+  }, []);
 
   useEffect(() => {
     setProducts([
@@ -24,7 +32,7 @@ const Products = () => {
 
   const handleDeleteClick = (product) => {
     setSelectedProduct(product);
-    setIsConfirmingDelete(true); // Show confirmation popup
+    setIsConfirmingDelete(true);
   };
 
   const handleSave = () => {
@@ -43,24 +51,24 @@ const Products = () => {
   const handleClickOutside = (e) => {
     if (popupRef.current && !popupRef.current.contains(e.target)) {
       setIsEditing(false);
-      setIsConfirmingDelete(false); // Close confirmation popup
+      setIsConfirmingDelete(false);
     }
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') { 
       setIsEditing(false);
-      setIsConfirmingDelete(false); // Close confirmation popup
+      setIsConfirmingDelete(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown); // Add keydown listener
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown); // Cleanup listener
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -103,7 +111,6 @@ const Products = () => {
         </tbody>
       </table>
 
-      {/* Edit Product Popup */}
       {isEditing && selectedProduct && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
@@ -138,7 +145,6 @@ const Products = () => {
         </div>
       )}
 
-      {/* Delete Confirmation Popup */}
       {isConfirmingDelete && selectedProduct && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>

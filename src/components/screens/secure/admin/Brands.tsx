@@ -67,7 +67,7 @@ const Brands = () => {
   }, []);
 
   const handleProductsClick = (brandId) => {
-    router.push(`/products?brand=${brandId}`); // Navigate to /products with brandId
+    router.push(`/admin-panel/products?brand=${brandId}`); // Navigate to /products with brandId
   };
 
   return (
