@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation';
 import styles from './Users.module.scss';
 
 const Products = () => {
@@ -12,10 +12,9 @@ const Products = () => {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
 
-  // Log the brand query parameter on component mount
   useEffect(() => {
-    const brandId = new URLSearchParams(window.location.search).get("brand"); // Get brand ID from query
-    console.log("Brand ID:", brandId); // Log brand ID
+    const brandId = new URLSearchParams(window.location.search).get("brand");
+    console.log("Brand ID:", brandId);
   }, []);
 
   useEffect(() => {
@@ -119,11 +118,6 @@ const Products = () => {
               <label className={styles.popupLabel}>Название</label>
               <input className={styles.userInput} type="text" value={selectedProduct.name} onChange={(e) => setSelectedProduct({ ...selectedProduct, name: e.target.value })} />
             </div>
-            
-            <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Артикул (SKU)</label>
-              <input className={styles.userInput} type="text" value={selectedProduct.sku} onChange={(e) => setSelectedProduct({ ...selectedProduct, sku: e.target.value })} />
-            </div>
 
             <div className={styles.popupField}>
               <label className={styles.popupLabel}>Постер</label>
@@ -133,11 +127,6 @@ const Products = () => {
             <div className={styles.popupField}>
               <label className={styles.popupLabel}>Изображения</label>
               <input className={styles.userInput} type="text" value={selectedProduct.imagesUrls.join(', ')} onChange={(e) => setSelectedProduct({ ...selectedProduct, imagesUrls: e.target.value.split(', ') })} />
-            </div>
-
-            <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Рейтинг</label>
-              <input className={styles.userInput} type="number" value={selectedProduct.rating} onChange={(e) => setSelectedProduct({ ...selectedProduct, rating: e.target.value })} />
             </div>
 
             <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
