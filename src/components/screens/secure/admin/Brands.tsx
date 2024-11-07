@@ -10,12 +10,34 @@ const Brands = () => {
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
   useEffect(() => {
     setBrands([
-      { id: 1, userId: 101, created: '2023-01-15', name: 'Brand1', slug: 'brand1', city: 'City1', logoUrl: '/uploads/brands/brand-1-logo.png', balance: 500, rating: 4.5 },
-      { id: 2, userId: 102, created: '2023-05-20', name: 'Brand2', slug: 'brand2', city: 'City2', logoUrl: '/uploads/brands/brand-1-logo.png', balance: 800, rating: 4.8 },
+      { 
+        id: 1, 
+        userId: 101, 
+        created: '2023-01-15', 
+        name: 'Brand1', 
+        slug: 'brand1', 
+        city: 'City1', 
+        logoUrl: '/uploads/brands/brand-1-logo.png', 
+        balance: 500, 
+        rating: 4.5,
+        description: 'Description for Brand1' 
+      },
+      { 
+        id: 2, 
+        userId: 102, 
+        created: '2023-05-20', 
+        name: 'Brand2', 
+        slug: 'brand2', 
+        city: 'City2', 
+        logoUrl: '/uploads/brands/brand-1-logo.png', 
+        balance: 800, 
+        rating: 4.8,
+        description: 'Description for Brand2'
+      },
     ]);
   }, []);
 
@@ -67,7 +89,7 @@ const Brands = () => {
   }, []);
 
   const handleProductsClick = (brandId) => {
-    router.push(`/admin-panel/products?brand=${brandId}`); // Navigate to /products with brandId
+    router.push(`/admin-panel/products?brand=${brandId}`);
   };
 
   return (
@@ -85,6 +107,7 @@ const Brands = () => {
             <th className={styles.tableHeader}>Логотип</th>
             <th className={styles.tableHeader}>Баланс</th>
             <th className={styles.tableHeader}>Рейтинг</th>
+            <th className={styles.tableHeader}>Описание</th>
             <th className={styles.tableHeader}>Управление</th>
           </tr>
         </thead>
@@ -102,6 +125,7 @@ const Brands = () => {
               </td> 
               <td className={styles.tableCell}>{brand.balance}</td>
               <td className={styles.tableCell}>{brand.rating}</td>
+              <td className={styles.tableCell}>{brand.description}</td>
               <td className={styles.tableCell}>
                 <button className={styles.editButton} onClick={() => handleEditClick(brand)}>Изменить</button>
                 <button className={styles.editButton} onClick={() => handleDeleteClick(brand)}>Удалить</button>
@@ -112,7 +136,90 @@ const Brands = () => {
         </tbody>
       </table>
 
-      {/* Edit and Delete popups remain unchanged */}
+      {/* Edit Brand Popup */}
+      {isEditing && selectedBrand && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent} ref={popupRef}>
+            <h2 className={styles.popupHeader}>Редактировать</h2>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Название</label>
+              <input
+                className={styles.userInput}
+                type="text"
+                value={selectedBrand.name}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, name: e.target.value })}
+              />
+            </div>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Город</label>
+              <input
+                className={styles.userInput}
+                type="text"
+                value={selectedBrand.city}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, city: e.target.value })}
+              />
+            </div>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Баланс</label>
+              <input
+                className={styles.userInput}
+                type="number"
+                value={selectedBrand.balance}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, balance: parseFloat(e.target.value) })}
+              />
+            </div>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Слаг</label>
+              <input
+                className={styles.userInput}
+                type="text"
+                value={selectedBrand.slug}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, slug: e.target.value })}
+              />
+            </div>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Описание</label>
+              <textarea
+                className={styles.userInput}
+                value={selectedBrand.description}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, description: e.target.value })}
+                rows="3"
+              />
+            </div>
+
+            <div className={styles.popupField}>
+              <label className={styles.popupLabel}>Логотип</label>
+              <input
+                className={styles.userInput}
+                type="text"
+                value={selectedBrand.logoUrl}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, logoUrl: e.target.value })}
+              />
+            </div>
+
+            <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Popup */}
+      {isConfirmingDelete && selectedBrand && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent} ref={popupRef}>
+            <h2 className={styles.popupHeader}>Подтвердите удаление</h2>
+            <p>Вы уверены, что хотите удалить бренд {selectedBrand.name}?</p>
+            <div className="flex justify-center">
+              <button className={styles.saveButton} onClick={handleConfirmDelete}>Да</button>
+              <button className={styles.saveButton} onClick={handleCancelDelete}>Нет</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
