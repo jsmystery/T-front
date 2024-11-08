@@ -40,10 +40,10 @@ const Announcements: FC<IAnnouncements> = ({ tariffs, setBalance, onCreateProduc
 
 
 
-	const [announcements, setAnnouncements] = useState(initialAnnouncements) // Highlight: UseState to manage announcements reactively
+	const [announcements, setAnnouncements] = useState(initialAnnouncements)
 
 
-	const [selectedOptions, setSelectedOptions] = useState<string[]>([]) // Create state for selected options
+	const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
 	useEffect(() => {
 		if (onCreateProductCompleteValue) {

@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { Sort } from '@/__generated__/output'
 import { useRouter } from 'next/navigation';
 import styles from './Users.module.scss';
+import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook'
+
 
 const Products = () => {
   const router = useRouter();
@@ -17,12 +20,36 @@ const Products = () => {
     console.log("Brand ID:", brandId);
   }, []);
 
+
+
+
   useEffect(() => {
     setProducts([
       { brandId: 1, productId: 101, created: '2023-01-15', name: 'Product1', sku: 'SKU001', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product1-1.jpg', '/images/product1-2.jpg'], rating: 4.5 },
       { brandId: 2, productId: 102, created: '2023-05-20', name: 'Product2', sku: 'SKU002', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product2-1.jpg', '/images/product2-2.jpg'], rating: 4.7 },
     ]);
   }, []);
+
+
+  const {
+		// announcements,
+		announcements: initialAnnouncements,
+		error,
+		refetch
+	} = useAnnouncementsAdmin(
+		{
+			perPage: 100,
+			page: 1,
+			sort: Sort.Desc,
+		},
+	)
+
+
+  const [announcements, setAnnouncements] = useState(initialAnnouncements)
+
+  useEffect(() => {
+		setAnnouncements(initialAnnouncements)
+	}, [initialAnnouncements])
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
