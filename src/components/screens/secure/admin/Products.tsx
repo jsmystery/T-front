@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Sort } from '@/__generated__/output'
+import { Sort } from '@/__generated__/output';
 import { useRouter } from 'next/navigation';
 import styles from './Users.module.scss';
-import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook'
-
+import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook';
 
 const Products = () => {
   const router = useRouter();
@@ -15,41 +14,35 @@ const Products = () => {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
 
-  useEffect(() => {
-    const brandId = new URLSearchParams(window.location.search).get("brand");
-    console.log("Brand ID:", brandId);
-  }, []);
-
-
-
-
-  useEffect(() => {
-    setProducts([
-      { brandId: 1, productId: 101, created: '2023-01-15', name: 'Product1', sku: 'SKU001', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product1-1.jpg', '/images/product1-2.jpg'], rating: 4.5 },
-      { brandId: 2, productId: 102, created: '2023-05-20', name: 'Product2', sku: 'SKU002', posterUrl: '/uploads/products/product-2-poster.png', imagesUrls: ['/images/product2-1.jpg', '/images/product2-2.jpg'], rating: 4.7 },
-    ]);
-  }, []);
-
-
+  // Fetch announcements data
   const {
-		// announcements,
-		announcements: initialAnnouncements,
-		error,
-		refetch
-	} = useAnnouncementsAdmin(
-		{
-			perPage: 100,
-			page: 1,
-			sort: Sort.Desc,
-		},
-	)
-
-
-  const [announcements, setAnnouncements] = useState(initialAnnouncements)
+    announcements: initialAnnouncements,
+    error,
+    refetch
+  } = useAnnouncementsAdmin(
+    {
+      perPage: 100,
+      page: 1,
+      sort: Sort.Desc,
+    }
+  );
 
   useEffect(() => {
-		setAnnouncements(initialAnnouncements)
-	}, [initialAnnouncements])
+    // Transform the `initialAnnouncements` data to match the products table structure
+    if (initialAnnouncements) {
+      const transformedProducts = initialAnnouncements.map((announcement) => ({
+        brandId: announcement.id,  // Assuming `id` is for `brandId`, adapt if needed
+        productId: announcement.id,
+        created: announcement.createdAt,
+        name: announcement.name,
+        sku: announcement.sku,
+        posterUrl: announcement.posterPath,
+        imagesUrls: announcement.pricesFull.map((price) => `/images/${price.minQuantity}.jpg`), // Adjust image URLs as needed
+        rating: announcement.minPrice // Assuming minPrice can represent a rating; adjust if needed
+      }));
+      setProducts(transformedProducts);
+    }
+  }, [initialAnnouncements]);
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
