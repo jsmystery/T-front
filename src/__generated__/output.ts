@@ -100,6 +100,7 @@ export type AnnouncementCard = {
   posterPath: Scalars['String']['output'];
   price: Scalars['Int']['output'];
   pricesFull: Array<Price>;
+  rating: Scalars['String']['output'];
   sku: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -731,7 +732,7 @@ export type AnnouncementsQueryVariables = Exact<{
 }>;
 
 
-export type AnnouncementsQuery = { announcements: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, city: string, sku: string, views: number, createdAt: string, about: string, pricesFull: Array<{ price: string, minQuantity: string }>, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
+export type AnnouncementsQuery = { announcements: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: string, city: string, sku: string, views: number, createdAt: string, about: string, pricesFull: Array<{ price: string, minQuantity: string }>, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1813,6 +1814,7 @@ export const AnnouncementsDocument = gql`
       posterPath
       minPrice
       maxPrice
+      rating
       pricesFull {
         price
         minQuantity

@@ -6,6 +6,7 @@ query Announcements($query: ProductQueryInput!) {
 			posterPath
 			minPrice
 			maxPrice
+			rating
 			pricesFull {
 				price
 				minQuantity

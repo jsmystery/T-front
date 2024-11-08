@@ -38,7 +38,7 @@ const Products = () => {
         sku: announcement.sku,
         posterUrl: announcement.posterPath,
         imagesUrls: announcement.pricesFull.map((price) => `/images/${price.minQuantity}.jpg`), // Adjust image URLs as needed
-        rating: announcement.minPrice // Assuming minPrice can represent a rating; adjust if needed
+        rating: announcement.rating
       }));
       setProducts(transformedProducts);
     }
