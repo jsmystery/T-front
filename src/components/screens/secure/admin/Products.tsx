@@ -2,17 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Sort } from '@/__generated__/output';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './Users.module.scss';
 import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook';
 
 const Products = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [products, setProducts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
+
+  // Get brandId from URL query parameters, default to null if not present
+  const brandId = searchParams.get('brand') ? Number(searchParams.get('brand')) : null;
 
   // Fetch announcements data
   const {
@@ -24,26 +28,44 @@ const Products = () => {
       perPage: 100,
       page: 1,
       sort: Sort.Desc,
-      brandId: 2
+      brandId: brandId
+    },
+    {
+      // Only fetch when brandId is available
+      enabled: !!brandId
     }
   );
 
   useEffect(() => {
+    // Redirect to a default brand if no brandId is provided
+    if (!brandId) {
+      router.push('/admin-panel/products?brand=2');
+      return;
+    }
+
     // Transform the `initialAnnouncements` data to match the products table structure
     if (initialAnnouncements) {
       const transformedProducts = initialAnnouncements.map((announcement) => ({
-        brandId: announcement.id,  // Assuming `id` is for `brandId`, adapt if needed
+        brandId: announcement.id,
         productId: announcement.id,
         created: announcement.createdAt,
         name: announcement.name,
         sku: announcement.sku,
         posterUrl: announcement.posterPath,
-        imagesUrls: announcement.pricesFull.map((price) => `/images/${price.minQuantity}.jpg`), // Adjust image URLs as needed
+        imagesUrls: announcement.pricesFull.map((price) => `/images/${price.minQuantity}.jpg`),
         rating: announcement.rating
       }));
       setProducts(transformedProducts);
     }
-  }, [initialAnnouncements]);
+  }, [initialAnnouncements, brandId, router]);
+
+  // Error handling
+  useEffect(() => {
+    if (error) {
+      console.error('Error fetching announcements:', error);
+      // You might want to show an error message to the user here
+    }
+  }, [error]);
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
@@ -57,11 +79,15 @@ const Products = () => {
 
   const handleSave = () => {
     setIsEditing(false);
+    // Optionally refetch data after save
+    refetch();
   };
 
   const handleConfirmDelete = () => {
     setProducts(products.filter(product => product.productId !== selectedProduct.productId));
     setIsConfirmingDelete(false);
+    // Optionally refetch data after delete
+    refetch();
   };
 
   const handleCancelDelete = () => {
@@ -76,7 +102,7 @@ const Products = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') { 
+    if (e.key === 'Escape') {
       setIsEditing(false);
       setIsConfirmingDelete(false);
     }
@@ -92,10 +118,15 @@ const Products = () => {
     };
   }, []);
 
+  if (!brandId) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Продукты</h1>
+      <h1 className={styles.title}>Продукты - Бренд {brandId}</h1>
       <table className={styles.table}>
+        {/* Rest of your table code remains the same */}
         <thead>
           <tr>
             <th className={styles.tableHeader}>ID Бренда</th>
@@ -131,6 +162,7 @@ const Products = () => {
         </tbody>
       </table>
 
+      {/* Popup components remain the same */}
       {isEditing && selectedProduct && (
         <div className={styles.popup}>
           <div className={styles.popupContent} ref={popupRef}>
