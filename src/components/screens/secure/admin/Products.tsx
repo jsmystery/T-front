@@ -5,6 +5,9 @@ import { Sort } from '@/__generated__/output';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './Users.module.scss';
 import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook';
+import { useDeleteProductAdminMutation } from '@/__generated__/output'
+import toast from 'react-hot-toast'
+
 
 const Products = () => {
   const router = useRouter();
@@ -29,10 +32,6 @@ const Products = () => {
       page: 1,
       sort: Sort.Desc,
       brandId: brandId
-    },
-    {
-      // Only fetch when brandId is available
-      enabled: !!brandId
     }
   );
 
@@ -63,9 +62,22 @@ const Products = () => {
   useEffect(() => {
     if (error) {
       console.error('Error fetching announcements:', error);
-      // You might want to show an error message to the user here
     }
   }, [error]);
+
+
+	const [deleteProductMutate] = useDeleteProductAdminMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+			toast.error(message)
+		},
+		onCompleted: () => {
+			// onDeleteAnnouncement()
+		}
+	})
+
+
+
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
@@ -85,6 +97,11 @@ const Products = () => {
 
   const handleConfirmDelete = () => {
     setProducts(products.filter(product => product.productId !== selectedProduct.productId));
+    deleteProductMutate({
+      variables: {
+        id: selectedProduct.productId,
+        brandId: Number(brandId),
+      }})
     setIsConfirmingDelete(false);
     // Optionally refetch data after delete
     refetch();

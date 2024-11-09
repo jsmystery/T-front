@@ -669,10 +669,11 @@ export type DeleteProductMutation = { deleteProduct: boolean };
 
 export type DeleteProductAdminMutationVariables = Exact<{
   id: Scalars['Int']['input'];
+  brandId: Scalars['Int']['input'];
 }>;
 
 
-export type DeleteProductAdminMutation = { deleteProduct: boolean };
+export type DeleteProductAdminMutation = { deleteProductAdmin: boolean };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -1170,8 +1171,8 @@ export type DeleteProductMutationHookResult = ReturnType<typeof useDeleteProduct
 export type DeleteProductMutationResult = Apollo.MutationResult<DeleteProductMutation>;
 export type DeleteProductMutationOptions = Apollo.BaseMutationOptions<DeleteProductMutation, DeleteProductMutationVariables>;
 export const DeleteProductAdminDocument = gql`
-    mutation DeleteProductAdmin($id: Int!) {
-  deleteProduct(id: $id)
+    mutation DeleteProductAdmin($id: Int!, $brandId: Int!) {
+  deleteProductAdmin(id: $id, brandId: $brandId)
 }
     `;
 export type DeleteProductAdminMutationFn = Apollo.MutationFunction<DeleteProductAdminMutation, DeleteProductAdminMutationVariables>;
@@ -1190,6 +1191,7 @@ export type DeleteProductAdminMutationFn = Apollo.MutationFunction<DeleteProduct
  * const [deleteProductAdminMutation, { data, loading, error }] = useDeleteProductAdminMutation({
  *   variables: {
  *      id: // value for 'id'
+ *      brandId: // value for 'brandId'
  *   },
  * });
  */
