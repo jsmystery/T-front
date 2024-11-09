@@ -24,6 +24,7 @@ const Products = () => {
       perPage: 100,
       page: 1,
       sort: Sort.Desc,
+      brandId: 2
     }
   );
 

@@ -68,6 +68,11 @@ export type AllAnnouncements = {
   count: Scalars['Int']['output'];
 };
 
+export type AllAnnouncementsAdmin = {
+  announcements: Array<AnnouncementCardAdmin>;
+  count: Scalars['Int']['output'];
+};
+
 export type AllBrands = {
   brands: Array<BrandCard>;
   count: Scalars['Int']['output'];
@@ -89,6 +94,23 @@ export type AllReviews = {
 };
 
 export type AnnouncementCard = {
+  about: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  maxPrice: Scalars['Int']['output'];
+  minPrice: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  orders: Array<NestedOrder>;
+  posterPath: Scalars['String']['output'];
+  price: Scalars['Int']['output'];
+  pricesFull: Array<Price>;
+  rating: Scalars['String']['output'];
+  sku: Scalars['String']['output'];
+  views: Scalars['Int']['output'];
+};
+
+export type AnnouncementCardAdmin = {
   about: Scalars['String']['output'];
   city: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
@@ -391,6 +413,7 @@ export type Query = {
   advertisements: AllAdvertisements;
   advertisementsByTypes: Array<Advertising>;
   announcements: AllAnnouncements;
+  announcementsAdmin: AllAnnouncementsAdmin;
   brand: Brand;
   brands: AllBrands;
   categories: AllCategories;
@@ -414,6 +437,11 @@ export type QueryAdvertisementsByTypesArgs = {
 
 
 export type QueryAnnouncementsArgs = {
+  query: ProductQueryInput;
+};
+
+
+export type QueryAnnouncementsAdminArgs = {
   query: ProductQueryInput;
 };
 
@@ -733,6 +761,13 @@ export type AnnouncementsQueryVariables = Exact<{
 
 
 export type AnnouncementsQuery = { announcements: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: string, city: string, sku: string, views: number, createdAt: string, about: string, pricesFull: Array<{ price: string, minQuantity: string }>, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
+
+export type AnnouncementsAdminQueryVariables = Exact<{
+  query: ProductQueryInput;
+}>;
+
+
+export type AnnouncementsAdminQuery = { announcementsAdmin: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: string, city: string, sku: string, views: number, createdAt: string, about: string, pricesFull: Array<{ price: string, minQuantity: string }>, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1869,6 +1904,70 @@ export type AnnouncementsQueryHookResult = ReturnType<typeof useAnnouncementsQue
 export type AnnouncementsLazyQueryHookResult = ReturnType<typeof useAnnouncementsLazyQuery>;
 export type AnnouncementsSuspenseQueryHookResult = ReturnType<typeof useAnnouncementsSuspenseQuery>;
 export type AnnouncementsQueryResult = Apollo.QueryResult<AnnouncementsQuery, AnnouncementsQueryVariables>;
+export const AnnouncementsAdminDocument = gql`
+    query AnnouncementsAdmin($query: ProductQueryInput!) {
+  announcementsAdmin(query: $query) {
+    announcements {
+      id
+      name
+      posterPath
+      minPrice
+      maxPrice
+      rating
+      pricesFull {
+        price
+        minQuantity
+      }
+      city
+      sku
+      views
+      createdAt
+      about
+      orders {
+        expirationDate
+        isLittleLeft
+        tariff {
+          type
+        }
+      }
+    }
+    count
+  }
+}
+    `;
+
+/**
+ * __useAnnouncementsAdminQuery__
+ *
+ * To run a query within a React component, call `useAnnouncementsAdminQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAnnouncementsAdminQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAnnouncementsAdminQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useAnnouncementsAdminQuery(baseOptions: Apollo.QueryHookOptions<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables> & ({ variables: AnnouncementsAdminQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>(AnnouncementsAdminDocument, options);
+      }
+export function useAnnouncementsAdminLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>(AnnouncementsAdminDocument, options);
+        }
+export function useAnnouncementsAdminSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>(AnnouncementsAdminDocument, options);
+        }
+export type AnnouncementsAdminQueryHookResult = ReturnType<typeof useAnnouncementsAdminQuery>;
+export type AnnouncementsAdminLazyQueryHookResult = ReturnType<typeof useAnnouncementsAdminLazyQuery>;
+export type AnnouncementsAdminSuspenseQueryHookResult = ReturnType<typeof useAnnouncementsAdminSuspenseQuery>;
+export type AnnouncementsAdminQueryResult = Apollo.QueryResult<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>;
 export const UserDocument = gql`
     query User {
   user {

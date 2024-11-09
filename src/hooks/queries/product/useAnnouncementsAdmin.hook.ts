@@ -2,7 +2,7 @@ import {
 	AnnouncementCard,
 	OrderInput,
 	ProductQueryInput,
-	useAnnouncementsQuery,
+	useAnnouncementsAdminQuery,
 	usePlaceOrderMutation,
 } from '@/__generated__/output';
 import { useSearchFilter } from '@/hooks/helpers/filters/useSearchFilter';
@@ -59,7 +59,7 @@ export const useAnnouncementsAdmin = (
 		// 	},
 		// });
 
-	const { data, error, refetch } = useAnnouncementsQuery({
+	const { data, error, refetch } = useAnnouncementsAdminQuery({
 		fetchPolicy: 'no-cache',
 		variables: {
 			query: {
@@ -71,7 +71,7 @@ export const useAnnouncementsAdmin = (
 
 	useEffect(() => {
 		const count = data?.announcements.count || 0;
-		const pagesCount = Math.ceil(count / (query.perPage || 15));
+		// const pagesCount = Math.ceil(count / (query.perPage || 15));
 		// const scrollArea = scrollRef.current;
 
 		// if (!scrollArea || pagesCount <= 1 || page >= pagesCount) return;
@@ -91,7 +91,7 @@ export const useAnnouncementsAdmin = (
 	}, [page]);
 
 	useEffect(() => {
-		const announcements = data?.announcements.announcements;
+		const announcements = data?.announcementsAdmin.announcements;
 
 		if (announcements) {
 			setAnnouncements(announcements);

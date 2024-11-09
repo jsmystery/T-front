@@ -1,0 +1,29 @@
+query AnnouncementsAdmin($query: ProductQueryInput!) {
+	announcementsAdmin(query: $query) {
+		announcements {
+			id
+			name
+			posterPath
+			minPrice
+			maxPrice
+			rating
+			pricesFull {
+				price
+				minQuantity
+				}
+			city
+			sku
+			views
+			createdAt
+			about
+			orders {
+				expirationDate
+				isLittleLeft
+				tariff {
+					type
+				}
+			}
+		}
+		count
+	}
+}
