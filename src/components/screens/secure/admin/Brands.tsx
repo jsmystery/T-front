@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './Users.module.scss';
+import { Sort, useBrandsQuery } from '@/__generated__/output'
+
 
 const Brands = () => {
   const [brands, setBrands] = useState([]);
@@ -11,6 +13,20 @@ const Brands = () => {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
   const router = useRouter();
+
+  const homeBrands = useBrandsQuery({
+		variables: {
+			query: {
+				page: 1,
+				perPage: 30,
+				sort: Sort.Desc,
+			},
+		},
+	})
+
+  console.log(homeBrands.data?.brands);
+  
+
 
   useEffect(() => {
     setBrands([
