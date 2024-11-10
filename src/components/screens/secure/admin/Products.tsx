@@ -5,7 +5,7 @@ import { Sort } from '@/__generated__/output';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './Users.module.scss';
 import { useAnnouncementsAdmin } from '@/hooks/queries/product/useAnnouncementsAdmin.hook';
-import { useDeleteProductAdminMutation } from '@/__generated__/output';
+import { useDeleteProductAdminMutation, useUpdateProductAdminMutation } from '@/__generated__/output';
 import toast from 'react-hot-toast';
 
 const Products = () => {

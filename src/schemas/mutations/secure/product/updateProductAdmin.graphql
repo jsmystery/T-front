@@ -1,0 +1,3 @@
+mutation UpdateProductAdmin($id: Int!, $data: UpdateProductInputAdmin!, $brandId: Int!) {
+  updateProductAdmin(id: $id, data: $data, brandId: $brandId) 
+}

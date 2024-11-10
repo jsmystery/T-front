@@ -244,6 +244,7 @@ export type Mutation = {
   telegramAuth: SessionUserResponse;
   updateBrand: Brand;
   updateProduct: Product;
+  updateProductAdmin: Scalars['Boolean']['output'];
   updateUserProfile: Scalars['Boolean']['output'];
 };
 
@@ -312,6 +313,13 @@ export type MutationUpdateBrandArgs = {
 
 export type MutationUpdateProductArgs = {
   data: UpdateProductInput;
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationUpdateProductAdminArgs = {
+  brandId: Scalars['Int']['input'];
+  data: UpdateProductInputAdmin;
   id: Scalars['Int']['input'];
 };
 
@@ -568,6 +576,13 @@ export type UpdateProductInput = {
   price3?: InputMaybe<Scalars['Float']['input']>;
 };
 
+export type UpdateProductInputAdmin = {
+  about?: InputMaybe<Scalars['String']['input']>;
+  imagesPaths: Array<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  posterPath: Scalars['String']['input'];
+};
+
 export type UpdateUserInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   newPassword?: InputMaybe<Scalars['String']['input']>;
@@ -689,6 +704,15 @@ export type UpdateProductMutationVariables = Exact<{
 
 
 export type UpdateProductMutation = { updateProduct: { id: number, name: string, about: string } };
+
+export type UpdateProductAdminMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  data: UpdateProductInputAdmin;
+  brandId: Scalars['Int']['input'];
+}>;
+
+
+export type UpdateProductAdminMutation = { updateProductAdmin: boolean };
 
 export type UpdateUserProfileMutationVariables = Exact<{
   input: UpdateUserInput;
@@ -1269,6 +1293,39 @@ export function useUpdateProductMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProductMutationHookResult = ReturnType<typeof useUpdateProductMutation>;
 export type UpdateProductMutationResult = Apollo.MutationResult<UpdateProductMutation>;
 export type UpdateProductMutationOptions = Apollo.BaseMutationOptions<UpdateProductMutation, UpdateProductMutationVariables>;
+export const UpdateProductAdminDocument = gql`
+    mutation UpdateProductAdmin($id: Int!, $data: UpdateProductInputAdmin!, $brandId: Int!) {
+  updateProductAdmin(id: $id, data: $data, brandId: $brandId)
+}
+    `;
+export type UpdateProductAdminMutationFn = Apollo.MutationFunction<UpdateProductAdminMutation, UpdateProductAdminMutationVariables>;
+
+/**
+ * __useUpdateProductAdminMutation__
+ *
+ * To run a mutation, you first call `useUpdateProductAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProductAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProductAdminMutation, { data, loading, error }] = useUpdateProductAdminMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      data: // value for 'data'
+ *      brandId: // value for 'brandId'
+ *   },
+ * });
+ */
+export function useUpdateProductAdminMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductAdminMutation, UpdateProductAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProductAdminMutation, UpdateProductAdminMutationVariables>(UpdateProductAdminDocument, options);
+      }
+export type UpdateProductAdminMutationHookResult = ReturnType<typeof useUpdateProductAdminMutation>;
+export type UpdateProductAdminMutationResult = Apollo.MutationResult<UpdateProductAdminMutation>;
+export type UpdateProductAdminMutationOptions = Apollo.BaseMutationOptions<UpdateProductAdminMutation, UpdateProductAdminMutationVariables>;
 export const UpdateUserProfileDocument = gql`
     mutation UpdateUserProfile($input: UpdateUserInput!) {
   updateUserProfile(input: $input)
