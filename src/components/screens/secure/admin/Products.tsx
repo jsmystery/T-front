@@ -69,6 +69,20 @@ const Products = () => {
     }
   });
 
+  const [UpdateProductMutate] = useUpdateProductAdminMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Product saved');
+		  toast.success("Изменения сохранены");
+		  // onEditAnnouncement()
+		  // setEditItem(false)
+		}
+	 });
+
+
   const handleEditClick = (product) => {
     setSelectedProduct(product);
     setIsEditing(true);
@@ -80,6 +94,22 @@ const Products = () => {
   };
 
   const handleSave = () => {
+    if (!selectedProduct.name) {
+			toast.error("Пожалуйста, заполните все поля.");
+			return;
+		 }
+     UpdateProductMutate({
+			variables: {
+				id: selectedProduct.productId,
+			  data: {
+				 name: selectedProduct.name,
+				 about: selectedProduct.about,
+				 posterPath: selectedProduct.posterUrl,
+				 imagesPaths: selectedProduct.imagesUrls,
+			  },
+        brandId: Number(brandId),
+			},
+		 });;
     setIsEditing(false);
     refetch();
   };

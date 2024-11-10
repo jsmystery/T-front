@@ -244,7 +244,7 @@ export type Mutation = {
   telegramAuth: SessionUserResponse;
   updateBrand: Brand;
   updateProduct: Product;
-  updateProductAdmin: Scalars['Boolean']['output'];
+  updateProductAdmin: Product;
   updateUserProfile: Scalars['Boolean']['output'];
 };
 
@@ -712,7 +712,7 @@ export type UpdateProductAdminMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProductAdminMutation = { updateProductAdmin: boolean };
+export type UpdateProductAdminMutation = { updateProductAdmin: { id: number, name: string, about: string } };
 
 export type UpdateUserProfileMutationVariables = Exact<{
   input: UpdateUserInput;
@@ -1295,7 +1295,11 @@ export type UpdateProductMutationResult = Apollo.MutationResult<UpdateProductMut
 export type UpdateProductMutationOptions = Apollo.BaseMutationOptions<UpdateProductMutation, UpdateProductMutationVariables>;
 export const UpdateProductAdminDocument = gql`
     mutation UpdateProductAdmin($id: Int!, $data: UpdateProductInputAdmin!, $brandId: Int!) {
-  updateProductAdmin(id: $id, data: $data, brandId: $brandId)
+  updateProductAdmin(id: $id, data: $data, brandId: $brandId) {
+    id
+    name
+    about
+  }
 }
     `;
 export type UpdateProductAdminMutationFn = Apollo.MutationFunction<UpdateProductAdminMutation, UpdateProductAdminMutationVariables>;
