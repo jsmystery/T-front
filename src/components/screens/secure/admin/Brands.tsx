@@ -3,76 +3,60 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './Users.module.scss';
-import { Sort, useBrandsQuery } from '@/__generated__/output'
+import { Sort, useBrandsQuery } from '@/__generated__/output';
+import Image from 'next/image';
 
+interface Brand {
+  id: number;
+  name: string;
+  slug: string;
+  logoPath: string;
+  rating: string;
+  reviewsCount: number;
+  about: string;
+  city: string;
+  category: {
+    name: string;
+    slug: string;
+  };
+}
 
 const Brands = () => {
-  const [brands, setBrands] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
   const router = useRouter();
 
-  const homeBrands = useBrandsQuery({
-		variables: {
-			query: {
-				page: 1,
-				perPage: 30,
-				sort: Sort.Desc,
-			},
-		},
-	})
-
-  console.log(homeBrands.data?.brands);
-  
-
-
-  useEffect(() => {
-    setBrands([
-      { 
-        id: 1, 
-        userId: 101, 
-        created: '2023-01-15', 
-        name: 'Brand1', 
-        slug: 'brand1', 
-        city: 'City1', 
-        logoUrl: '/uploads/brands/brand-1-logo.png', 
-        balance: 500, 
-        rating: 4.5,
-        description: 'Description for Brand1' 
+  const { data, loading, error } = useBrandsQuery({
+    variables: {
+      query: {
+        page: 1,
+        perPage: 30,
+        sort: Sort.Desc,
       },
-      { 
-        id: 2, 
-        userId: 102, 
-        created: '2023-05-20', 
-        name: 'Brand2', 
-        slug: 'brand2', 
-        city: 'City2', 
-        logoUrl: '/uploads/brands/brand-1-logo.png', 
-        balance: 800, 
-        rating: 4.8,
-        description: 'Description for Brand2'
-      },
-    ]);
-  }, []);
+    },
+  });
 
-  const handleEditClick = (brand) => {
+  const brands = data?.brands?.brands || [];
+
+  const handleEditClick = (brand: Brand) => {
     setSelectedBrand(brand);
     setIsEditing(true);
   };
 
-  const handleDeleteClick = (brand) => {
+  const handleDeleteClick = (brand: Brand) => {
     setSelectedBrand(brand);
     setIsConfirmingDelete(true);
   };
 
   const handleSave = () => {
+    // Implement your mutation logic here
     setIsEditing(false);
   };
 
   const handleConfirmDelete = () => {
-    setBrands(brands.filter(brand => brand.id !== selectedBrand.id));
+    // Implement your deletion mutation logic here
     setIsConfirmingDelete(false);
   };
 
@@ -80,14 +64,14 @@ const Brands = () => {
     setIsConfirmingDelete(false);
   };
 
-  const handleClickOutside = (e) => {
-    if (popupRef.current && !popupRef.current.contains(e.target)) {
+  const handleClickOutside = (e: MouseEvent) => {
+    if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
       setIsEditing(false);
       setIsConfirmingDelete(false);
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       setIsEditing(false);
       setIsConfirmingDelete(false);
@@ -104,9 +88,12 @@ const Brands = () => {
     };
   }, []);
 
-  const handleProductsClick = (brandId) => {
+  const handleProductsClick = (brandId: number) => {
     router.push(`/admin-panel/products?brand=${brandId}`);
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading brands</div>;
 
   return (
     <div className={styles.container}>
@@ -114,34 +101,40 @@ const Brands = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.tableHeader}>ID Бренда</th>
-            <th className={styles.tableHeader}>ID Пользователя</th>
-            <th className={styles.tableHeader}>Создан</th>
+            <th className={styles.tableHeader}>ID</th>
             <th className={styles.tableHeader}>Название</th>
             <th className={styles.tableHeader}>Слаг</th>
             <th className={styles.tableHeader}>Город</th>
             <th className={styles.tableHeader}>Логотип</th>
-            <th className={styles.tableHeader}>Баланс</th>
             <th className={styles.tableHeader}>Рейтинг</th>
+            <th className={styles.tableHeader}>Отзывы</th>
+            <th className={styles.tableHeader}>Категория</th>
             <th className={styles.tableHeader}>Описание</th>
             <th className={styles.tableHeader}>Управление</th>
           </tr>
         </thead>
         <tbody>
-          {brands.map(brand => (
+          {brands.map((brand: Brand) => (
             <tr key={brand.id} className={styles.tableRow}>
               <td className={styles.tableCell}>{brand.id}</td>
-              <td className={styles.tableCell}>{brand.userId}</td>
-              <td className={styles.tableCell}>{brand.created}</td>
               <td className={styles.tableCell}>{brand.name}</td>
               <td className={styles.tableCell}>{brand.slug}</td>
               <td className={styles.tableCell}>{brand.city}</td>
               <td className={styles.tableCell}>
-                <img src={brand.logoUrl} alt={brand.name} className={styles.logoImage} />
-              </td> 
-              <td className={styles.tableCell}>{brand.balance}</td>
+                {brand.logoPath && (
+                  <Image 
+                    src={brand.logoPath} 
+                    alt={brand.name} 
+                    width={50} 
+                    height={50}
+                    className={styles.logoImage} 
+                  />
+                )}
+              </td>
               <td className={styles.tableCell}>{brand.rating}</td>
-              <td className={styles.tableCell}>{brand.description}</td>
+              <td className={styles.tableCell}>{brand.reviewsCount}</td>
+              <td className={styles.tableCell}>{brand.category.name}</td>
+              <td className={styles.tableCell}>{brand.about.slice(0, 33)}...</td>
               <td className={styles.tableCell}>
                 <button className={styles.editButton} onClick={() => handleEditClick(brand)}>Изменить</button>
                 <button className={styles.editButton} onClick={() => handleDeleteClick(brand)}>Удалить</button>
@@ -179,16 +172,6 @@ const Brands = () => {
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Баланс</label>
-              <input
-                className={styles.userInput}
-                type="number"
-                value={selectedBrand.balance}
-                onChange={(e) => setSelectedBrand({ ...selectedBrand, balance: parseFloat(e.target.value) })}
-              />
-            </div>
-
-            <div className={styles.popupField}>
               <label className={styles.popupLabel}>Слаг</label>
               <input
                 className={styles.userInput}
@@ -202,19 +185,19 @@ const Brands = () => {
               <label className={styles.popupLabel}>Описание</label>
               <textarea
                 className={styles.userInput}
-                value={selectedBrand.description}
-                onChange={(e) => setSelectedBrand({ ...selectedBrand, description: e.target.value })}
-                rows="3"
+                value={selectedBrand.about}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, about: e.target.value })}
+                rows={3}
               />
             </div>
 
             <div className={styles.popupField}>
-              <label className={styles.popupLabel}>Логотип</label>
+              <label className={styles.popupLabel}>Логотип (путь)</label>
               <input
                 className={styles.userInput}
                 type="text"
-                value={selectedBrand.logoUrl}
-                onChange={(e) => setSelectedBrand({ ...selectedBrand, logoUrl: e.target.value })}
+                value={selectedBrand.logoPath}
+                onChange={(e) => setSelectedBrand({ ...selectedBrand, logoPath: e.target.value })}
               />
             </div>
 

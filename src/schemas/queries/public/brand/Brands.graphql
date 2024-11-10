@@ -7,6 +7,8 @@ query Brands($query: BrandQueryInput!) {
 			logoPath
 			rating
 			reviewsCount
+			about
+			city
 			category {
 				name
 				slug

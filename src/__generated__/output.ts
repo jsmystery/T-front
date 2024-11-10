@@ -754,7 +754,7 @@ export type BrandsQueryVariables = Exact<{
 }>;
 
 
-export type BrandsQuery = { brands: { count: number, brands: Array<{ id: number, name: string, slug: string, logoPath: string, rating: string, reviewsCount: number, category: { name: string, slug: string } }> } };
+export type BrandsQuery = { brands: { count: number, brands: Array<{ id: number, name: string, slug: string, logoPath: string, rating: string, reviewsCount: number, about: string, city: string, category: { name: string, slug: string } }> } };
 
 export type CategoriesQueryVariables = Exact<{
   query: CategoryQueryInput;
@@ -1573,6 +1573,8 @@ export const BrandsDocument = gql`
       logoPath
       rating
       reviewsCount
+      about
+      city
       category {
         name
         slug
