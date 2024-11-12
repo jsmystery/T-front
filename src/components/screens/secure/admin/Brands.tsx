@@ -29,7 +29,7 @@ const Brands = () => {
   const popupRef = useRef(null);
   const router = useRouter();
 
-  const { data, loading, error } = useBrandsQuery({
+  const { data, loading, error, refetch } = useBrandsQuery({
     variables: {
       query: {
         page: 1,
@@ -52,10 +52,9 @@ const Brands = () => {
   };
 
   const handleSave = () => {
-    
     UpdateBrandMutateAdmin({
       variables: {
-			id: selectedBrand.id,
+        id: selectedBrand.id,
         input: {
           name: selectedBrand.name,
           city: selectedBrand.city,
@@ -65,8 +64,6 @@ const Brands = () => {
         },
       },
     });
-
-    setIsEditing(false);
   };
 
   const handleConfirmDelete = () => {
@@ -107,16 +104,17 @@ const Brands = () => {
   };
 
   const [UpdateBrandMutateAdmin] = useUpdateBrandAdminMutation({
-		fetchPolicy: 'no-cache',
-		onError: ({ message }) => {
-		  toast.error(message);
-		},
-		onCompleted: () => {
-		  console.log('Brand saved');
-		  toast.success("Бренд сохранен");
-		}
-	 });
-
+    fetchPolicy: 'no-cache',
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+    onCompleted: async () => {
+      console.log('Brand saved');
+      toast.success("Бренд сохранен");
+      await refetch();
+      setIsEditing(false);
+    }
+  });
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading brands</div>;
