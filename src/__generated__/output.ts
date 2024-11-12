@@ -24,7 +24,7 @@ export type Account = {
 };
 
 export type AccountBrand = {
-  about: Scalars['String']['output'];
+  about?: Maybe<Scalars['String']['output']>;
   balance: Scalars['Int']['output'];
   category: SelectCategory;
   city: Scalars['String']['output'];
@@ -128,7 +128,7 @@ export type AnnouncementCardAdmin = {
 };
 
 export type Brand = {
-  about: Scalars['String']['output'];
+  about?: Maybe<Scalars['String']['output']>;
   city: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
   id: Scalars['Int']['output'];
@@ -141,12 +141,13 @@ export type Brand = {
   rating: Scalars['String']['output'];
   reviews: Array<ReviewCard>;
   reviewsCount: Scalars['Int']['output'];
+  slug: Scalars['String']['output'];
   telegram?: Maybe<Scalars['String']['output']>;
   whatsapp?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrandCard = {
-  about: Scalars['String']['output'];
+  about?: Maybe<Scalars['String']['output']>;
   category: NestedCategory;
   city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
@@ -243,6 +244,7 @@ export type Mutation = {
   placeOrder: NestedOrder;
   telegramAuth: SessionUserResponse;
   updateBrand: Brand;
+  updateBrandAdmin: Brand;
   updateProduct: Product;
   updateProductAdmin: Product;
   updateUserProfile: Scalars['Boolean']['output'];
@@ -311,6 +313,12 @@ export type MutationUpdateBrandArgs = {
 };
 
 
+export type MutationUpdateBrandAdminArgs = {
+  id: Scalars['Float']['input'];
+  input: UpdateBrandInputAdmin;
+};
+
+
 export type MutationUpdateProductArgs = {
   data: UpdateProductInput;
   id: Scalars['Int']['input'];
@@ -329,6 +337,7 @@ export type MutationUpdateUserProfileArgs = {
 };
 
 export type NestedBrand = {
+  about?: Maybe<Scalars['String']['output']>;
   city: Scalars['String']['output'];
   logoPath: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -347,6 +356,7 @@ export type NestedOrder = {
 };
 
 export type NestedProductBrand = {
+  about?: Maybe<Scalars['String']['output']>;
   city: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   isBrandOwner: Scalars['Boolean']['output'];
@@ -565,6 +575,14 @@ export type UpdateBrandInput = {
   name: Scalars['String']['input'];
 };
 
+export type UpdateBrandInputAdmin = {
+  about: Scalars['String']['input'];
+  city: Scalars['String']['input'];
+  logoPath: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
+};
+
 export type UpdateProductInput = {
   about?: InputMaybe<Scalars['String']['input']>;
   minQuantity: Scalars['Float']['input'];
@@ -658,7 +676,7 @@ export type CreateBrandMutationVariables = Exact<{
 }>;
 
 
-export type CreateBrandMutation = { createBrand: { id: number, name: string, slug: string, city: string, logoPath: string, about: string, rating: string } };
+export type CreateBrandMutation = { createBrand: { id: number, name: string, slug: string, city: string, logoPath: string, about?: string | null, rating: string } };
 
 export type UpdateBrandMutationVariables = Exact<{
   id: Scalars['Float']['input'];
@@ -666,7 +684,15 @@ export type UpdateBrandMutationVariables = Exact<{
 }>;
 
 
-export type UpdateBrandMutation = { updateBrand: { id: number, name: string, city: string, about: string } };
+export type UpdateBrandMutation = { updateBrand: { id: number, name: string, city: string, about?: string | null } };
+
+export type UpdateBrandAdminMutationVariables = Exact<{
+  id: Scalars['Float']['input'];
+  input: UpdateBrandInput;
+}>;
+
+
+export type UpdateBrandAdminMutation = { updateBrand: { id: number, name: string, city: string, logoPath: string, slug: string, about?: string | null } };
 
 export type PlaceOrderMutationVariables = Exact<{
   data: OrderInput;
@@ -747,14 +773,14 @@ export type BrandQueryVariables = Exact<{
 }>;
 
 
-export type BrandQuery = { brand: { id: number, name: string, logoPath: string, city: string, postedCount: number, rating: string, phone?: string | null, whatsapp?: string | null, telegram?: string | null, isSubscribed: boolean, isBrandOwner: boolean, about: string, reviewsCount: number, createdAt: string, reviews: Array<{ id: number, authorName: string, comment: string, rating: number, createdAt: string }> } };
+export type BrandQuery = { brand: { id: number, name: string, logoPath: string, city: string, postedCount: number, rating: string, phone?: string | null, whatsapp?: string | null, telegram?: string | null, isSubscribed: boolean, isBrandOwner: boolean, about?: string | null, reviewsCount: number, createdAt: string, reviews: Array<{ id: number, authorName: string, comment: string, rating: number, createdAt: string }> } };
 
 export type BrandsQueryVariables = Exact<{
   query: BrandQueryInput;
 }>;
 
 
-export type BrandsQuery = { brands: { count: number, brands: Array<{ id: number, name: string, slug: string, logoPath: string, rating: string, reviewsCount: number, about: string, city: string, category: { name: string, slug: string } }> } };
+export type BrandsQuery = { brands: { count: number, brands: Array<{ id: number, name: string, slug: string, logoPath: string, rating: string, reviewsCount: number, about?: string | null, city: string, category: { name: string, slug: string } }> } };
 
 export type CategoriesQueryVariables = Exact<{
   query: CategoryQueryInput;
@@ -792,7 +818,7 @@ export type ReviewsQuery = { reviews: { count: number, reviews: Array<{ id: numb
 export type AccountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AccountQuery = { account: { brand?: { id: number, name: string, about: string, balance: number, email?: string | null, phone?: string | null, whatsapp?: string | null, telegram?: string | null, logoPath: string, city: string, postedCount: number, subscribers: Array<string>, createdAt: string, category: { id: number, name: string } } | null, tariffs: Array<{ price: number, duration?: number | null, description?: string | null, type: TariffType }>, categories: Array<{ id: number, name: string }> } };
+export type AccountQuery = { account: { brand?: { id: number, name: string, about?: string | null, balance: number, email?: string | null, phone?: string | null, whatsapp?: string | null, telegram?: string | null, logoPath: string, city: string, postedCount: number, subscribers: Array<string>, createdAt: string, category: { id: number, name: string } } | null, tariffs: Array<{ price: number, duration?: number | null, description?: string | null, type: TariffType }>, categories: Array<{ id: number, name: string }> } };
 
 export type AnnouncementsQueryVariables = Exact<{
   query: ProductQueryInput;
@@ -1126,6 +1152,45 @@ export function useUpdateBrandMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateBrandMutationHookResult = ReturnType<typeof useUpdateBrandMutation>;
 export type UpdateBrandMutationResult = Apollo.MutationResult<UpdateBrandMutation>;
 export type UpdateBrandMutationOptions = Apollo.BaseMutationOptions<UpdateBrandMutation, UpdateBrandMutationVariables>;
+export const UpdateBrandAdminDocument = gql`
+    mutation UpdateBrandAdmin($id: Float!, $input: UpdateBrandInput!) {
+  updateBrand(id: $id, input: $input) {
+    id
+    name
+    city
+    logoPath
+    slug
+    about
+  }
+}
+    `;
+export type UpdateBrandAdminMutationFn = Apollo.MutationFunction<UpdateBrandAdminMutation, UpdateBrandAdminMutationVariables>;
+
+/**
+ * __useUpdateBrandAdminMutation__
+ *
+ * To run a mutation, you first call `useUpdateBrandAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBrandAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBrandAdminMutation, { data, loading, error }] = useUpdateBrandAdminMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateBrandAdminMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBrandAdminMutation, UpdateBrandAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBrandAdminMutation, UpdateBrandAdminMutationVariables>(UpdateBrandAdminDocument, options);
+      }
+export type UpdateBrandAdminMutationHookResult = ReturnType<typeof useUpdateBrandAdminMutation>;
+export type UpdateBrandAdminMutationResult = Apollo.MutationResult<UpdateBrandAdminMutation>;
+export type UpdateBrandAdminMutationOptions = Apollo.BaseMutationOptions<UpdateBrandAdminMutation, UpdateBrandAdminMutationVariables>;
 export const PlaceOrderDocument = gql`
     mutation PlaceOrder($data: OrderInput!) {
   placeOrder(data: $data) {
