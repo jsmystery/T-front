@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast'
 import styles from './Users.module.scss';
-import { Sort, useBrandsQuery } from '@/__generated__/output';
+import { Sort, useBrandsQuery, useUpdateBrandAdminMutation } from '@/__generated__/output';
 import Image from 'next/image';
 
 interface Brand {
@@ -51,7 +52,20 @@ const Brands = () => {
   };
 
   const handleSave = () => {
-    // Implement your mutation logic here
+    
+    UpdateBrandMutateAdmin({
+      variables: {
+			id: selectedBrand.id,
+        input: {
+          name: selectedBrand.name,
+          city: selectedBrand.city,
+          about: selectedBrand.about,
+          slug: selectedBrand.slug,
+          logoPath: selectedBrand.logoPath,
+        },
+      },
+    });
+
     setIsEditing(false);
   };
 
@@ -91,6 +105,18 @@ const Brands = () => {
   const handleProductsClick = (brandId: number) => {
     router.push(`/admin-panel/products?brand=${brandId}`);
   };
+
+  const [UpdateBrandMutateAdmin] = useUpdateBrandAdminMutation({
+		fetchPolicy: 'no-cache',
+		onError: ({ message }) => {
+		  toast.error(message);
+		},
+		onCompleted: () => {
+		  console.log('Brand saved');
+		  toast.success("Бренд сохранен");
+		}
+	 });
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading brands</div>;

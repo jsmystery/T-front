@@ -231,11 +231,11 @@ const showAddProduct = () => setAddItem(!addItem)
       },
     });
 
-    console.log('Saved data:', {
-      brandName,
-      city,
-		about
-    });
+   //  console.log('Saved data:', {
+   //    brandName,
+   //    city,
+	// 	about
+   //  });
   };
 
 
@@ -283,13 +283,13 @@ const showAddProduct = () => setAddItem(!addItem)
 			 }
 		}}
 		)
-    console.log('Saved data:', {
-      phone,
-      telegram,
-      whatsapp,
-      email,
-      password
-    });
+   //  console.log('Saved data:', {
+   //    phone,
+   //    telegram,
+   //    whatsapp,
+   //    email,
+   //    password
+   //  });
   };
 
   return (

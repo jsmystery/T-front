@@ -1,5 +1,5 @@
-mutation UpdateBrandAdmin($id: Float!, $input: UpdateBrandInput!) {
-  updateBrand(id: $id, input: $input) {
+mutation UpdateBrandAdmin($id: Float!, $input: UpdateBrandInputAdmin!) {
+  updateBrandAdmin(id: $id, input: $input) {
     id 
     name
     city

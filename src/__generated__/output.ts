@@ -688,11 +688,11 @@ export type UpdateBrandMutation = { updateBrand: { id: number, name: string, cit
 
 export type UpdateBrandAdminMutationVariables = Exact<{
   id: Scalars['Float']['input'];
-  input: UpdateBrandInput;
+  input: UpdateBrandInputAdmin;
 }>;
 
 
-export type UpdateBrandAdminMutation = { updateBrand: { id: number, name: string, city: string, logoPath: string, slug: string, about?: string | null } };
+export type UpdateBrandAdminMutation = { updateBrandAdmin: { id: number, name: string, city: string, logoPath: string, slug: string, about?: string | null } };
 
 export type PlaceOrderMutationVariables = Exact<{
   data: OrderInput;
@@ -1153,8 +1153,8 @@ export type UpdateBrandMutationHookResult = ReturnType<typeof useUpdateBrandMuta
 export type UpdateBrandMutationResult = Apollo.MutationResult<UpdateBrandMutation>;
 export type UpdateBrandMutationOptions = Apollo.BaseMutationOptions<UpdateBrandMutation, UpdateBrandMutationVariables>;
 export const UpdateBrandAdminDocument = gql`
-    mutation UpdateBrandAdmin($id: Float!, $input: UpdateBrandInput!) {
-  updateBrand(id: $id, input: $input) {
+    mutation UpdateBrandAdmin($id: Float!, $input: UpdateBrandInputAdmin!) {
+  updateBrandAdmin(id: $id, input: $input) {
     id
     name
     city
