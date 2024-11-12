@@ -234,6 +234,7 @@ export type Mutation = {
   balanceTopUp: YookassaPayment;
   createBrand: BrandCard;
   createProduct: Scalars['Boolean']['output'];
+  deleteBrand: Scalars['Boolean']['output'];
   deleteProduct: Scalars['Boolean']['output'];
   deleteProductAdmin: Scalars['Boolean']['output'];
   jwtConfirmation: Scalars['Boolean']['output'];
@@ -263,6 +264,11 @@ export type MutationCreateBrandArgs = {
 
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
+};
+
+
+export type MutationDeleteBrandArgs = {
+  id: Scalars['Float']['input'];
 };
 
 
@@ -677,6 +683,13 @@ export type CreateBrandMutationVariables = Exact<{
 
 
 export type CreateBrandMutation = { createBrand: { id: number, name: string, slug: string, city: string, logoPath: string, about?: string | null, rating: string } };
+
+export type DeleteBrandMutationVariables = Exact<{
+  id: Scalars['Float']['input'];
+}>;
+
+
+export type DeleteBrandMutation = { deleteBrand: boolean };
 
 export type UpdateBrandMutationVariables = Exact<{
   id: Scalars['Float']['input'];
@@ -1115,6 +1128,37 @@ export function useCreateBrandMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateBrandMutationHookResult = ReturnType<typeof useCreateBrandMutation>;
 export type CreateBrandMutationResult = Apollo.MutationResult<CreateBrandMutation>;
 export type CreateBrandMutationOptions = Apollo.BaseMutationOptions<CreateBrandMutation, CreateBrandMutationVariables>;
+export const DeleteBrandDocument = gql`
+    mutation DeleteBrand($id: Float!) {
+  deleteBrand(id: $id)
+}
+    `;
+export type DeleteBrandMutationFn = Apollo.MutationFunction<DeleteBrandMutation, DeleteBrandMutationVariables>;
+
+/**
+ * __useDeleteBrandMutation__
+ *
+ * To run a mutation, you first call `useDeleteBrandMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBrandMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBrandMutation, { data, loading, error }] = useDeleteBrandMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteBrandMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBrandMutation, DeleteBrandMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBrandMutation, DeleteBrandMutationVariables>(DeleteBrandDocument, options);
+      }
+export type DeleteBrandMutationHookResult = ReturnType<typeof useDeleteBrandMutation>;
+export type DeleteBrandMutationResult = Apollo.MutationResult<DeleteBrandMutation>;
+export type DeleteBrandMutationOptions = Apollo.BaseMutationOptions<DeleteBrandMutation, DeleteBrandMutationVariables>;
 export const UpdateBrandDocument = gql`
     mutation UpdateBrand($id: Float!, $input: UpdateBrandInput!) {
   updateBrand(id: $id, input: $input) {

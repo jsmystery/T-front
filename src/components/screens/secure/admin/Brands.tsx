@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast'
 import styles from './Users.module.scss';
-import { Sort, useBrandsQuery, useUpdateBrandAdminMutation } from '@/__generated__/output';
+import { Sort, useBrandsQuery, useUpdateBrandAdminMutation, useDeleteBrandMutation } from '@/__generated__/output';
 import Image from 'next/image';
 
 interface Brand {
@@ -41,6 +41,31 @@ const Brands = () => {
 
   const brands = data?.brands?.brands || [];
 
+  const [UpdateBrandMutateAdmin] = useUpdateBrandAdminMutation({
+    fetchPolicy: 'no-cache',
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+    onCompleted: async () => {
+      console.log('Brand saved');
+      toast.success("Бренд сохранен");
+      await refetch();
+      setIsEditing(false);
+    }
+  });
+
+  const [DeleteBrandMutation] = useDeleteBrandMutation({
+    fetchPolicy: 'no-cache',
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+    onCompleted: async () => {
+      toast.success("Бренд успешно удален");
+      await refetch();
+      setIsConfirmingDelete(false);
+    }
+  });
+
   const handleEditClick = (brand: Brand) => {
     setSelectedBrand(brand);
     setIsEditing(true);
@@ -67,8 +92,13 @@ const Brands = () => {
   };
 
   const handleConfirmDelete = () => {
-    // Implement your deletion mutation logic here
-    setIsConfirmingDelete(false);
+    if (selectedBrand) {
+      DeleteBrandMutation({
+        variables: {
+          id: selectedBrand.id
+        },
+      });
+    }
   };
 
   const handleCancelDelete = () => {
@@ -102,19 +132,6 @@ const Brands = () => {
   const handleProductsClick = (brandId: number) => {
     router.push(`/admin-panel/products?brand=${brandId}`);
   };
-
-  const [UpdateBrandMutateAdmin] = useUpdateBrandAdminMutation({
-    fetchPolicy: 'no-cache',
-    onError: ({ message }) => {
-      toast.error(message);
-    },
-    onCompleted: async () => {
-      console.log('Brand saved');
-      toast.success("Бренд сохранен");
-      await refetch();
-      setIsEditing(false);
-    }
-  });
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading brands</div>;

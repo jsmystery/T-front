@@ -1,0 +1,3 @@
+mutation DeleteBrand($id: Float!) {
+  deleteBrand(id: $id)
+}
