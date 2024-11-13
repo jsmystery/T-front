@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
 };
 
 export type Account = {
@@ -443,6 +444,7 @@ export type Query = {
   account: Account;
   advertisements: AllAdvertisements;
   advertisementsByTypes: Array<Advertising>;
+  allUsers: Array<UserList>;
   announcements: AllAnnouncements;
   announcementsAdmin: AllAnnouncementsAdmin;
   brand: Brand;
@@ -614,6 +616,17 @@ export type UpdateUserInput = {
   phone?: InputMaybe<Scalars['String']['input']>;
   telegram?: InputMaybe<Scalars['String']['input']>;
   whatsapp?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserList = {
+  createdAt: Scalars['DateTime']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  login?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  role: UserRole;
+  telegram?: Maybe<Scalars['String']['output']>;
+  whatsapp?: Maybe<Scalars['String']['output']>;
 };
 
 export enum UserRole {
@@ -846,6 +859,11 @@ export type AnnouncementsAdminQueryVariables = Exact<{
 
 
 export type AnnouncementsAdminQuery = { announcementsAdmin: { count: number, announcements: Array<{ id: number, name: string, posterPath: string, minPrice: number, maxPrice: number, rating: string, city: string, sku: string, views: number, createdAt: string, about: string, pricesFull: Array<{ price: string, minQuantity: string }>, orders: Array<{ expirationDate?: string | null, isLittleLeft?: boolean | null, tariff: { type: TariffType } }> }> } };
+
+export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersQuery = { allUsers: Array<{ id: number, createdAt: any, role: UserRole, login?: string | null, email?: string | null, phone?: string | null, whatsapp?: string | null, telegram?: string | null }> };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2187,6 +2205,52 @@ export type AnnouncementsAdminQueryHookResult = ReturnType<typeof useAnnouncemen
 export type AnnouncementsAdminLazyQueryHookResult = ReturnType<typeof useAnnouncementsAdminLazyQuery>;
 export type AnnouncementsAdminSuspenseQueryHookResult = ReturnType<typeof useAnnouncementsAdminSuspenseQuery>;
 export type AnnouncementsAdminQueryResult = Apollo.QueryResult<AnnouncementsAdminQuery, AnnouncementsAdminQueryVariables>;
+export const AllUsersDocument = gql`
+    query allUsers {
+  allUsers {
+    id
+    createdAt
+    role
+    login
+    email
+    phone
+    whatsapp
+    telegram
+  }
+}
+    `;
+
+/**
+ * __useAllUsersQuery__
+ *
+ * To run a query within a React component, call `useAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<AllUsersQuery, AllUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllUsersQuery, AllUsersQueryVariables>(AllUsersDocument, options);
+      }
+export function useAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUsersQuery, AllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllUsersQuery, AllUsersQueryVariables>(AllUsersDocument, options);
+        }
+export function useAllUsersSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<AllUsersQuery, AllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AllUsersQuery, AllUsersQueryVariables>(AllUsersDocument, options);
+        }
+export type AllUsersQueryHookResult = ReturnType<typeof useAllUsersQuery>;
+export type AllUsersLazyQueryHookResult = ReturnType<typeof useAllUsersLazyQuery>;
+export type AllUsersSuspenseQueryHookResult = ReturnType<typeof useAllUsersSuspenseQuery>;
+export type AllUsersQueryResult = Apollo.QueryResult<AllUsersQuery, AllUsersQueryVariables>;
 export const UserDocument = gql`
     query User {
   user {

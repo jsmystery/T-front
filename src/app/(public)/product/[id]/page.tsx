@@ -22,7 +22,7 @@ export default function ProductPage({
 	if (!params.id) return <NotFoundPage />
 
 	const user = getUser()
-	const isAdmin = user?.role === UserRole.Admin
+	// const isAdmin = user?.role === UserRole.Admin
 	
 
 	const productData = useCurrentProductQuery({
@@ -36,7 +36,7 @@ export default function ProductPage({
 			product={productData.data?.currentProduct}
 			// product={PRODUCT_DATA}
 			searchParams={searchParams}
-			isAdmin={isAdmin}
+			// isAdmin={isAdmin}
 		/>
 	)
 }

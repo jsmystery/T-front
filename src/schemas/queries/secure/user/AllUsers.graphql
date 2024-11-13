@@ -1,0 +1,14 @@
+query allUsers {
+	allUsers {
+    id
+    createdAt
+    role
+   #  profile {
+      login
+      email
+      phone
+      whatsapp
+      telegram
+   #  }
+	}
+}
