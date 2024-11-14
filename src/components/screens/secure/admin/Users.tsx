@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { useAllUsersQuery, useUpdateUserProfileAdminMutation } from '@/__generated__/output';
+import { useAllUsersQuery, useUpdateUserProfileAdminMutation, useDeleteUserMutation } from '@/__generated__/output';
 import styles from './Users.module.scss';
 import toast from 'react-hot-toast'
 
@@ -35,17 +35,17 @@ const Users = () => {
     }
   });
 
-  // const [DeleteBrandMutation] = useDeleteBrandMutation({
-  //   fetchPolicy: 'no-cache',
-  //   onError: ({ message }) => {
-  //     toast.error(message);
-  //   },
-  //   onCompleted: async () => {
-  //     toast.success("Бренд успешно удален");
-  //     await refetch();
-  //     setIsConfirmingDelete(false);
-  //   }
-  // });
+  const [DeleteUserMutation] = useDeleteUserMutation({
+    fetchPolicy: 'no-cache',
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+    onCompleted: async () => {
+      toast.success("Юзер успешно удален");
+      await refetch();
+      setIsConfirmingDelete(false);
+    }
+  });
 
   const handleEditClick = (user) => {
     setSelectedUser(user);
@@ -71,12 +71,18 @@ const Users = () => {
       },
     });
     setIsEditing(false);
-    // Here, you would add the logic to save the changes to the server
   };
 
   const handleConfirmDelete = () => {
-    // Here, you would add the logic to delete the user on the server
-    setUsers(users.filter(user => user.id !== selectedUser.id));
+
+    // setUsers(users.filter(user => user.id !== selectedUser.id));
+    if (selectedUser) {
+      DeleteUserMutation({
+        variables: {
+          id: selectedUser.id
+        },
+      });
+    }
     setIsConfirmingDelete(false);
   };
 
