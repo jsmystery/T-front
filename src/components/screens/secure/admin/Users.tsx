@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { useAllUsersQuery } from '@/__generated__/output';
+import { useAllUsersQuery, useUpdateUserProfileAdminMutation } from '@/__generated__/output';
 import styles from './Users.module.scss';
+import toast from 'react-hot-toast'
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -11,15 +13,39 @@ const Users = () => {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const popupRef = useRef(null);
 
-  // Fetch data using the useAllUsersQuery hook
   const { data, loading, error, refetch } = useAllUsersQuery();
 
-  // Update users state with fetched data when available
   useEffect(() => {
     if (data && data.allUsers) {
       setUsers(data.allUsers);
     }
   }, [data]);
+
+
+  const [UpdateUserProfileMutateAdmin] = useUpdateUserProfileAdminMutation({
+    fetchPolicy: 'no-cache',
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+    onCompleted: async () => {
+      console.log('user saved');
+      toast.success("Пользователь сохранен");
+      await refetch();
+      setIsEditing(false);
+    }
+  });
+
+  // const [DeleteBrandMutation] = useDeleteBrandMutation({
+  //   fetchPolicy: 'no-cache',
+  //   onError: ({ message }) => {
+  //     toast.error(message);
+  //   },
+  //   onCompleted: async () => {
+  //     toast.success("Бренд успешно удален");
+  //     await refetch();
+  //     setIsConfirmingDelete(false);
+  //   }
+  // });
 
   const handleEditClick = (user) => {
     setSelectedUser(user);
@@ -32,6 +58,18 @@ const Users = () => {
   };
 
   const handleSave = () => {
+    UpdateUserProfileMutateAdmin({
+      variables: {
+        input: {
+          userId: selectedUser.id,
+          whatsapp: selectedUser.whatsapp,
+          telegram: selectedUser.telegram,
+          phone: selectedUser.phone,
+          email: selectedUser.email,
+          login: selectedUser.login,
+        },
+      },
+    });
     setIsEditing(false);
     // Here, you would add the logic to save the changes to the server
   };
@@ -135,10 +173,10 @@ const Users = () => {
               <label className={styles.popupLabel}>Номер</label>
               <input className={styles.userInput} type="text" value={selectedUser.phone} onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })} />
             </div>
-            <div className={styles.popupField}>
+            {/* <div className={styles.popupField}>
               <label className={styles.popupLabel}>Роль</label>
               <input className={styles.userInput} type="text" value={selectedUser.role} onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })} />
-            </div>
+            </div> */}
             <button className={styles.saveButton} onClick={handleSave}>Сохранить</button>
           </div>
         </div>
